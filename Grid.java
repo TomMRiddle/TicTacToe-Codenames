@@ -15,22 +15,7 @@ public class Grid {
         this.colorCodes = colorCodes;
 
         // Ensure the grid dimensions match the data
-        if (gridData.length != colorCodes.length || gridData[0].length != colorCodes[0].length) {
-            throw new IllegalArgumentException("Grid dimensions do not match the provided data");
-        }
-
-        // Calculate the size of the grid based on the longest string length and padding
-        int maxStringLength = 0;
-        for (String[] gridDatum : gridData) {
-            for (String s : gridDatum) {
-                if (s != null) {
-                    maxStringLength = Math.max(maxStringLength, s.length());
-                }
-            }
-        }
-
-        // Calculate the cell size including padding
-        int cellSize = maxStringLength + padding * 2;
+        int cellSize = getCellSize(gridData, colorCodes, padding);
 
         // Pad strings to the nearest odd number of cells
         String[][] paddedGridData = new String[gridData.length][gridData[0].length];
@@ -63,6 +48,25 @@ public class Grid {
         }
 
         this.gridData = newGridData;
+    }
+
+    private static int getCellSize(String[][] gridData, String[][] colorCodes, int padding) {
+        if (gridData.length != colorCodes.length || gridData[0].length != colorCodes[0].length) {
+            throw new IllegalArgumentException("Grid dimensions do not match the provided data");
+        }
+
+        // Calculate the size of the grid based on the longest string length and padding
+        int maxStringLength = 0;
+        for (String[] gridDatum : gridData) {
+            for (String s : gridDatum) {
+                if (s != null) {
+                    maxStringLength = Math.max(maxStringLength, s.length());
+                }
+            }
+        }
+
+        // Calculate the cell size including padding
+        return maxStringLength + padding * 2;
     }
 
     public void print() {
@@ -111,14 +115,14 @@ public class Grid {
 
         allMembers.add(ASSASSIN);
 
-        // Add 8 members from each team
+        // Add 8 agents from each team
 
         for (int i = 0; i < 8; i++) {
             allMembers.add(TEAM1);
             allMembers.add(TEAM2);
         }
 
-        // Add a random extra from one of the teams (choose randomly between Team1 and Team2)
+        // Add a random extra agent from one of the teams (choose randomly between Team1 and Team2)
         if (Math.random() < 0.5) {
             allMembers.add(TEAM1);
         } else {
