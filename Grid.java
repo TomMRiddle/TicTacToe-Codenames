@@ -73,7 +73,7 @@ public class Grid {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 String colorCode = colorCodes[i / 3][j]; // Adjust index to use correct color codes
-                System.out.print(Ansi.BG + colorCode + gridData[i][j] + Ansi.RESET);
+                System.out.print(Ansi.BG + Ansi.BOLD + colorCode + gridData[i][j] + Ansi.RESET);
             }
             System.out.println();
         }
