@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Grid {
     private final int columns;
@@ -11,8 +9,6 @@ public class Grid {
     private static final String ASSASSIN = Ansi.RESET;
     private static final String TEAM1 = Ansi.BLUE;
     private static final String TEAM2 = Ansi.RED;
-
-
 
     public Grid(String[][] gridData, String[][] colorCodes, int padding) {
         this.gridData = gridData;
@@ -79,6 +75,31 @@ public class Grid {
         }
     }
 
+
+    public static String[][] generateRandomStringMatrix(String[] inputArray) {
+        // Ensure there are enough elements in the input array to fill a 5x5 matrix.
+        if (inputArray.length < 25) {
+            throw new IllegalArgumentException("Input array must contain at least 25 elements.");
+        }
+
+        String[][] result = new String[5][5];
+        List<String> inputList = new ArrayList<>(Arrays.asList(inputArray));
+        Random random = new Random();
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                // Randomly select an index from the input list and get the corresponding string.
+                int randomIndex = random.nextInt(inputList.size());
+                result[i][j] = inputList.get(randomIndex);
+
+                // Remove the selected element to ensure it's not reused in the same matrix
+                inputList.remove(randomIndex);
+            }
+        }
+
+        return result;
+    }
+
     public static String[][] randomizedSecretGrid() {
         List<String> allMembers = new ArrayList<>();
 
@@ -125,13 +146,17 @@ public class Grid {
         // Example usage
         int padding = 2;
 
-        String[][] gridData = {
-                {"Hello", "World", "Java", "Grid", "Word"},
-                {"This", "Is", "A", "Test", "BOO!"},
-                {"ANSI", "Colors", "Here", "Too", "Heehaw!"},
-                {"Padded", "Cells", "Centered!", "Banana is loong", "Minions"},
-                {"Stuff", "Random", "Go go go!", "Banjo", "Gru"}
+        String[] inputArray = {
+                "Hello", "World", "Java", "Grid", "Word",
+                "This", "Is", "A", "Test", "BOO!",
+                "ANSI", "Colors", "Here", "Too", "Heehaw!",
+                "Padded", "Cells", "Centered!", "Banana is loong", "Minions",
+                "Stuff", "Random", "Go go go!", "Banjo", "Gru",
+                "Duck", "Quack!", "Duckling", "Ugly", "Swan"
         };
+
+        String[][] gridData = generateRandomStringMatrix(inputArray);
+
 
         String[][] colorCodes = randomizedSecretGrid();
 
