@@ -1,6 +1,11 @@
 package utils;
 
 public class Ansi {
+    //prevent instantiation
+    private Ansi(){
+        throw new AssertionError();
+    }
+
     public static final String RESET = "\33[0m";
     public static final String FG = "\33[27m";
     public static final String BG = "\33[7m";
