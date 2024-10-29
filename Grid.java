@@ -1,14 +1,15 @@
 import java.util.*;
+import static utils.Ansi.*;
 
 public class Grid {
     private final int columns;
     private final int rows;
     private  String[][] gridData;
     private final String[][] colorCodes;
-    private static final String INNOCENT = Ansi.BRIGHT_WHITE;
-    private static final String ASSASSIN = Ansi.RESET;
-    private static final String TEAM1 = Ansi.BLUE;
-    private static final String TEAM2 = Ansi.RED;
+    private static final String INNOCENT = BRIGHT_WHITE;
+    private static final String ASSASSIN = RESET;
+    private static final String TEAM1 = BLUE;
+    private static final String TEAM2 = RED;
 
     public Grid(String[][] gridData, String[][] colorCodes, int padding) {
         this.gridData = gridData;
@@ -73,7 +74,7 @@ public class Grid {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 String colorCode = colorCodes[i / 3][j]; // Adjust index to use correct color codes
-                System.out.print(Ansi.BG + Ansi.BOLD + colorCode + gridData[i][j] + Ansi.RESET);
+                System.out.print(BG + BOLD + colorCode + gridData[i][j] + RESET);
             }
             System.out.println();
         }
@@ -160,7 +161,6 @@ public class Grid {
         };
 
         String[][] gridData = generateRandomStringMatrix(inputArray);
-
 
         String[][] colorCodes = randomizedSecretGrid();
 

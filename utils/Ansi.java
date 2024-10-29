@@ -1,3 +1,5 @@
+package utils;
+
 public class Ansi {
     public static final String RESET = "\33[0m";
     public static final String FG = "\33[27m";
