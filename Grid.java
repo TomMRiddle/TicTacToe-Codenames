@@ -43,7 +43,7 @@ public class Grid {
                 System.arraycopy(paddedGridData[k++], 0, newGridData[i], 0, columns);
             } else { // Fill with empty strings for the other two rows
                 for (int j = 0; j < columns; j++) {
-                    newGridData[i][j] = " ".repeat(cellSize);
+                    newGridData[i][j] = "\u00A0".repeat(cellSize);
                 }
             }
         }
