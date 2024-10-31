@@ -4,9 +4,11 @@ import static utils.Ansi.*;
 
 public abstract class Board {
     protected List<List<Cell>> cells;
+    protected int padding = 2;
 
     public Board() {
     }
+
     public Board(int numRows, int numCols) {
         this.cells = initialize(numRows, numCols);
     }
@@ -33,16 +35,41 @@ public abstract class Board {
         return cells;
     }
 
+    protected int getLongestCellLength() {
+        int maxStringLength = 0;
+        for (List<Cell> cellRow : cells) {
+            for (Cell cell : cellRow) {
+                if (cell != null) {
+                    maxStringLength = Math.max(maxStringLength, cell.toString().length());
+                }
+            }
+        }
+        return maxStringLength + padding * 2;
+    }
+
     @Override
     public String toString() {
         StringBuilder out = new StringBuilder();
-        for (int i = 0; i < cells.size(); i++) {
-            for (int j = 0; j < cells.getFirst().size(); j++) {
-                String colorCode = cells.get(i).get(j).getColor(); // Adjust index to use correct color codes
-                out.append(BG + BOLD).append(colorCode).append(cells.get(i).get(j));
-                out.append(RESET);
-            }
+        int longestCellLength = getLongestCellLength();
+        for (int i = 0; i < cells.size() * 3; i++) { //iterate 3 times for every row
+                for (int j = 0; j < cells.getFirst().size(); j++) { //iterate once for every column
+                    String colorCode = cells.get(i / 3).get(j).getColor();
+                    out.append(BG + BOLD).append(colorCode);
+                    if (i % 3 == 1) { // Place original cell row in the middle of each block of three rows
+                        int cellPaddingLeft = (longestCellLength - cells.get(i / 3).get(j).toString().length()) / 2;
+                        int cellPaddingRight = (longestCellLength - cells.get(i / 3).get(j).toString().length()) - cellPaddingLeft;
+                        out.append(" ".repeat(cellPaddingRight));
+                        out.append(cells.get(i / 3).get(j));
+                        out.append(" ".repeat(cellPaddingLeft));
+                    } else {
+                        out.append(" ".repeat(longestCellLength)); //output the number of spaces equal to the length of the cell content
+                    }
+                    out.append(RESET+" ");
+                }
             out.append("\n");
+            if (i % 3 == 2) {
+                out.append("\n");
+            }
         }
         return out.toString();
     }
