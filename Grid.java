@@ -168,3 +168,13 @@ public class Grid {
         grid.print();
     }
 }
+
+//    public class Grid {
+//    public static void main(String[] args) {
+//        Player player1 = new HumanPlayer("Ahmed", 'X');
+//        Player player2 = new ComputerPlayer("Wall-E", 'O');
+//
+//        System.out.println(player1.getName() + " spelar med " + player1.getSymbol());
+//        System.out.println(player2.getName() + " spelar med " + player2.getSymbol());
+//    }
+//    }
