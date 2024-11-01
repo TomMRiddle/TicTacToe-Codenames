@@ -1,6 +1,6 @@
 public class TicTacToeCell extends Cell {
-    public TicTacToeCell() {
-        super();
+    public TicTacToeCell(int id) {
+        super(id);
     }
     @Override
     public void setContent(String content) {
