@@ -68,7 +68,7 @@ public abstract class Board {
                     } else { //third row in cell
                         out.append(spacer.repeat(longestCellLength)); //output the number of spacers equal to the length of the cell content
                     }
-                    out.append(RESET+spacer);
+                    out.append(RESET).append(spacer);
                 }
             out.append("\n");
             if (i % 3 == 2) {
