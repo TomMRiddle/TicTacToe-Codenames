@@ -16,6 +16,7 @@ public class ComputerPlayer extends Player {
         } while (!Objects.equals(board.getCellById(cellId).toString(), " "));
         Cell cell = board.getCellById(cellId);
         cell.setContent(getSymbol());
+        cell.setOwner(this);
     }
 }
 

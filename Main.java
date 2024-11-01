@@ -3,21 +3,31 @@ import java.util.Collections;
 import java.util.List;
 
 public class Main {
+    private static Board board = new TicTacToeBoard();
+    private static List<Player> players= new ArrayList<>();
+
     public static void main(String[] args) {
-        Board board = new TicTacToeBoard();
-        System.out.println(board);
-        List<Player> players= new ArrayList<Player>();
         players.add(new HumanPlayer("Victor", "X"));
         players.add(new ComputerPlayer("Computer", "O"));
-        Player winner = null;
+
         Collections.shuffle(players);
-        System.out.println(board);
-        while(winner == null) {
+        boolean gameloop = true;
+        while(gameloop) {
             for (Player player : players) {
                 player.makeMove(board);
-                System.out.println(board);
+                board.checkWin();
+                if(board.getWinner() != null || board.isDraw()) {
+                    gameloop = false;
+                    break;
+                }
             }
         }
-        System.out.println("the winner is: " + winner.getName());
+        System.out.println(board);
+        if(!board.isDraw()) {
+            System.out.println(board.getWinner().getName() + " wins!");
+        } else {
+            System.out.println("It's a tie!");
+        }
     }
+
 }

@@ -8,7 +8,7 @@ public class TicTacToeBoard extends Board{
     }
 
     @Override
-    protected List<List<Cell>> initialize(int numRows, int numCols) {
+    protected void initialize(int numRows, int numCols) {
         cells = new ArrayList<>();
         int cellId = 1;
         for (int i = 0; i < numRows; i++) {
@@ -22,7 +22,62 @@ public class TicTacToeBoard extends Board{
 
             cells.add(row);
         }
+    }
+    @Override
+    protected void checkWin() {
+        // Check rows
+        int numCols = cells.getFirst().size();
+        int numRows = cells.size();
+        for (List<Cell> cell : cells) {
+            if (cell.getFirst().getOwner() != null &&
+                    cell.getFirst().getOwner().equals(cell.get(1).getOwner()) &&
+                    cell.get(1).getOwner().equals(cell.getLast().getOwner())) {
+                winner = cell.getFirst().getOwner();
+            }
+        }
 
-        return cells;
+        // Check columns
+        for (int col = 0; col < numCols; col++) {
+            if (cells.getFirst().get(col).getOwner() != null &&
+                    cells.getFirst().get(col).getOwner().equals(cells.get(1).get(col).getOwner()) &&
+                    cells.get(1).get(col).getOwner().equals(cells.getLast().get(col).getOwner())) {
+                winner = cells.getFirst().get(col).getOwner();
+            }
+        }
+
+        // Check diagonals
+        if(cells.get(1).get(1) !=  null) {
+            if ((cells.getFirst().getFirst().getOwner() != null &&
+                    cells.getFirst().getFirst().getOwner().equals(cells.get(1).get(1).getOwner()) &&
+                    cells.get(1).get(1).getOwner().equals(cells.getLast().getLast().getOwner()))
+                    || (cells.getFirst().getLast().getOwner() != null &&
+                    cells.getFirst().getLast().getOwner().equals(cells.get(1).get(1).getOwner()) &&
+                    cells.get(1).get(1).getOwner().equals(cells.getLast().getFirst().getOwner()))) {
+                winner = cells.get(1).get(1).getOwner();
+            }
+        }
+
+        // No winner check if board is full
+        boolean allFilled = true;
+        for (int row = 0; row < numRows; row++) {
+            for (int col = 0; col < numCols; col++) {
+                if (cells.get(row).get(col).getOwner() == null) {
+                    allFilled = false;
+                    break;
+                }
+            }
+            if (!allFilled) {
+                break;
+            }
+        }
+        if (allFilled) {
+            draw = true;
+        }
+    }
+    public Player getWinner() {
+        return winner;
+    }
+    public boolean isDraw() {
+        return draw;
     }
 }

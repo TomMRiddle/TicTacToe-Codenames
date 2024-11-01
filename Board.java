@@ -4,18 +4,20 @@ import static utils.Ansi.*;
 public abstract class Board {
     protected List<List<Cell>> cells;
     protected int padding = 2;
+    protected Player winner;
+    protected boolean draw;
 
     public Board() {
+        winner = null;
+        draw = false;
     }
 
-    public Board(int numRows, int numCols) {
-        this.cells = initialize(numRows, numCols);
-    }
-
-    protected abstract List<List<Cell>> initialize(int numRows, int numCols);
+    protected abstract void initialize(int numRows, int numCols);
+    protected abstract void checkWin();
+    public abstract boolean isDraw();
+    public abstract Player getWinner();
 
     public Cell getCell(int row, int col) {
-
         return cells.get(row).get(col);
     }
     public Cell getCellById(int id) {

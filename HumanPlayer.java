@@ -9,6 +9,7 @@ public class HumanPlayer extends Player {
     @Override
     public void makeMove(Board board) {
         Scanner scanner = new Scanner(System.in);
+        System.out.println(board);
         System.out.println(getName() + ", enter cell number: ");
         int cellId;
 
@@ -17,5 +18,6 @@ public class HumanPlayer extends Player {
         } while (!Objects.equals(board.getCellById(cellId).toString(), " "));
         Cell cell = board.getCellById(cellId);
         cell.setContent(getSymbol());
+        cell.setOwner(this);
     }
 }
