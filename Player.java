@@ -1,18 +1,18 @@
 public abstract class Player {
     protected String name;
-    protected char symbol;
+    protected String symbol;
 
-    public Player(String name, char symbol) {
+    public Player(String name, String symbol) {
         this.name = name;
         this.symbol = symbol;
     }
     public String getName() {
         return name;
     }
-    public char getSymbol() {
+    public String getSymbol() {
         return symbol;
     }
 
-    public abstract int[] makeMove();
+    public abstract void makeMove(Board board);
 }
 

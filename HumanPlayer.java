@@ -1,18 +1,21 @@
+import java.util.Objects;
 import java.util.Scanner;
 
 public class HumanPlayer extends Player {
-    public HumanPlayer(String name, char symbol) {
+    public HumanPlayer(String name, String symbol) {
         super(name, symbol);
     }
 
     @Override
-    public int[] makeMove() {
+    public void makeMove(Board board) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter row: ");
-        int row = scanner.nextInt();
-        System.out.println("Enter column: ");
-        int col = scanner.nextInt();
+        System.out.println(getName() + ", enter cell number: ");
+        int cellId;
 
-        return new int[]{row, col};
+        do {
+            cellId = scanner.nextInt();
+        } while (!Objects.equals(board.getCellById(cellId).toString(), " "));
+        Cell cell = board.getCellById(cellId);
+        cell.setContent(getSymbol());
     }
 }

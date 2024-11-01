@@ -1,20 +1,21 @@
+import java.util.Objects;
 import java.util.Random;
 
 public class ComputerPlayer extends Player {
-    public ComputerPlayer(String name, char symbol) {
+    public ComputerPlayer(String name, String symbol) {
         super(name, symbol);
     }
 
     @Override                   //"Logik" för datorn
-    public int[] makeMove(){
+    public void makeMove(Board board) {
         Random random = new Random();
-        int row, col;
+        int cellId;
 
         do {
-            row = random.nextInt(3);
-            col = random.nextInt(3);
-        } while (board[row][col] != ' '); // board/grid?
-        return new int[]{row, col};
+            cellId = random.nextInt(8)+1;
+        } while (!Objects.equals(board.getCellById(cellId).toString(), " "));
+        Cell cell = board.getCellById(cellId);
+        cell.setContent(getSymbol());
     }
 }
 
