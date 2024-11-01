@@ -15,7 +15,7 @@ public class HumanPlayer extends Player {
 
         do {
             cellId = scanner.nextInt();
-        } while (!Objects.equals(board.getCellById(cellId).toString(), " "));
+        } while ( (cellId > 9) || (cellId < 1) || !Objects.equals(board.getCellById(cellId).toString(), " "));
         Cell cell = board.getCellById(cellId);
         cell.setContent(getSymbol());
         cell.setOwner(this);
