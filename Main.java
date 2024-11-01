@@ -3,8 +3,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Main {
-    private static Board board = new TicTacToeBoard();
-    private static List<Player> players= new ArrayList<>();
+    private static final Board board = new TicTacToeBoard();
+    private static final List<Player> players= new ArrayList<>();
 
     public static void main(String[] args) {
         players.add(new HumanPlayer("Victor", "X"));
