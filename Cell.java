@@ -1,5 +1,5 @@
 import static utils.Ansi.*;
-public abstract class Cell {
+public abstract class Cell implements ICell {
     protected String content;
     protected String color;
     protected int id;
@@ -12,11 +12,11 @@ public abstract class Cell {
         this.owner = null;
     }
 
-    public abstract void setContent(String content);
-    public abstract void setOwner(Player player);
+    @Override
     public int getId() {
         return id;
     }
+    @Override
     public String getColor() {
         return color;
     }
@@ -26,5 +26,4 @@ public abstract class Cell {
         return content;
     }
 
-    public abstract Player getOwner();
 }

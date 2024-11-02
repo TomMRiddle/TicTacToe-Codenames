@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Main {
+public class TicTacToeGame {
     private static final Board board = new TicTacToeBoard();
     private static final List<Player> players= new ArrayList<>();
 

@@ -53,7 +53,7 @@ public abstract class Board {
         String spacer = "\u00A0";
         StringBuilder out = new StringBuilder();
         int longestCellLength = getLongestCellLength();
-        for (int i = 0; i < cells.size() * 3; i++) { //iterate 3 times for every cellrow of the board
+        for (int i = 0; i < cells.size() * 3; i++) { //iterate 3 times for every cell row of the board
                 for (int j = 0; j < cells.getFirst().size(); j++) { //iterate once for every column
                     String colorCode = cells.get(i / 3).get(j).getColor();
                     out.append(BG + BOLD).append(colorCode);
@@ -70,7 +70,7 @@ public abstract class Board {
                     } else { //third row in cell
                         out.append(spacer.repeat(longestCellLength)); //output the number of spacers equal to the length of the cell content
                     }
-                    out.append(RESET).append(spacer);
+                    out.append(RESET).append("  ");
                 }
             out.append("\n");
             if (i % 3 == 2) {
