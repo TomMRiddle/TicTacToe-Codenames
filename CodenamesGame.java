@@ -7,7 +7,7 @@ public class CodenamesGame {
         System.out.println(board);
         for(List<Cell> cells : board.getAllCells()) {
             for(Cell cell : cells) {
-                cell.toggleSpymasterView();
+
             }
         }
     }

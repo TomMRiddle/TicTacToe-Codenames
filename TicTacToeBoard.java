@@ -58,20 +58,22 @@ public class TicTacToeBoard extends Board{
         }
 
         // No winner check if board is full
-        boolean allFilled = true;
-        for (int row = 0; row < numRows; row++) {
-            for (int col = 0; col < numCols; col++) {
-                if (cells.get(row).get(col).getOwner() == null) {
-                    allFilled = false;
+        if(winner == null) {
+            boolean allFilled = true;
+            for (int row = 0; row < numRows; row++) {
+                for (int col = 0; col < numCols; col++) {
+                    if (cells.get(row).get(col).getOwner() == null) {
+                        allFilled = false;
+                        break;
+                    }
+                }
+                if (!allFilled) {
                     break;
                 }
             }
-            if (!allFilled) {
-                break;
+            if (allFilled) {
+                draw = true;
             }
-        }
-        if (allFilled) {
-            draw = true;
         }
     }
     public Player getWinner() {
