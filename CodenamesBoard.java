@@ -2,7 +2,7 @@ import java.util.*;
 import static utils.Ansi.*;
 import static utils.Words.*;
 
-public class CodenamesBoard extends Board {
+public class CodenamesBoard extends Board<CodenamesCell> {
 
     public CodenamesBoard() {
         initialize(5,5);
@@ -15,7 +15,7 @@ public class CodenamesBoard extends Board {
         cells = new ArrayList<>();
         int cellId = 1;
         for (int i = 0; i < numRows; i++) {
-            List<Cell> row = new ArrayList<>();
+            List<CodenamesCell> row = new ArrayList<>();
 
             for (int j = 0; j < numCols; j++) {
 
@@ -27,7 +27,7 @@ public class CodenamesBoard extends Board {
         }
     }
 
-    private Queue<String> createSecrets() {
+    public Queue<String> createSecrets() {
         List<String> secrets = new ArrayList<>();
 
         // Add 7 innocent

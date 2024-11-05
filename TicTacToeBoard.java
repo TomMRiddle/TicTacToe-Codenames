@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicTacToeBoard extends Board{
+public class TicTacToeBoard extends Board<TicTacToeCell> {
 
     public TicTacToeBoard() {
         initialize(3, 3);
@@ -12,7 +12,7 @@ public class TicTacToeBoard extends Board{
         cells = new ArrayList<>();
         int cellId = 1;
         for (int i = 0; i < numRows; i++) {
-            List<Cell> row = new ArrayList<>();
+            List<TicTacToeCell> row = new ArrayList<>();
 
             for (int j = 0; j < numCols; j++) {
 
@@ -28,7 +28,7 @@ public class TicTacToeBoard extends Board{
         // Check rows
         int numCols = cells.getFirst().size();
         int numRows = cells.size();
-        for (List<Cell> cell : cells) {
+        for (List<TicTacToeCell> cell : cells) {
             if (cell.getFirst().getOwner() != null &&
                     cell.getFirst().getOwner().equals(cell.get(1).getOwner()) &&
                     cell.get(1).getOwner().equals(cell.getLast().getOwner())) {

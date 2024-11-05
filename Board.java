@@ -1,8 +1,10 @@
 import java.util.List;
+import java.util.SequencedCollection;
+
 import static utils.Ansi.*;
 
-public abstract class Board {
-    protected List<List<Cell>> cells;
+public abstract class Board<T extends Cell> {
+    protected List<List<T>> cells;
     protected int padding = 2;
     protected Player winner;
     protected boolean draw;
@@ -20,6 +22,7 @@ public abstract class Board {
     public Cell getCell(int row, int col) {
         return cells.get(row).get(col);
     }
+
     public Cell getCellById(int id) {
         int numCols = cells.getFirst().size();
         int cellsCount = numCols * cells.size();
@@ -32,13 +35,13 @@ public abstract class Board {
         }
     }
 
-    public List<List<Cell>> getAllCells() {
+    public List<List<T>> getAllCells() {
         return cells;
     }
 
     protected int getLongestCellLength() {
         int maxStringLength = 0;
-        for (List<Cell> cellRow : cells) {
+        for (List<? extends Cell> cellRow : cells) {
             for (Cell cell : cellRow) {
                 if (cell != null) {
                     maxStringLength = Math.max(maxStringLength, cell.toString().length());
