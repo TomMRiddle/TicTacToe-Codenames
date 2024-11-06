@@ -1,8 +1,8 @@
 import java.util.List;
 import static utils.Ansi.*;
 
-public abstract class Board {
-    protected List<List<Cell>> cells;
+public abstract class Board<T extends Cell> {
+    protected List<List<T>> cells;
     protected int padding = 2;
     protected Player winner;
     protected boolean draw;
@@ -17,10 +17,10 @@ public abstract class Board {
     public abstract boolean isDraw();
     public abstract Player getWinner();
 
-    public Cell getCell(int row, int col) {
+    public T getCell(int row, int col) {
         return cells.get(row).get(col);
     }
-    public Cell getCellById(int id) {
+    public T getCellById(int id) {
         int numCols = cells.getFirst().size();
         int cellsCount = numCols * cells.size();
         if (id < cellsCount || id > 1) {
@@ -32,14 +32,14 @@ public abstract class Board {
         }
     }
 
-    public List<List<Cell>> getAllCells() {
+    public List<List<T>> getAllCells() {
         return cells;
     }
 
     protected int getLongestCellLength() {
         int maxStringLength = 0;
-        for (List<Cell> cellRow : cells) {
-            for (Cell cell : cellRow) {
+        for (List<T> cellRow : cells) {
+            for (T cell : cellRow) {
                 if (cell != null) {
                     maxStringLength = Math.max(maxStringLength, cell.toString().length());
                 }

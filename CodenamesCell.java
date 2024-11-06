@@ -32,18 +32,4 @@ public class CodenamesCell extends Cell {
         return revealed;
     }
 
-    @Override
-    public void setContent(String content) {
-
-    }
-
-    @Override
-    public void setOwner(Player player) {
-
-    }
-
-    @Override
-    public Player getOwner() {
-        return null;
-    }
 }

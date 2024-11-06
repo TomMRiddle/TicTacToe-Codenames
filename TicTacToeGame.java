@@ -3,8 +3,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class TicTacToeGame {
-    private static final Board board = new TicTacToeBoard();
-    private static final List<Player> players= new ArrayList<>();
+    private static final TicTacToeBoard board = new TicTacToeBoard();
+    private static final List<Player<TicTacToeBoard>> players= new ArrayList<>();
 
     public static void main(String[] args) {
         players.add(new HumanPlayer("Victor", "X"));
@@ -13,7 +13,7 @@ public class TicTacToeGame {
         Collections.shuffle(players);
         boolean gameloop = true;
         while(gameloop) {
-            for (Player player : players) {
+            for (Player<TicTacToeBoard> player : players) {
                 player.makeMove(board);
                 board.checkWin();
                 if(board.getWinner() != null || board.isDraw()) {
