@@ -27,7 +27,7 @@ public class CodenamesBoard extends Board<CodenamesCell> {
         }
     }
 
-    private Queue<String> createSecrets() {
+    public Queue<String> createSecrets() {
         List<String> secrets = new ArrayList<>();
 
         // Add 7 innocent
