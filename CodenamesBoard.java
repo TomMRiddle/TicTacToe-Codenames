@@ -32,11 +32,11 @@ public class CodenamesBoard extends Board<CodenamesCell> {
 
         // Add 7 innocent
         for (int i = 0; i < 7; i++) {
-            secrets.add(WHITE);
+            secrets.add(BRIGHT_WHITE);
         }
         // Add 1 assassin
 
-        secrets.add(BLACK);
+        secrets.add(BRIGHT_BLACK);
 
         // Add 8 agents from each team
 

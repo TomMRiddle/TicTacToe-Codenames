@@ -7,7 +7,7 @@ public class CodenamesCell extends Cell {
         super(cellId);
         this.content = content;
         this.secret = secret;
-        this.color = BRIGHT_WHITE;
+        this.color = BG;
         spymasterView = false;
         revealed = false;
     }
