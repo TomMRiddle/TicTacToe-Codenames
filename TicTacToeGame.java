@@ -38,7 +38,7 @@ public class TicTacToeGame {
         boolean gameloop = true;
         while(gameloop) {
             for (Player<TicTacToeBoard> player : players) {
-                player.makeMove(board);
+                player.takeTurn(board);
                 board.checkWin();
                 if(board.getWinner() != null || board.isDraw()) {
                     gameloop = false;

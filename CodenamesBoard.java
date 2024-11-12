@@ -61,16 +61,14 @@ public class CodenamesBoard extends Board<CodenamesCell> {
     protected void checkWin() {
 
     }
+    public String printBoard() {
 
-    @Override
-    public boolean isDraw() {
-        //never possible in Codenames
-        return false;
+        return "";
     }
 
     @Override
     public Player getWinner() {
         return null;
-    }
 
+    }
 }

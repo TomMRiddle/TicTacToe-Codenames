@@ -13,6 +13,6 @@ public abstract class Player<T extends Board> {
         return symbol;
     }
 
-    public abstract void makeMove(T board);
+    public abstract void takeTurn(T board);
 }
 

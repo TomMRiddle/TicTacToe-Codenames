@@ -7,7 +7,7 @@ public class ComputerPlayer extends Player<TicTacToeBoard> {
     }
 
     @Override                   //"Logik" för datorn
-    public void makeMove(TicTacToeBoard board) {
+    public void takeTurn(TicTacToeBoard board) {
         Random random = new Random();
         int cellId;
 

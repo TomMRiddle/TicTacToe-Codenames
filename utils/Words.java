@@ -1,7 +1,10 @@
 package utils;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+
+import static utils.Ansi.*;
 
 public class Words {
     private Words(){
@@ -509,5 +512,4 @@ public class Words {
             "Kudde",
             "Pizza"
     ));
-    public static List<String> secret = new ArrayList<>(Arrays.asList());
 }

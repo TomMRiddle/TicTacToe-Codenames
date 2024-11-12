@@ -7,7 +7,7 @@ public class HumanPlayer extends Player<TicTacToeBoard> {
     }
     Scanner scanner = new Scanner(System.in);
     @Override
-    public void makeMove(TicTacToeBoard board) {
+    public void takeTurn(TicTacToeBoard board) {
 
         System.out.println(board);
         System.out.println(getName() + ", enter cell number: ");
