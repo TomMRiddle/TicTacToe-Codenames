@@ -151,7 +151,7 @@ public class GameMenu {
             "║          SPELDETALJER                ║\n" +
             "║                                      ║\n" +
             "║    Valt spel: " + (gameChoice == 1 ? "Tre i Rad   " : "Codenames  ") + "      ║\n" +
-            "║    Antal spelare: " + playerCount + "                  ║\n" +
+            "║    Antal spelare: " + playerCount + "║\n" +
             "║                                      ║\n" +
             "║          SPELARLISTA                 ║\n" +
             "║                                      ║\n" +
