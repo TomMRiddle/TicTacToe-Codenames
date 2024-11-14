@@ -55,7 +55,7 @@ public class GameMenu {
                 "║        2. CODENAMES                  ║\n" +
                 "║                                      ║\n" +
                 "║        Välj mellan (1-2):            ║\n" +
-                "╚══════════════════════════════════════╝"
+                "╚═════════════════��════════════════════╝"
             );
 
             try {
@@ -170,19 +170,30 @@ public class GameMenu {
     }
 
     private void displayGameConfiguration(int gameChoice, int playerCount, String[] playerNames) {
+        StringBuilder playerList = new StringBuilder();
+        for (int i = 0; i < playerCount; i++) {
+            if (gameChoice == 1 && playerCount == 1 && i == 0) {
+                // För enspelarläge i Tre i rad
+                playerList.append(String.format("║    Spelare: %-20s    ║%n", playerNames[0]));
+                playerList.append("║    Motståndare: Dator              ║%n");
+            } else {
+                // För alla andra lägen
+                playerList.append(String.format("║    Spelare %d: %-20s ║%n", (i + 1), playerNames[i]));
+            }
+        }
+
         System.out.println("\n" +
             "╔══════════════════════════════════════╗\n" +
             "║          SPELET STARTAR!             ║\n" +
             "║                                      ║\n" +
             "║          SPELDETALJER                ║\n" +
             "║                                      ║\n" +
-            "║    Valt spel: " + (gameChoice == 1 ? "Tre i Rad   " : "Codenames  ") + "      ║\n" +
-            "║    Antal spelare: " + playerCount + "║\n" +
+            String.format("║    Valt spel: %-20s    ║%n", (gameChoice == 1 ? "Tre i Rad" : "Codenames")) +
+            String.format("║    Antal spelare: %-15d ║%n", playerCount) +
             "║                                      ║\n" +
             "║          SPELARLISTA                 ║\n" +
             "║                                      ║\n" +
-            "║    Spelare 1: " + String.format("%-14s", playerNames[0]) + "      ║\n" +
-            "║    Spelare 2: " + String.format("%-14s", playerNames[1]) + "      ║\n" +
+            playerList +
             "║                                      ║\n" +
             "║          LYCKA TILL!                 ║\n" +
             "║                                      ║\n" +
