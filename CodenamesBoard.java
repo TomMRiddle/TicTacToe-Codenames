@@ -57,8 +57,9 @@ public class CodenamesBoard extends Board<CodenamesCell> {
     }
 
     @Override
-    protected void checkWin() {
+    protected boolean checkWin() {
 
+        return false;
     }
     public String printBoard() {
 
