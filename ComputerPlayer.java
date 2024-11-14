@@ -34,9 +34,9 @@ public class ComputerPlayer extends Player<TicTacToeBoard> {
         }
 
         //drag som kan leda till vinst
-        int winnableAndPlaceMove = findWinnableAndPlace(board, getSymbol());
-        if(winnableAndPlaceMove != -1) {
-            takeTurn(board, winnableAndPlaceMove);
+        int winnableMove = findWinnable(board, getSymbol());
+        if(winnableMove != -1) {
+            takeTurn(board, winnableMove);
             return;
         }
 
@@ -73,7 +73,7 @@ public class ComputerPlayer extends Player<TicTacToeBoard> {
         board.getCellById(cellId).setContent(getSymbol());
         board.getCellById(cellId).setOwner(this);
     }
-    private int findWinnableAndPlace(TicTacToeBoard board, String symbol) {
+    private int findWinnable(TicTacToeBoard board, String symbol) {
         List<Integer> winnablePositions = new ArrayList<>();
 
         // Check lines intersecting with cell 1
