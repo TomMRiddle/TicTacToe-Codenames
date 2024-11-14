@@ -1,4 +1,3 @@
-import java.util.Objects;
 import java.util.Random;
 
 public class ComputerPlayer extends Player<TicTacToeBoard> {
@@ -14,7 +13,6 @@ public class ComputerPlayer extends Player<TicTacToeBoard> {
         // Vinnande drag
         int winningMove = findWinningMove(board, getSymbol());
         if(winningMove != -1) {
-            takeTurn(board, winningMove);
             return;
         }
 
@@ -32,20 +30,22 @@ public class ComputerPlayer extends Player<TicTacToeBoard> {
         int cellId;
 
         do {
-            cellId = random.nextInt(8)+1;
-        } while (!Objects.equals(board.getCellById(cellId).toString(), " "));
-        TicTacToeCell cell = board.getCellById(cellId);
-        cell.setContent(getSymbol());
-        cell.setOwner(this);
+            cellId = random.nextInt(9)+1;
+        } while (!board.getCellById(cellId).toString().equals(" "));
+        board.getCellById(cellId).setContent(getSymbol());
+        board.getCellById(cellId).setOwner(this);
     }
 
     private int findWinningMove(TicTacToeBoard board, String symbol) {
         for (int i = 1; i <= 9; i++) {
             if(board.getCellById(i).toString().equals(" ")) {
                 board.getCellById(i).setContent(symbol);
-                board.checkWin();
-                if(board.getWinner() != null || board.isDraw()) {
-                    return i;
+                if(board.checkWin()) {
+                    if(board.getCellById(i).toString().equals(getSymbol())) {
+                        board.getCellById(i).setOwner(this);
+                    } else {
+                        return i;
+                    }
                 }
                 board.getCellById(i).setContent(" ");
             }
