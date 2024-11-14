@@ -1,16 +1,19 @@
 public class TicTacToeCell extends Cell {
-    public TicTacToeCell(int id) {
-        super(id);
+    private Player<TicTacToeBoard> owner;
+    public TicTacToeCell(int cellId) {
+        super(cellId);
     }
-    @Override
     public void setContent(String content) {
         this.content = content;
     }
 
-    public Player getOwner() {
+    public Player<TicTacToeBoard> getOwner() {
         return owner;
     }
-    public void setOwner(Player owner) {
+    public void setOwner(Player<TicTacToeBoard> owner) {
         this.owner = owner;
+    }
+    public String getTheContent() {
+        return content;
     }
 }

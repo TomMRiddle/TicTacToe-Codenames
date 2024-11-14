@@ -1,8 +1,8 @@
 import java.util.List;
 import static utils.Ansi.*;
 
-public abstract class Board {
-    protected List<List<Cell>> cells;
+public abstract class Board<T extends Cell> {
+    protected List<List<T>> cells;
     protected int padding = 2;
     protected Player winner;
     protected boolean draw;
@@ -13,14 +13,13 @@ public abstract class Board {
     }
 
     protected abstract void initialize(int numRows, int numCols);
-    protected abstract void checkWin();
-    public abstract boolean isDraw();
+    protected abstract boolean checkWin();
     public abstract Player getWinner();
 
-    public Cell getCell(int row, int col) {
+    public T getCell(int row, int col) {
         return cells.get(row).get(col);
     }
-    public Cell getCellById(int id) {
+    public T getCellById(int id) {
         int numCols = cells.getFirst().size();
         int cellsCount = numCols * cells.size();
         if (id < cellsCount || id > 1) {
@@ -32,14 +31,14 @@ public abstract class Board {
         }
     }
 
-    public List<List<Cell>> getAllCells() {
+    public List<List<T>> getAllCells() {
         return cells;
     }
 
     protected int getLongestCellLength() {
         int maxStringLength = 0;
-        for (List<Cell> cellRow : cells) {
-            for (Cell cell : cellRow) {
+        for (List<T> cellRow : cells) {
+            for (T cell : cellRow) {
                 if (cell != null) {
                     maxStringLength = Math.max(maxStringLength, cell.toString().length());
                 }
@@ -53,7 +52,7 @@ public abstract class Board {
         String spacer = "\u00A0";
         StringBuilder out = new StringBuilder();
         int longestCellLength = getLongestCellLength();
-        for (int i = 0; i < cells.size() * 3; i++) { //iterate 3 times for every cellrow of the board
+        for (int i = 0; i < cells.size() * 3; i++) { //iterate 3 times for every cell row of the board
                 for (int j = 0; j < cells.getFirst().size(); j++) { //iterate once for every column
                     String colorCode = cells.get(i / 3).get(j).getColor();
                     out.append(BG + BOLD).append(colorCode);
@@ -70,7 +69,7 @@ public abstract class Board {
                     } else { //third row in cell
                         out.append(spacer.repeat(longestCellLength)); //output the number of spacers equal to the length of the cell content
                     }
-                    out.append(RESET).append(spacer);
+                    out.append(RESET).append("  ");
                 }
             out.append("\n");
             if (i % 3 == 2) {

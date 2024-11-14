@@ -1,4 +1,4 @@
-public abstract class Player {
+public abstract class Player<T extends Board> {
     protected String name;
     protected String symbol;
 
@@ -12,7 +12,7 @@ public abstract class Player {
     public String getSymbol() {
         return symbol;
     }
+    public abstract void takeTurn(T board);
 
-    public abstract void makeMove(Board board);
 }
 
