@@ -1,18 +1,12 @@
 public class Score {
     
-    private String playerName;
-    private int wins;
-    private int losses;
-    private int ties;
+    private Player playerName;
+    private int playerScore;
+    
 
-    public Score (String playerName, int wins, int losses, int ties){
+    public Score (Player playerName, int playerScore){
         this.playerName=playerName;
-        this.wins=wins;
-        this.losses=losses;
-        this.ties=ties;  
-    }
-
-    //public toString(String){
-
-    }
+        this.playerScore=playerScore;
+    }   
+}
     

@@ -1,26 +1,20 @@
-import java.util.List;
+import java.util.*;
 
 public class Scoreboard {
 
-    private List<Score> highscores;
     private String gameName;
+    
 
-    public Scoreboard (String gameName, List<Score> highscores) {
-        this.gameName=gameName;
-        this.highscores=highscores;
+    public Scoreboard (String gameName) {
+        this.gameName=gameName;        
     }
 
-    public void newScore(){
-        if (true) {
-            Scoreboard newScoreboard = new Scoreboard(gameName, highscores);
-        }
-    } 
+    public void createScore(){
+        public List<Score> highscores = new ArrayList<>();
+        highscores.add(Score);
+    }
 
-    @Override
-    public String toString(){
-        for (int i=0; i<highscores.length; i++) { 
-            highscores;
-        }
+   
     }
    
 
@@ -28,6 +22,5 @@ public class Scoreboard {
     
 
 
-}
-}
+
 
