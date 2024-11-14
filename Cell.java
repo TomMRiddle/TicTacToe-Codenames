@@ -4,13 +4,11 @@ public abstract class Cell {
     protected String color;
     protected int id;
 
-    public Cell(int id) {
+    public Cell(int cellId) {
+        this.id = cellId;
         this.content = " ";
         this.color = WHITE;
-        this.id = id;
     }
-
-    public abstract void setContent(String content);
 
     public int getId() {
         return id;
@@ -23,4 +21,5 @@ public abstract class Cell {
     public String toString() {
         return content;
     }
+
 }
