@@ -83,7 +83,7 @@ public class GameMenu {
                     "╔══════════════════════════════════════╗\n" +
                     "║      VÄLJ ANTAL SPELARE:             ║\n" +
                     "║                                      ║\n" +
-                    "║        1. EN SPELARE                 ║\n" +
+                    "║        1. EN SPELARE (MOT DATORN)    ║\n" +
                     "║        2. TVÅ SPELARE                ║\n" +
                     "║                                      ║\n" +
                     "║        Välj antal (1-2):             ║\n" +
