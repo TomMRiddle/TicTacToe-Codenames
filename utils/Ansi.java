@@ -35,4 +35,5 @@ public class Ansi {
     public static final String CURSOR_SHOW = "\33[?25h";
     public static final String CLEAR_SCREEN = "\33[2J";
     public static final String CLEAR_LINE = "\33[2K";
+    public static final String NBSP = "\u00A0";
 }
