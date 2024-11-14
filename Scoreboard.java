@@ -1,29 +1,33 @@
+import java.util.List;
+
 public class Scoreboard {
 
-    //Scoreboard behöver vara en array/list/collection av nåt slag (vilken?), innehållandes spelarnamn och score. MEN blandade variabler? Obra.
-    private list playerScores;
-    
-    //Metoder som scoreboard behöver innehålla:
-    
+    private List<Score> highscores;
+    private String gameName;
 
-    // - jämföra och sortera score
-
-    
-    for (int i=0; i<playerScores.length; i++){
-        
+    public Scoreboard (String gameName, List<Score> highscores) {
+        this.gameName=gameName;
+        this.highscores=highscores;
     }
 
-    // - visa scoreboard 
-    public void printScoreboard() {
-        System.out.println("SCOREBOARD");
-        for (int i=0; i<playerScores.length; i++) {
-            System.out.println(playerScore[i]);
+    public void newScore(){
+        if (true) {
+            Scoreboard newScoreboard = new Scoreboard(gameName, highscores);
+        }
+    } 
+
+    @Override
+    public String toString(){
+        for (int i=0; i<highscores.length; i++) { 
+            highscores;
         }
     }
-
+   
 
     
     
 
 
 }
+}
+

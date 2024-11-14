@@ -1,25 +1,18 @@
 public class Score {
     
-    String player;
-    int score;
+    private String playerName;
+    private int wins;
+    private int losses;
+    private int ties;
 
-    public Score (String player, int score){
-        this.player=player;
-        this.score=score;  
+    public Score (String playerName, int wins, int losses, int ties){
+        this.playerName=playerName;
+        this.wins=wins;
+        this.losses=losses;
+        this.ties=ties;  
     }
-    //Getters och setters
-    // Score som egen klass -> där finns spelarnamn och score samt funktion för att beräkna score. 
+
+    //public toString(String){
+
+    }
     
-    //Metoder som score behöver innehålla:
-    // - Spara/lagra spelare och wins/losses
-    // - Beräkna score genom "vinster-förluster = score"
-
-
-   // public int calculateScore(int playerWins, int playerLosses) { //argument: player.wins, player.losses (eller gettermetod för dessa)
-                
-   
-    // - Glömma spelare som hamnar utanför scoreboard
-
-
-    
-}
