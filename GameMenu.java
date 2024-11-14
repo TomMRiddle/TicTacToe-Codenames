@@ -10,7 +10,7 @@ public class GameMenu {
     public void start() {
         displayWelcomeBanner();
         int gameChoice = selectGame();
-        int playerCount = selectPlayerCount();
+        int playerCount = selectPlayerCount(gameChoice);
         String[] playerNames = getPlayerNames(playerCount);
 
         // Lägg till Spel logik senare
@@ -76,34 +76,60 @@ public class GameMenu {
         }
     }
 
-    private int selectPlayerCount() {
+    private int selectPlayerCount(int gameChoice) {
         while (true) {
-            System.out.println("\n" +
-                "╔══════════════════════════════════════╗\n" +
-                "║      VÄLJ ANTAL SPELARE:             ║\n" +
-                "║                                      ║\n" +
-                "║        2. TVÅ SPELARE                ║\n" +
-                "║        3. TRE SPELARE                ║\n" +
-                "║        4. FYRA SPELARE               ║\n" +
-                "║                                      ║\n" +
-                "║        Välj antal (2-4):             ║\n" +
-                "╚══════════════════════════════════════╝"
-            );
+            if (gameChoice == 1) {  // Tre i rad
+                System.out.println("\n" +
+                    "╔══════════════════════════════════════╗\n" +
+                    "║      VÄLJ ANTAL SPELARE:             ║\n" +
+                    "║                                      ║\n" +
+                    "║        1. EN SPELARE                 ║\n" +
+                    "║        2. TVÅ SPELARE                ║\n" +
+                    "║                                      ║\n" +
+                    "║        Välj antal (1-2):             ║\n" +
+                    "╚══════════════════════════════════════╝"
+                );
 
-            try {
-                int antal = Integer.parseInt(scanner.nextLine());
-                if (antal >= 2 && antal <= 4) return antal;
-                System.out.println(
+                try {
+                    int antal = Integer.parseInt(scanner.nextLine());
+                    if (antal >= 1 && antal <= 2) return antal;
+                    System.out.println(
+                        "╔══════════════════════════════════════╗\n" +
+                        "║    Felaktigt val! Välj mellan 1-2    ║\n" +
+                        "╚══════════════════════════════════════╝"
+                    );
+                } catch (NumberFormatException e) {
+                    System.out.println(
+                        "╔══════════════════════════════════════╗\n" +
+                        "║        Skriv en siffra (1-2)!        ║\n" +
+                        "╚══════════════════════════════════════╝"
+                    );
+                }
+            } else {  // Codenames
+                System.out.println("\n" +
                     "╔══════════════════════════════════════╗\n" +
-                    "║    Felaktigt val! Välj mellan 2-4    ║\n" +
+                    "║      VÄLJ ANTAL SPELARE:             ║\n" +
+                    "║                                      ║\n" +
+                    "║        Välj antal (4-8):             ║\n" +
+                    "║                                      ║\n" +
                     "╚══════════════════════════════════════╝"
                 );
-            } catch (NumberFormatException e) {
-                System.out.println(
-                    "╔══════════════════════════════════════╗\n" +
-                    "║        Skriv en siffra (2-4)!        ║\n" +
-                    "╚══════════════════════════════════════╝"
-                );
+
+                try {
+                    int antal = Integer.parseInt(scanner.nextLine());
+                    if (antal >= 4 && antal <= 8) return antal;
+                    System.out.println(
+                        "╔══════════════════════════════════════╗\n" +
+                        "║    Felaktigt val! Välj mellan 4-8    ║\n" +
+                        "╚══════════════════════════════════════╝"
+                    );
+                } catch (NumberFormatException e) {
+                    System.out.println(
+                        "╔══════════════════════════════════════╗\n" +
+                        "║        Skriv en siffra (4-8)!        ║\n" +
+                        "╚══════════════════════════════════════╝"
+                    );
+                }
             }
         }
     }
@@ -134,7 +160,7 @@ public class GameMenu {
                     break;
                 }
                 System.out.println(
-                    "╔════���═════════════════════════════════╗\n" +
+                    "╔══════════════════════════════════════╗\n" +
                     "║     Namn får inte vara tomt!         ║\n" +
                     "╚══════════════════════════════════════╝"
                 );
