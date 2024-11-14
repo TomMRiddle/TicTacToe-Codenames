@@ -36,6 +36,7 @@ public class ComputerPlayer extends Player<TicTacToeBoard> {
         board.getCellById(cellId).setOwner(this);
     }
 
+        // Metod för vinnadne drag
     private int findWinningMove(TicTacToeBoard board, String symbol) {
         for (int i = 1; i <= 9; i++) {
             if(board.getCellById(i).toString().equals(" ")) {
