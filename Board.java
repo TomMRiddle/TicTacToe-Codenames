@@ -16,6 +16,9 @@ public abstract class Board<T extends Cell> {
     protected abstract void checkWin();
     public abstract Player getWinner();
 
+    public T getCell(int row, int col) {
+        return cells.get(row).get(col);
+    }
     public T getCellById(int id) {
         int numCols = cells.getFirst().size();
         int cellsCount = numCols * cells.size();

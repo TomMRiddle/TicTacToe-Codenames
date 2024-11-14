@@ -22,7 +22,6 @@ public class CodenamesBoard extends Board<CodenamesCell> {
                 row.add(new CodenamesCell(cellId, content.poll(), secret.poll()));
                 cellId++;
             }
-
             cells.add(row);
         }
     }
