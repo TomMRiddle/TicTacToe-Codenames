@@ -26,8 +26,7 @@ public class ComputerPlayer extends Player<TicTacToeBoard> {
         }
 
         // Blockerande drag
-        String opponentSymbol = getSymbol().equals("X") ? "O" : "X";
-        int blockingMove = findWinningMove(board, opponentSymbol);
+        int blockingMove = findWinningMove(board, opponentSymbol(getSymbol()));
         if(blockingMove != -1) {
             takeTurn(board, blockingMove);
             return;
@@ -73,28 +72,13 @@ public class ComputerPlayer extends Player<TicTacToeBoard> {
         board.getCellById(cellId).setContent(getSymbol());
         board.getCellById(cellId).setOwner(this);
     }
+
     private int findWinnable(TicTacToeBoard board, String symbol) {
         List<Integer> winnablePositions = new ArrayList<>();
 
-        // Check lines intersecting with cell 1
+        // Check all lines
         for (int[] line : winnableLines) {
-            if (Arrays.stream(line).anyMatch(cell -> cell == 1)) {
                 checkLine(board, line, symbol, winnablePositions);
-            }
-        }
-
-        // Check lines intersecting with cell 5
-        for (int[] line : winnableLines) {
-            if (Arrays.stream(line).anyMatch(cell -> cell == 5)) {
-                checkLine(board, line, symbol, winnablePositions);
-            }
-        }
-
-        // Check lines intersecting with cell 9
-        for (int[] line : winnableLines) {
-            if (Arrays.stream(line).anyMatch(cell -> cell == 9)) {
-                checkLine(board, line, symbol, winnablePositions);
-            }
         }
 
         // Randomly return a winnable position or choose randomly from available cells
