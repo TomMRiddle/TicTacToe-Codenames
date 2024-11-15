@@ -64,11 +64,10 @@ public class TicTacToeGame {
             System.out.println("Would you like to play again? (yes/no): ");
             String userInput = scan.nextLine().trim().toLowerCase();
             
-            playAgain = userInput.equals("yes");
+            playAgain = userInput.contains("y");
         }
 
         System.out.println("Thank you for playing!");
-        scan.close();
     }
 
 }
