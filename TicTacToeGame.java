@@ -2,12 +2,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static utils.Ansi.*;
+import java.util.Scanner;
 
 public class TicTacToeGame {
     private static final TicTacToeBoard board = new TicTacToeBoard();
     private static final List<Player<TicTacToeBoard>> players= new ArrayList<>();
-
+    
     public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
         System.out.println( BRIGHT_YELLOW + """
           _____                       ____ \s
          |_ " _|         ___       U /"___|\s
@@ -34,24 +36,38 @@ public class TicTacToeGame {
         players.add(new HumanPlayer("Victor", "X"));
         players.add(new ComputerPlayer("Computer", "O"));
 
-        Collections.shuffle(players);
-        boolean gameloop = true;
-        while(gameloop) {
-            for (Player<TicTacToeBoard> player : players) {
-                player.takeTurn(board);
-                board.checkWin();
-                if(board.getWinner() != null || board.isDraw()) {
-                    gameloop = false;
-                    break;
+        boolean playAgain = true;
+
+        while (playAgain) {
+            TicTacToeBoard board = new TicTacToeBoard();
+
+            Collections.shuffle(players);    
+            
+            boolean gameloop = true;
+            while(gameloop) {
+                for (Player<TicTacToeBoard> player : players) {
+                    player.takeTurn(board);
+                    board.checkWin();
+                    if(board.getWinner() != null || board.isDraw()) {
+                        gameloop = false;
+                        break;
+                    }
                 }
             }
+            System.out.println(board);
+            if(!board.isDraw()) {
+                System.out.println(board.getWinner().getName() + " wins!");
+            } else {
+                System.out.println("It's a tie!");
+            }
+            
+            System.out.println("Would you like to play again? (yes/no): ");
+            String userInput = scan.nextLine().trim().toLowerCase();
+            
+            playAgain = userInput.contains("y");
         }
-        System.out.println(board);
-        if(!board.isDraw()) {
-            System.out.println(board.getWinner().getName() + " wins!");
-        } else {
-            System.out.println("It's a tie!");
-        }
+
+        System.out.println("Thank you for playing!");
     }
 
 }
