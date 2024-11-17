@@ -58,17 +58,19 @@ public class CodenamesBoard extends Board<CodenamesCell> {
 
     @Override
     protected boolean checkWin() {
-
         return false;
     }
-    public String printBoard() {
 
-        return "";
+    public void setSpymasterView(boolean spymasterView) {
+        for (List<CodenamesCell> cellRow : cells) {
+            for (CodenamesCell cell : cellRow) {
+                cell.setSpymasterView(spymasterView);
+            }
+        }
     }
 
     @Override
     public Player getWinner() {
         return null;
-
     }
 }

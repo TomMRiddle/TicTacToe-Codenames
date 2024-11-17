@@ -73,7 +73,7 @@ public abstract class Board<T extends Cell> {
                 }
             out.append("\n");
             if (i % 3 == 2) {
-                out.append("\n");
+                out.append("\n"); //add an empty line between cell rows
             }
         }
         return out.toString();
