@@ -9,6 +9,9 @@ public class TicTacToeGame {
     private static final List<Player<TicTacToeBoard>> players= new ArrayList<>();
     
     public static void main(String[] args) {
+        start();
+    }
+    public static void start() {
         Scanner scan = new Scanner(System.in);
         System.out.println( BRIGHT_YELLOW + """
           _____                       ____ \s
@@ -41,8 +44,8 @@ public class TicTacToeGame {
         while (playAgain) {
             TicTacToeBoard board = new TicTacToeBoard();
 
-            Collections.shuffle(players);    
-            
+            Collections.shuffle(players);
+
             boolean gameloop = true;
             while(gameloop) {
                 for (Player<TicTacToeBoard> player : players) {
@@ -60,10 +63,10 @@ public class TicTacToeGame {
             } else {
                 System.out.println("It's a tie!");
             }
-            
+
             System.out.println("Would you like to play again? (yes/no): ");
             String userInput = scan.nextLine().trim().toLowerCase();
-            
+
             playAgain = userInput.contains("y");
         }
 
