@@ -1,8 +1,9 @@
 import static utils.Ansi.*;
 public class CodenamesCell extends Cell {
-    private String secret;
+    private final String secret;
     private boolean spymasterView;
     private boolean revealed;
+
     public CodenamesCell(int cellId, String content, String secret) {
         super(cellId);
         this.content = content;
@@ -14,9 +15,15 @@ public class CodenamesCell extends Cell {
     public boolean isRevealed() {
         return revealed;
     }
+    @Override
+    public String toString() {
+        String revealedIndicator = "█";
+        return (revealed && spymasterView ? revealedIndicator + content +  revealedIndicator : content);
+    }
     public void reveal() {
         this.revealed = true;
     }
+
     @Override
     public String getColor() {
         return (revealed || spymasterView ? secret : color);

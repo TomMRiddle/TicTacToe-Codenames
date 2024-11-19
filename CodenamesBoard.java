@@ -4,7 +4,9 @@ import static utils.Words.*;
 
 public class CodenamesBoard extends Board<CodenamesCell> {
 
+    private boolean spymasterView;
     public CodenamesBoard() {
+        spymasterView = false;
         initialize(5,5);
     }
     @Override
@@ -67,10 +69,21 @@ public class CodenamesBoard extends Board<CodenamesCell> {
                 cell.setSpymasterView(spymasterView);
             }
         }
+        this.spymasterView = spymasterView;
+    }
+    public void reveal(int cellId) {
+        getCellById(cellId).reveal();
     }
 
     @Override
     public Player getWinner() {
         return null;
+    }
+
+    @Override
+    public String toString() {
+        String legend = BG+BLUE+BOLD+"Agent för lag blå"+RESET+" "+BG+RED+BOLD+"Agent för lag röd"+RESET+" "+BG+BRIGHT_BLACK+BOLD+"Lönnmördare"+RESET+" "+BG+BRIGHT_WHITE+BOLD+"oskyldig åskådare"+RESET+"\n\n";
+        if (spymasterView) { legend = "█avslöjat kodnamn█ "+legend; } else { legend = BG+BOLD+"Ej avslöjade kodnamn"+RESET+" "+legend; }
+        return legend + super.toString();
     }
 }

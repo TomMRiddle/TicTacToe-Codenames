@@ -27,9 +27,11 @@ public class CodenamesGame {
                 RESET);
         System.out.println(CLS);
         CodenamesBoard board = new CodenamesBoard();
+        board.reveal(9);
         System.out.println(board);
         board.setSpymasterView(true);
         System.out.println(CLEAR_SCREEN);
+
         System.out.println(board);
     }
 }
