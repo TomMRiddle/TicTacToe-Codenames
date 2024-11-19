@@ -55,7 +55,7 @@ public abstract class Board<T extends Cell> {
         for (int i = 0; i < cells.size() * 3; i++) { //iterate 3 times for every cell row of the board
                 for (int j = 0; j < cells.getFirst().size(); j++) { //iterate once for every column
                     String colorCode = cells.get(i / 3).get(j).getColor();
-                    out.append(BG + BOLD).append(colorCode);
+                    out.append(BG).append(colorCode);
                     if (i % 3 == 0) { //first row in cell
                         String cellId = cells.get(i / 3).get(j).getId()+"";
                         out.append(cellId);

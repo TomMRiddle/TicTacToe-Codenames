@@ -82,8 +82,8 @@ public class CodenamesBoard extends Board<CodenamesCell> {
 
     @Override
     public String toString() {
-        String legend = BG+BLUE+BOLD+"Agent för lag blå"+RESET+" "+BG+RED+BOLD+"Agent för lag röd"+RESET+" "+BG+BRIGHT_BLACK+BOLD+"Lönnmördare"+RESET+" "+BG+BRIGHT_WHITE+BOLD+"oskyldig åskådare"+RESET+"\n\n";
-        if (spymasterView) { legend = "█avslöjat kodnamn█ "+legend; } else { legend = BG+BOLD+"Ej avslöjade kodnamn"+RESET+" "+legend; }
+        String legend = BG+BLUE+"Agent för lag blå"+RESET+" "+BG+RED+"Agent för lag röd"+RESET+" "+BG+BRIGHT_BLACK+"Lönnmördare"+RESET+" "+BG+BRIGHT_WHITE+"oskyldig åskådare"+RESET+"\n\n";
+        if (spymasterView) { legend = "█avslöjat kodnamn█ "+legend; } else { legend = BG+BRIGHT_YELLOW+"Ej avslöjade kodnamn"+RESET+" "+legend; }
         return legend + super.toString();
     }
 }

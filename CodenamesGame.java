@@ -30,8 +30,6 @@ public class CodenamesGame {
         board.reveal(9);
         System.out.println(board);
         board.setSpymasterView(true);
-        System.out.println(CLEAR_SCREEN);
-
         System.out.println(board);
     }
 }
