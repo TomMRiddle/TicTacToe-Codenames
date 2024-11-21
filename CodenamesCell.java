@@ -28,7 +28,15 @@ public class CodenamesCell extends Cell {
     public String getColor() {
         return (revealed || spymasterView ? secret : color);
     }
+
+    public String setColor(String color) {
+        return (revealed || spymasterView ? color : this.color);
+    }
     public void setSpymasterView(boolean spymasterView) {
         this.spymasterView = spymasterView;
+    }
+
+    public String getSecret() {
+        return secret;
     }
 }
