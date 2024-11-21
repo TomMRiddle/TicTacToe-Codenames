@@ -4,45 +4,44 @@ import static utils.Ansi.*;
 
 public class AgentPlayer extends Player<CodenamesBoard> {
     private final String teamColor;
+    private final Scanner scanner;
 
     public AgentPlayer(String name, String teamColor) {
         super(name);
+        scanner = new Scanner(System.in);
         this.teamColor = teamColor;
     }
 
     @Override
     public void takeTurn(CodenamesBoard board) {
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println(getName() + " från laget " + teamColor + "s tur.");
+        System.out.println(getName() + " från det" + teamColor + (teamColor.equals(BLUE) ? "blå" : "röda") + RESET + "lagets tur.");
         System.out.println("Skriv ett nummer för att gissa ett ord (1-25):");
 
         int cellId = scanner.nextInt();
 
-        guessWord(board, cellId, 3);
-
-        if (hasWon(board)) {
-            System.out.println("Grattis! " + teamColor + " laget har vunnit!");
-        }
+        guessWord(board, 3); //totalGuesses ska komma från spymasterns tur
     }
 
     public String getTeamColor() {
         return teamColor;
     }
 
-    // Metod för att gissa ett ord, baserat på cellID
-    public void guessWord(CodenamesBoard board, int cellId, int totalGuesses) {
+    // Metod för att gissa ett ord, baserat på cellId
+    public void guessWord(CodenamesBoard board, int totalGuesses) {
         int correctGuesses = 0; // Räknar korrekta gissningar
         int remainingGuesses = totalGuesses; // Antal gissningar laget har kvar
-        Scanner scanner = new Scanner(System.in);
+        int cellId;
 
         while (remainingGuesses > 0) {
+            System.out.println("Skriv ett nummer för att gissa ett ord (1-25):");
+            cellId = scanner.nextInt();
             CodenamesCell cell = board.getCellById(cellId);
 
             // Kontrollera om cellId är ogiltigt eller cellen redan är avslöjad
             if (cell == null || cell.isRevealed()) {
                 System.out.println(cell == null ? "Ogiltigt gissning." : "Detta ord har redan gissats.");
-                return;
+                continue;
             }
 
             // Kalla på metoden för att "reveala cell"
@@ -50,17 +49,18 @@ public class AgentPlayer extends Player<CodenamesBoard> {
             System.out.println(getName() + " gissar på: " + cell.toString());
 
             // Kontrollera cellens "hemlighet"
-            if (cell.getSecret().equals(BRIGHT_BLACK)) {
+            if (cell.getColor().equals(BRIGHT_BLACK)) {
                 System.out.println("Lönnmördaren avslöjad! Spelet är över.");
-                break; // Avsluta spelet
-            } else if (cell.getSecret().equals(teamColor)) {
+                break; // Förlorar och avslutar spelet
+            } else if (cell.getColor().equals(teamColor)) {
                 System.out.println("Bra gissat! Detta är en " + teamColor + "-agent.");
                 correctGuesses++;
-                cell.setColor(teamColor); // Markera cellen med lagets färg
-            } else if (cell.getSecret().equals(BRIGHT_WHITE)) {
-                System.out.println("Fel! Detta var en neutral agent.");
+            } else if (cell.getColor().equals(BRIGHT_WHITE)) {
+                System.out.println("Fel! Detta var en oskyldig åskådare.");
+                break; //turen går över till nästa spelare
             } else {
                 System.out.println("Fel! Detta var inte en " + teamColor + "-agent.");
+                break; //turen går över till nästa spelare
             }
 
             // Minska kvarvarande gissningar
@@ -78,38 +78,9 @@ public class AgentPlayer extends Player<CodenamesBoard> {
                 if (userResponse.equals("nej")) {
                     break;
                 }
-
-                // Extra gissning
-                System.out.println("Skriv ett nummer för att gissa ett ord (1-25):");
-                cellId = scanner.nextInt();
             }
         }
-
         System.out.println("Rundan är över.");
     }
-
-
-//    // Kontrollera om spelarens lag har vunnit
-//    public boolean hasWon(CodenamesBoard board) {
-//        int revealedAgents = 0;
-//
-//        // Gå igenom alla celler och räkna avslöjade agenter för laget
-//        for (List<CodenamesCell> row : board.getAllCells()) {
-//            for (CodenamesCell cell : row) {
-//                if (cell.getSecret().equals(teamColor) && cell.isRevealed()) {
-//                    revealedAgents++;
-//                }
-//            }
-//        }
-//
-//        // Kontrollera om rätt antal agenter för laget har avslöjats för att vinna
-//        if (teamColor.equals("RED") && revealedAgents == 9) {
-//            return true;
-//        } else if (teamColor.equals("BLUE") && revealedAgents == 8) {
-//            return true;
-//        }
-//
-//        return false;
-//    }
 }
 
