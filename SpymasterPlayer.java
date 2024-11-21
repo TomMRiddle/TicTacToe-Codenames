@@ -13,7 +13,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
 
     @Override
     public void takeTurn(CodenamesBoard board) {
-        System.out.println("Studera spelbrädet och fundera på en ledtråd som kan hjälpa dina agenter att gissa rätt! \nAnge din ledtråd med ett ord följt av en siffra, t.ex. TRÄD 5.\nOBS! Ditt ord får inte vara ett av orden på aktuell spelplan. Din siffra får inte överstiga antalet agenter ditt lag har kvar att hitta.");
+        System.out.println("Studera spelbrädet och fundera på en ledtråd som kan hjälpa dina agenter att gissa rätt! \nDin ledtråd ska bestå av ett ord följt av en siffra som representerar antalet agenter ditt ord passar in på. Exempel: TRÄD 5.\nOBS! Ditt ord får inte vara ett av orden på aktuell spelplan. Din siffra får inte överstiga antalet agenter ditt lag har kvar att hitta.");
         
         String clue;
         int cluenumber;
@@ -24,7 +24,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
             clue = spyscan.nextLine();
     
             for (List<CodenamesCell> cellRow : board.cells) {
-                for (CodenamesCell cell : cellRow) {//kolla alla 25 ord på aktuellt bräde))
+                for (CodenamesCell cell : cellRow) {
                     if (clue.equals(cell.content)){
                         System.out.println("Välj ett ord som inte finns på spelplanen!");
                         tryAgain = true;
@@ -40,6 +40,17 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
             System.out.println("Ange din siffra: ");
             cluenumber = spyscan.nextInt();
 
+            int revealCounter=0;
+            for (List<CodenamesCell> cellRow : board.cells) {
+                for (CodenamesCell cell : cellRow) {
+                    if(cell.revealed=true){
+                        revealCounter++;
+                    }
+                    else{
+                        
+                    }
+                }
+            }
             if(cluenumber>8){ //ohittade secrets/
                 System.out.println("Din siffra får inte överstiga lagets ofunna agenter. Försök igen!");
                 tryAgain=true;
