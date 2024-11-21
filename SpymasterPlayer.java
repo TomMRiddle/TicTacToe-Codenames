@@ -50,6 +50,6 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
         } while (tryAgain);
         System.out.println("Fin ledtråd! \nTryck ENTER för att dölja spelbrädets färger och visa ledtråden för dina lagkamrater.");
 
-        System.out.println("Spymaster's ledtråd: /n" +clue +cluenumber);        
+        System.out.println("Spymaster's ledtråd: \n" +clue +cluenumber);        
     }
 }
