@@ -41,17 +41,15 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
             cluenumber = spyscan.nextInt();
 
             int revealCounter=0;
+
             for (List<CodenamesCell> cellRow : board.cells) {
                 for (CodenamesCell cell : cellRow) {
-                    if(cell.revealed=true){
+                    if(cell.isRevealed()){
                         revealCounter++;
-                    }
-                    else{
-                        
                     }
                 }
             }
-            if(cluenumber>8){ //ohittade secrets/
+            if(cluenumber>revealCounter){
                 System.out.println("Din siffra får inte överstiga lagets ofunna agenter. Försök igen!");
                 tryAgain=true;
             }
