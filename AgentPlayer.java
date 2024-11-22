@@ -14,6 +14,7 @@ public class AgentPlayer extends Player<CodenamesBoard> {
 
     @Override
     public void takeTurn(CodenamesBoard board) {
+        int totalGuesses = board.getNumberOfGuesses();
 
         System.out.println(getName() + " från det" + teamColor + (teamColor.equals(BLUE) ? "blå" : "röda") + RESET + "lagets tur.");
         System.out.println("Skriv ett nummer för att gissa ett ord (1-25):");
