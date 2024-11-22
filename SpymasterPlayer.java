@@ -22,6 +22,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
         System.out.println(board);
 
         do {
+            tryAgain=false;
             System.out.println("Ange ditt ord: ");
             clue = spyscan.nextLine();
 
@@ -36,6 +37,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
         } while (tryAgain);
 
         do {
+            tryAgain=false;
             System.out.println("\nAnge din siffra: ");
             cluenumber = spyscan.nextInt();
 
