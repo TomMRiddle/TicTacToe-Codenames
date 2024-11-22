@@ -1,9 +1,11 @@
 import java.util.*;
 
 public class ComputerPlayer extends Player<TicTacToeBoard> {
+    private final String symbol;
     private final int[][] winnableLines;
     public ComputerPlayer(String name, String symbol) {
-        super(name, symbol);
+        super(name);
+        this.symbol = symbol;
         winnableLines = new int[][]{
                 {1, 2, 3}, {4, 5, 6}, {7, 8, 9}, // Rows
                 {1, 4, 7}, {2, 5, 8}, {3, 6, 9}, // Columns
@@ -18,22 +20,22 @@ public class ComputerPlayer extends Player<TicTacToeBoard> {
     public void takeTurn(TicTacToeBoard board) {
 
         // Vinnande drag
-        int winningMove = findWinningMove(board, getSymbol());
+        int winningMove = findWinningMove(board, symbol);
         if(winningMove != -1) {
-            board.getCellById(winningMove).setContent(getSymbol());
+            board.getCellById(winningMove).setContent(symbol);
             takeTurn(board, winningMove);
             return;
         }
 
         // Blockerande drag
-        int blockingMove = findWinningMove(board, opponentSymbol(getSymbol()));
+        int blockingMove = findWinningMove(board, opponentSymbol(symbol));
         if(blockingMove != -1) {
             takeTurn(board, blockingMove);
             return;
         }
 
         //drag som kan leda till vinst
-        int winnableMove = findWinnable(board, getSymbol());
+        int winnableMove = findWinnable(board, symbol);
         if(winnableMove != -1) {
             takeTurn(board, winnableMove);
             return;
@@ -46,7 +48,7 @@ public class ComputerPlayer extends Player<TicTacToeBoard> {
         do {
             cellId = random.nextInt(9)+1;
         } while (!board.getCellById(cellId).toString().equals(" "));
-        board.getCellById(cellId).setContent(getSymbol());
+        board.getCellById(cellId).setContent(symbol);
         board.getCellById(cellId).setOwner(this);
     }
 
@@ -69,7 +71,7 @@ public class ComputerPlayer extends Player<TicTacToeBoard> {
     }
 
     private void takeTurn(TicTacToeBoard board, int cellId) {
-        board.getCellById(cellId).setContent(getSymbol());
+        board.getCellById(cellId).setContent(symbol);
         board.getCellById(cellId).setOwner(this);
     }
 
@@ -78,7 +80,7 @@ public class ComputerPlayer extends Player<TicTacToeBoard> {
 
         // Check all lines
         for (int[] line : winnableLines) {
-                checkLine(board, line, symbol, winnablePositions);
+            checkLine(board, line, symbol, winnablePositions);
         }
 
         // Randomly return a winnable position or choose randomly from available cells
@@ -104,7 +106,7 @@ public class ComputerPlayer extends Player<TicTacToeBoard> {
                 // Skip already filled cells
                 continue;
             }
-            if (board.getCellById(cell).toString().equals(opponentSymbol(getSymbol()))) {
+            if (board.getCellById(cell).toString().equals(opponentSymbol(symbol))) {
                 // Found an opponent's symbol, no winnable move here
                 return;
             }

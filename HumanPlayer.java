@@ -1,9 +1,11 @@
-import java.util.Objects;
 import java.util.Scanner;
 
 public class HumanPlayer extends Player<TicTacToeBoard> {
+    private final String symbol;
     public HumanPlayer(String name, String symbol) {
-        super(name, symbol);
+        super(name);
+        this.symbol = symbol;
+
     }
     Scanner scanner = new Scanner(System.in);
     @Override
@@ -16,9 +18,9 @@ public class HumanPlayer extends Player<TicTacToeBoard> {
         do {
             cellId = scanner.nextInt();
             scanner.nextLine();
-        } while ( (cellId > 9) || (cellId < 1) || !Objects.equals(board.getCellById(cellId).toString(), " "));
+        } while ( (cellId > 9) || (cellId < 1) || board.getCellById(cellId).toString().equals(" "));
         TicTacToeCell cell = board.getCellById(cellId);
-        cell.setContent(getSymbol());
+        cell.setContent(symbol);
         cell.setOwner(this);
     }
 }
