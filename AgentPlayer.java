@@ -15,6 +15,8 @@ public class AgentPlayer extends Player<CodenamesBoard> {
     @Override
     public void takeTurn(CodenamesBoard board) {
         int totalGuesses = board.getNumberOfGuesses();
+        board.setSpymasterView(false);
+        System.out.println(board);
 
         System.out.println(getName() + " från det" + teamColor + " " + (teamColor.equals(BLUE) ? "blå" : "röda") + RESET + " lagets tur.");
 //        System.out.println("Skriv ett nummer för att gissa ett ord (1-25):");
@@ -62,6 +64,7 @@ public class AgentPlayer extends Player<CodenamesBoard> {
             // Avslöja cellen
             cell.reveal();
             System.out.println(getName() + " gissar på: " + cell.toString());
+            System.out.println(board);
 
             // feedback på gissningarna
             if (cell.getColor().equals(BRIGHT_BLACK)) {
