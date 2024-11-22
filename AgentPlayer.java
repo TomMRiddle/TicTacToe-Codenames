@@ -16,12 +16,12 @@ public class AgentPlayer extends Player<CodenamesBoard> {
     public void takeTurn(CodenamesBoard board) {
         int totalGuesses = board.getNumberOfGuesses();
 
-        System.out.println(getName() + " från det" + teamColor + " " + (teamColor.equals(BLUE) ? "blå" : "röda") + RESET + " lagets tur.");
-//        System.out.println("Skriv ett nummer för att gissa ett ord (1-25):");
-//
-//        int cellId = scanner.nextInt();
+        System.out.println(getName() + " från det" + teamColor + (teamColor.equals(BLUE) ? "blå" : "röda") + RESET + "lagets tur.");
+        System.out.println("Skriv ett nummer för att gissa ett ord (1-25):");
 
-        guessWord(board, totalGuesses); //totalGuesses ska komma från spymasterns tur
+        int cellId = scanner.nextInt();
+
+        guessWord(board, 3); //totalGuesses ska komma från spymasterns tur
     }
 
     public String getTeamColor() {
@@ -30,69 +30,53 @@ public class AgentPlayer extends Player<CodenamesBoard> {
 
     // Metod för att gissa ett ord, baserat på cellId
     public void guessWord(CodenamesBoard board, int totalGuesses) {
-        int correctGuesses = 0;
-        int remainingGuesses = totalGuesses;
+        int correctGuesses = 0; // Räknar korrekta gissningar
+        int remainingGuesses = totalGuesses; // Antal gissningar laget har kvar
+        int cellId;
 
         while (remainingGuesses > 0) {
-            System.out.println("Skriv ett nummer för att gissa ett ord (1-25): ");
-
-            // Hantera & felhantera inmatning av cellId
-            int cellId;
-            while (true) {
-                try {
-                    cellId = Integer.parseInt(scanner.nextLine().trim());
-                    if (cellId < 1 || cellId > 25) {
-                        System.out.println("Ogiltigt nummer. Välj mellan 1 och 25: ");
-                        continue;
-                    }
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println("Ogiltig input. Ange ett nummer: ");
-                }
-            }
-
+            System.out.println("Skriv ett nummer för att gissa ett ord (1-25):");
+            cellId = scanner.nextInt();
             CodenamesCell cell = board.getCellById(cellId);
 
-            // Kontrollera om cellen redan är avslöjad
-            if (cell.isRevealed()) {
-                System.out.println("Detta ord har redan gissats. Försök igen.");
+            // Kontrollera om cellId är ogiltigt eller cellen redan är avslöjad
+            if (cell == null || cell.isRevealed()) {
+                System.out.println(cell == null ? "Ogiltigt gissning." : "Detta ord har redan gissats.");
                 continue;
             }
 
-            // Avslöja cellen
+            // Kalla på metoden för att "reveala cell"
             cell.reveal();
             System.out.println(getName() + " gissar på: " + cell.toString());
 
-            // feedback på gissningarna
+            // Kontrollera cellens "hemlighet"
             if (cell.getColor().equals(BRIGHT_BLACK)) {
                 System.out.println("Lönnmördaren avslöjad! Spelet är över.");
-                break;
+                break; // Förlorar och avslutar spelet
             } else if (cell.getColor().equals(teamColor)) {
-                System.out.println("Bra gissat! Detta är en " + teamColor + (teamColor.equals(BLUE) ? "blå" : "röd") + RESET + " agent! :D");
+                System.out.println("Bra gissat! Detta är en " + teamColor + "-agent.");
                 correctGuesses++;
-                remainingGuesses--;
             } else if (cell.getColor().equals(BRIGHT_WHITE)) {
                 System.out.println("Fel! Detta var en oskyldig åskådare.");
-                return;
+                break; //turen går över till nästa spelare
             } else {
-                String oppositeColor = teamColor.equals(BLUE) ? RED : BLUE;
-                System.out.println("Fel! Detta var en " + oppositeColor + (oppositeColor.equals(BLUE) ? "blå" : "röd") + RESET + " agent :(");
-                return;
+                System.out.println("Fel! Detta var inte en " + teamColor + "-agent.");
+                break; //turen går över till nästa spelare
             }
 
-            System.out.println("Kvarstående gissningar: " + remainingGuesses);
+            // Minska kvarvarande gissningar
+            remainingGuesses--;
 
-            // Ge extra gissning om alla är korrekta
+            // Extra gissning om alla föregående var korrekta
             if (correctGuesses == totalGuesses && remainingGuesses == 0) {
-                System.out.println("Ni gissade rätt på alla och får en extra gissning!");
+                System.out.println("Ni gissade rätt på alla och får därmed en extra gissning!");
                 remainingGuesses++;
             }
 
-            // Fråga om att fortsätta om gissningar
             if (remainingGuesses > 0) {
                 System.out.println("Vill ni fortsätta gissa? (ja/nej)");
                 String userResponse = scanner.nextLine().trim().toLowerCase();
-                if (!userResponse.equals("ja")) {
+                if (userResponse.equals("nej")) {
                     break;
                 }
             }

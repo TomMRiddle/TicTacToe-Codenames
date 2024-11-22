@@ -23,7 +23,6 @@ public class MenuLogic {
             display.displayGameDetails(gameChoice, playerCount, playerNames);
             startTicTacToe(playerCount, playerNames);
         } else {
-            display.displayCodenamesGameDetails(playerNames);
             startCodenames(playerNames);
         }
     }
@@ -70,6 +69,10 @@ public class MenuLogic {
     }
 
     private void startCodenames(String[] playerNames) {
-        CodenamesGame.main(null);
+        int[] spymasterIndices = playerManager.selectSpymasters(playerNames);
+        display.displayCodenamesGameDetails(playerNames, spymasterIndices);
+        System.out.println("\nTryck ENTER för att starta spelet...");
+        scanner.nextLine();
+        CodenamesGame.start(playerNames, spymasterIndices);
     }
 }

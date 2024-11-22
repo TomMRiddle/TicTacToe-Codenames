@@ -92,7 +92,7 @@ public class MenuDisplay {
             └──────────────────────────────────┘""");
     }
 
-    public void displayCodenamesGameDetails(String[] allPlayers) {
+    public void displayCodenamesGameDetails(String[] allPlayers, int[] spymasterIndices) {
         int redTeamSize = (allPlayers.length + 1) / 2;
         String[] redTeam = new String[redTeamSize];
         String[] blueTeam = new String[allPlayers.length - redTeamSize];
@@ -106,18 +106,24 @@ public class MenuDisplay {
             │                                  │
             │         RÖDA LAGET               │""");
         
-        System.out.printf("│          - %-22s│%n", redTeam[0] + " (Spymaster)");
-        for (int i = 1; i < redTeam.length; i++) {
-            System.out.printf("│          - %-22s│%n", redTeam[i]);
+        for (int i = 0; i < redTeam.length; i++) {
+            if (i == spymasterIndices[0]) {
+                System.out.printf("│          - %-22s│%n", redTeam[i] + " (Spymaster)");
+            } else {
+                System.out.printf("│          - %-22s│%n", redTeam[i]);
+            }
         }
         
         System.out.println("""
             │                                  │
             │         BLÅA LAGET               │""");
         
-        System.out.printf("│          - %-22s│%n", blueTeam[0] + " (Spymaster)");
-        for (int i = 1; i < blueTeam.length; i++) {
-            System.out.printf("│          - %-22s│%n", blueTeam[i]);
+        for (int i = 0; i < blueTeam.length; i++) {
+            if (i + redTeamSize == spymasterIndices[1]) {
+                System.out.printf("│          - %-22s│%n", blueTeam[i] + " (Spymaster)");
+            } else {
+                System.out.printf("│          - %-22s│%n", blueTeam[i]);
+            }
         }
         
         System.out.println("""
@@ -133,7 +139,6 @@ public class MenuDisplay {
             System.out.println("Det blev oavgjort!");
         }
     }
-
     private String getGameName(int gameChoice) {
         return gameChoice == 1 ? "TRE I RAD" : "CODENAMES";
     }
