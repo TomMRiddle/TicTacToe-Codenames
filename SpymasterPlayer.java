@@ -29,10 +29,10 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
                 for (CodenamesCell cell : cellRow) {
                     if (clue.equals(cell.content)){
                         System.out.println("\nVälj ett ord som inte finns på spelplanen!");
-                        tryAgain = true;
+                        tryAgain=true;
                     }
                     else{
-                        tryAgain = false;
+                        tryAgain=false;
                     }                
                 }
             }            
