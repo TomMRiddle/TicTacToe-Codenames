@@ -26,7 +26,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
             System.out.println("Ange ditt ord: ");
             clue = spyscan.nextLine();
 
-            for (List<CodenamesCell> cellRow : board.cells) {
+            for (List<CodenamesCell> cellRow : board.getAllCells()) {
                 for (CodenamesCell cell : cellRow) {
                     if (clue.equals(cell.content)){
                         System.out.println("\nVälj ett ord som inte finns på spelplanen!");
@@ -43,7 +43,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
 
             int missingAgentCounter=0;
 
-            for (List<CodenamesCell> cellRow : board.cells) {
+            for (List<CodenamesCell> cellRow : board.getAllCells()) {
                 for (CodenamesCell cell : cellRow) {
                     if(!cell.isRevealed() && cell.getColor()==teamColor){
                         missingAgentCounter++;
