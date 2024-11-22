@@ -2,34 +2,15 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class HumanPlayer extends Player<TicTacToeBoard> {
-<<<<<<< Updated upstream
     public HumanPlayer(String name, String symbol) {
         super(name, symbol);
 =======
-    private final String symbol;
-    private final Scanner scanner;
-
-    public HumanPlayer(String name, String symbol) {
-        super(name);
-        this.symbol = symbol;
-        this.scanner = new Scanner(System.in);
 >>>>>>> Stashed changes
     }
 
     @Override
     public void takeTurn(TicTacToeBoard board) {
         System.out.println(board);
-<<<<<<< Updated upstream
-        System.out.println(getName() + ", enter cell number: ");
-        int cellId;
-
-        do {
-            cellId = scanner.nextInt();
-            scanner.nextLine();
-        } while ( (cellId > 9) || (cellId < 1) || !Objects.equals(board.getCellById(cellId).toString(), " "));
-        TicTacToeCell cell = board.getCellById(cellId);
-        cell.setContent(getSymbol());
-        cell.setOwner(this);
 =======
         System.out.println(getName() + ", ange cellnummer (1-9): ");
         
