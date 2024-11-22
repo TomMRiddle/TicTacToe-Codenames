@@ -17,7 +17,10 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
         int cluenumber;
         boolean tryAgain=false;
         board.setSpymasterView(true);
+        System.out.println("Nu är det "+ name+", spymastern för det "+teamColor+BG+(teamColor == RED ? "röda" : "blå")+RESET+" lagets tur");
         System.out.println("Studera spelbrädet och fundera på en ledtråd som kan hjälpa dina agenter att gissa rätt! \nDin ledtråd ska bestå av ett ord följt av en siffra som representerar antalet agenter ditt ord passar in på. \nExempel: Träd 5.\nOBS! Ditt ord får inte vara ett av orden på aktuell spelplan. \nDin siffra får inte överstiga antalet agenter ditt lag har kvar att hitta.");
+        spyscan.nextLine();
+        System.out.println("Skriv något och tryck enter för att visa spelbrädet");
         System.out.println(board);
 
         do {
@@ -27,10 +30,14 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
 
             for (List<CodenamesCell> cellRow : board.getAllCells()) {
                 for (CodenamesCell cell : cellRow) {
-                    if (clue.equalsIgnoreCase(cell.toString())){
+                    if (clue.trim().equalsIgnoreCase(cell.toString()) && !cell.isRevealed() || clue.trim().isEmpty()){
                         System.out.println("\nVälj ett ord som inte finns på spelplanen!");
                         tryAgain = true;
+                        break;
                     }
+                }
+                if (tryAgain){
+                    break;
                 }
             }
         } while (tryAgain);
