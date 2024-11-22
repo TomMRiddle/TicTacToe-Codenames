@@ -1,17 +1,17 @@
-import java.util.Objects;
+
 import java.util.Scanner;
 
 public class HumanPlayer extends Player<TicTacToeBoard> {
+    private Scanner scanner;
+    private String symbol;
     public HumanPlayer(String name, String symbol) {
-        super(name, symbol);
-=======
->>>>>>> Stashed changes
+        super(name);
+        this.symbol = symbol;
+        scanner = new Scanner(System.in);
     }
-
     @Override
     public void takeTurn(TicTacToeBoard board) {
         System.out.println(board);
-=======
         System.out.println(getName() + ", ange cellnummer (1-9): ");
         
         while (true) {
@@ -39,6 +39,5 @@ public class HumanPlayer extends Player<TicTacToeBoard> {
                 scanner.nextLine(); 
             }
         }
->>>>>>> Stashed changes
     }
 }
