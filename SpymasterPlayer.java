@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.Scanner;
+import static utils.Ansi.*;
 
 public class SpymasterPlayer extends Player<CodenamesBoard>{
     Scanner spyscan;
@@ -11,6 +12,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
         spyscan = new Scanner(System.in);
     }
 
+    
     @Override
     public void takeTurn(CodenamesBoard board) {
         System.out.println("Studera spelbrädet och fundera på en ledtråd som kan hjälpa dina agenter att gissa rätt! \nDin ledtråd ska bestå av ett ord följt av en siffra som representerar antalet agenter ditt ord passar in på. Exempel: TRÄD 5.\nOBS! Ditt ord får inte vara ett av orden på aktuell spelplan. Din siffra får inte överstiga antalet agenter ditt lag har kvar att hitta.");
@@ -26,7 +28,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
             for (List<CodenamesCell> cellRow : board.cells) {
                 for (CodenamesCell cell : cellRow) {
                     if (clue.equals(cell.content)){
-                        System.out.println("Välj ett ord som inte finns på spelplanen!");
+                        System.out.println("\nVälj ett ord som inte finns på spelplanen!");
                         tryAgain = true;
                     }
                     else{
@@ -37,19 +39,19 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
         } while (tryAgain);
        
         do {
-            System.out.println("Ange din siffra: ");
+            System.out.println("\nAnge din siffra: ");
             cluenumber = spyscan.nextInt();
 
-            int revealCounter=0;
+            int missingAgentCounter=0;
 
             for (List<CodenamesCell> cellRow : board.cells) {
                 for (CodenamesCell cell : cellRow) {
-                    if(cell.isRevealed()){
-                        revealCounter++;
+                    if(!cell.isRevealed() && cell.getColor()==teamColor){
+                        missingAgentCounter++;
                     }
                 }
             }
-            if(cluenumber>revealCounter){
+            if(cluenumber>missingAgentCounter){
                 System.out.println("Din siffra får inte överstiga lagets ofunna agenter. Försök igen!");
                 tryAgain=true;
             }
@@ -57,8 +59,10 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
                 tryAgain=false;
             }
         } while (tryAgain);
-        System.out.println("Fin ledtråd! \nTryck ENTER för att dölja spelbrädets färger och visa ledtråden för dina lagkamrater.");
-
-        System.out.println("Spymaster's ledtråd: \n" +clue +cluenumber);        
+        System.out.println(CLS+"Spymaster's ledtråd: \n" +clue+" "+cluenumber);        
     }
+    public String getTeamColor() {
+        return teamColor;
+    }
+
 }
