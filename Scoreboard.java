@@ -33,7 +33,7 @@ public class Scoreboard {
     private void load() {
         if (!Files.exists(Paths.get(CSV_FILE_NAME))) {
             try (PrintWriter writer = new PrintWriter(new FileWriter(CSV_FILE_NAME))) {
-                writer.println("Game Type,Home Player,Away Player,Result");
+                writer.println("Home Player,Away Player,Result");
             } catch (IOException e) {
                 e.printStackTrace();
             }
