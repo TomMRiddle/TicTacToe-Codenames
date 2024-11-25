@@ -1,8 +1,13 @@
-import java.io.*;
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Scoreboard {
     private static final String COMMA_DELIMITER = ", ";
@@ -57,18 +62,22 @@ public class Scoreboard {
     }
 
     private void updateScores(String homePlayer, String awayPlayer, int result) {
+        final int DRAW = 2;
+        final int WIN = 0;
+        final int LOSS = 1;
         switch (result) {
+
             case 0: // Draw
-                scores.computeIfAbsent(homePlayer, k -> new int[3])[2]++;
-                scores.computeIfAbsent(awayPlayer, k -> new int[3])[2]++;
+                scores.computeIfAbsent(homePlayer, k -> new int[3])[DRAW]++;
+                scores.computeIfAbsent(awayPlayer, k -> new int[3])[DRAW]++;
                 break;
             case 1: // Home Player wins
-                scores.computeIfAbsent(homePlayer, k -> new int[3])[0]++;
-                scores.computeIfAbsent(awayPlayer, k -> new int[3])[1]++;
+                scores.computeIfAbsent(homePlayer, k -> new int[3])[WIN]++;
+                scores.computeIfAbsent(awayPlayer, k -> new int[3])[LOSS]++;
                 break;
             case 2: // Away Player wins
-                scores.computeIfAbsent(homePlayer, k -> new int[3])[1]++;
-                scores.computeIfAbsent(awayPlayer, k -> new int[3])[0]++;
+                scores.computeIfAbsent(homePlayer, k -> new int[3])[LOSS]++;
+                scores.computeIfAbsent(awayPlayer, k -> new int[3])[WIN]++;
                 break;
         }
     }
