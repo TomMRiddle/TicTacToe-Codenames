@@ -21,7 +21,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
             System.out.println("Tryck ENTER för att fortsätta...");
             System.out.println("==============\n");
             spyscan.nextLine();
-            // Removed screen clearing to preserve game overview
+            
         String clue;
         int cluenumber;
         boolean tryAgain=true;
