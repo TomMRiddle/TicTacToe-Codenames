@@ -6,7 +6,9 @@ public class TicTacToeCell extends Cell {
     public void setContent(String content) {
         this.content = content;
     }
-
+    public void setColor(String color) {
+        this.color = color;
+    }
     public Player<TicTacToeBoard> getOwner() {
         return owner;
     }

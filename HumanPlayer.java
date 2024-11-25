@@ -1,14 +1,15 @@
-
 import java.util.Scanner;
 
 public class HumanPlayer extends Player<TicTacToeBoard> {
-    private Scanner scanner;
-    private String symbol;
+    private final String symbol;
+    private final Scanner scanner;
+
     public HumanPlayer(String name, String symbol) {
         super(name);
         this.symbol = symbol;
-        scanner = new Scanner(System.in);
+        this.scanner = new Scanner(System.in);
     }
+
     @Override
     public void takeTurn(TicTacToeBoard board) {
         System.out.println(board);
@@ -36,7 +37,7 @@ public class HumanPlayer extends Player<TicTacToeBoard> {
                 
             } catch (NumberFormatException e) {
                 System.out.println("Ange ett giltigt nummer!");
-                scanner.nextLine(); 
+                scanner.nextLine(); // clear invalid input
             }
         }
     }
