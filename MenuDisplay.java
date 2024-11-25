@@ -2,22 +2,29 @@ import static utils.Ansi.*;
 
 public class MenuDisplay {
     public void displayWelcomeBanner() {
-        System.out.println("""
-            ┌──────────────────────────────────────────────────────────────────────────────────────────────┐
-            │                                                                                              │
-            │     ___  ______________ _____ _____ _____          _   _  ___________ _____ _______   __     │
-            │     |  \\/  |  _  | ___ \\_   _|_   _/  ___|        | | | ||  _  | ___ \\_   _|  ___\\ \\ / /     │
-            │     | .  . | | | | |_/ / | |   | | \\ `--.         | | | || | | | |_/ / | | | |__  \\ V /      │
-            │     | |\\/| | | | |    /  | |   | |  `--. \\        | | | || | | |    /  | | |  __| /   \\      │
-            │     | |  | \\ \\_/ / |\\ \\  | |  _| |_/\\__/ /        \\ \\_/ /\\ \\_/ / |\\ \\  | | | |___/ /^\\ \\     │
-            │     \\_|  |_/\\___/\\_| \\_| \\_/  \\___/\\____/          \\___/  \\___/\\_| \\_| \\_/ \\____/\\/   \\/     │
-            │                                                                                              │
-            │                                  VÄLKOMMEN TILL VÅRA SPEL!                                   │
-            │                                                                                              │
-            │                                  Tre i Rad & Codenames                                       │
-            │                                                                                              │
-            └──────────────────────────────────────────────────────────────────────────────────────────────┘
-            """);
+        System.out.println(RED +
+                "     ███▄ ▄███▓ ▒█████   ██▀███  ▄▄▄█████▓ ██▓  ██████       \n" +
+                "    ▓██▒▀█▀ ██▒▒██▒  ██▒▓██ ▒ ██▒▓  ██▒ ▓▒▓██▒▒██    ▒       \n" +
+                "    ▓██    ▓██░▒██░  ██▒▓██ ░▄█ ▒▒ ▓██░ ▒░▒██▒░ ▓██▄         \n" +
+                "    ▒██    ▒██ ▒██   ██░▒██▀▀█▄  ░ ▓██▓ ░ ░██░  ▒   ██▒      \n" +
+                "    ▒██▒   ░██▒░ ████▓▒░░██▓ ▒██▒  ▒██▒ ░ ░██░▒██████▒▒      \n" +
+                "    ░ ▒░   ░  ░░ ▒░▒░▒░ ░ ▒▓ ░▒▓░  ▒ ░░   ░▓  ▒ ▒▓▒ ▒ ░      \n" +
+                " "+BRIGHT_WHITE+"█████"+RED+" ░ "+BRIGHT_WHITE+"█████"+RED+"░  ░ ▒ ▒░   ░▒ ░ ▒░"+BRIGHT_WHITE+"█████"+RED+"     ▒ ░░ ░▒  ░ ░      \n" +
+                BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"   ░░"+BRIGHT_WHITE+"███"+RED+"  ░ ░ ░ ▒    ░░   ░ "+BRIGHT_GREEN+"░"+BRIGHT_WHITE+"███"+RED+"      ▒ ░░  ░  ░        \n" +
+                BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"    ░"+BRIGHT_WHITE+"███  ██████  ████████ ███████    ██████  █████ █████\n" +
+                BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"    ░"+BRIGHT_WHITE+"███ ███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░    "+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░░"+BRIGHT_WHITE+"███\n" +
+                BRIGHT_GREEN+" ░░"+BRIGHT_WHITE+"███   ███"+BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░░░  ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"    ░"+BRIGHT_WHITE+"███████"+BRIGHT_GREEN+"  ░░░"+BRIGHT_WHITE+"█████"+BRIGHT_GREEN+"░ \n" +
+                BRIGHT_GREEN+"  ░░░"+BRIGHT_WHITE+"█████"+BRIGHT_GREEN+"░  ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"      ░"+BRIGHT_WHITE+"███ ███"+BRIGHT_GREEN+"░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░░    "+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░░"+BRIGHT_WHITE+"███\n" +
+                BRIGHT_GREEN+"    ░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"    ░░"+BRIGHT_WHITE+"██████  █████"+BRIGHT_GREEN+"     ░░"+BRIGHT_WHITE+"█████"+BRIGHT_GREEN+" ░░"+BRIGHT_WHITE+"██████  █████ █████\n" +
+                BRIGHT_GREEN+"     ░░░      ░░░░░░  ░░░░░       ░░░░░   ░░░░░░  ░░░░░ ░░░░░\n" + 
+                "\n" +
+                "┌─────────────────────────────────────────────────────────┐\n" +
+                "│                                                         │\n" +
+                "│                VÄLKOMMEN TILL VÅRA SPEL!                │\n" +
+                "│                Tre i rad & Codenames                    │\n" +
+                "│                                                         │\n" +
+                "└─────────────────────────────────────────────────────────┘\n" +
+                RESET);
     }
 
     public void showGameSelectionMenu() {

@@ -43,9 +43,9 @@ public class MenuPlayerManager {
 
     public int[] selectSpymasters(String[] allPlayers) {
         int redTeamSize = (allPlayers.length + 1) / 2;
-        int[] spymasterIndices = new int[2]; // Index 0 for red team, Index 1 for blue team
+        int[] spymasterIndices = new int[2]; 
         
-        // Select Red Team Spymaster
+        // Det röda laget väljer Spymaster
         System.out.println("""
             ┌─────────────────────────────────────┐
             │  VÄLJ SPYMASTER FÖR DET RÖDA LAGET  │
@@ -71,7 +71,7 @@ public class MenuPlayerManager {
             }
         }
 
-        // Select Blue Team Spymaster
+        // Det blåa laget väljer Spymaster
         System.out.println("""
             ┌─────────────────────────────────────┐
             │  VÄLJ SPYMASTER FÖR DET BLÅA LAGET  │
