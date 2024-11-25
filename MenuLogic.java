@@ -46,29 +46,8 @@ public class MenuLogic {
     }
 
     private void startTicTacToe(int playerCount, String[] playerNames) {
-        TicTacToeBoard board = new TicTacToeBoard();
-        List<Player<TicTacToeBoard>> players = new ArrayList<>();
-        
-        // Låt första spelaren välja symbol
-        display.showSymbolSelectionMenu(playerNames[0]);
-        String player1Symbol = getValidInput("symbol", 1, 2) == 1 ? "X" : "O";
-        String player2Symbol = player1Symbol.equals("X") ? "O" : "X";
-        
-        // Skapa spelarna med deras symboler
-        players.add(new HumanPlayer(playerNames[0], player1Symbol));
-        players.add(playerCount == 1 ? 
-            new ComputerPlayer("Computer", player2Symbol) : 
-            new HumanPlayer(playerNames[1], player2Symbol));
-
-        while (true) {
-            for (Player<TicTacToeBoard> player : players) {
-                player.takeTurn(board);
-                if (board.checkWin() || board.isDraw()) {
-                    display.showGameResult(board);
-                    return;
-                }
-            }
-        }
+        display.displayGameDetails(1, playerCount, playerNames);
+        TicTacToeGame.start(playerCount, playerNames);
     }
 
     private void startCodenames(String[] playerNames) {

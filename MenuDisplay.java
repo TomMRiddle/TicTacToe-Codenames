@@ -159,7 +159,7 @@ public class MenuDisplay {
     public void showGameResult(TicTacToeBoard board) {
         System.out.println(board);
         if(!board.isDraw()) {
-            System.out.println(board.getWinner().getName() + " vinner!");
+            System.out.println(board.getWinner().getName() + " Vann!");
         } else {
             System.out.println("Det blev oavgjort!");
         }
