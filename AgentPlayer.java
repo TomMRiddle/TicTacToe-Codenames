@@ -95,7 +95,7 @@ public class AgentPlayer extends Player<CodenamesBoard> {
             if (remainingGuesses > 0) {
                 System.out.println("Vill ni fortsätta gissa? (ja/nej)");
                 String userResponse = scanner.nextLine().trim().toLowerCase();
-                if (!userResponse.equals("ja")) {
+                if (userResponse.equals("nej")) {
                     break;
                 }
             }
@@ -103,3 +103,4 @@ public class AgentPlayer extends Player<CodenamesBoard> {
         System.out.println("Rundan är över.");
     }
 }
+
