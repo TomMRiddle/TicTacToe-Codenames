@@ -23,7 +23,7 @@ public class TicTacToeGame {
         // Skapa spelarna med deras symboler
         players.add(new HumanPlayer(playerNames[0], player1Symbol));
         players.add(playerCount == 1 ? 
-            new ComputerPlayer("Computer", player2Symbol) : 
+            new ComputerPlayer("Dator", player2Symbol) :
             new HumanPlayer(playerNames[1], player2Symbol));
             
         // Slumpa vem som börjar
