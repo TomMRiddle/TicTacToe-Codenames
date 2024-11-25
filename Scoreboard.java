@@ -11,20 +11,23 @@ import java.util.Map;
 
 public class Scoreboard {
     private static final String COMMA_DELIMITER = ", ";
-    private static Scoreboard INSTANCE;
+    private static final Map<String, Scoreboard> INSTANCES = new HashMap<>();
+    private String gameType;
     private final Map<String, int[]> scores;
-    private static final String CSV_FILE_NAME = "scores.csv";
+    private final String CSV_FILE_NAME;
 
-    public Scoreboard() {
-        scores = new HashMap<>();
+    private Scoreboard(String gameType) {
+        this.scores = new HashMap<>();
+        this.gameType = gameType;
+        this.CSV_FILE_NAME = "scoreboard_" + gameType + ".csv";
         load();
     }
     //singleton
-    public static synchronized Scoreboard getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new Scoreboard();
+    public static synchronized Scoreboard getInstance(String gameType) {
+        if (!INSTANCES.containsKey(gameType)) {
+            INSTANCES.put(gameType, new Scoreboard(gameType));
         }
-        return INSTANCE;
+        return INSTANCES.get(gameType);
     }
 
     private void load() {
@@ -68,21 +71,21 @@ public class Scoreboard {
         switch (result) {
 
             case 0: // Draw
-                scores.computeIfAbsent(homePlayer, k -> new int[3])[DRAW]++;
-                scores.computeIfAbsent(awayPlayer, k -> new int[3])[DRAW]++;
+                scores.computeIfAbsent(homePlayer, _ -> new int[3])[DRAW]++;
+                scores.computeIfAbsent(awayPlayer, _ -> new int[3])[DRAW]++;
                 break;
             case 1: // Home Player wins
-                scores.computeIfAbsent(homePlayer, k -> new int[3])[WIN]++;
-                scores.computeIfAbsent(awayPlayer, k -> new int[3])[LOSS]++;
+                scores.computeIfAbsent(homePlayer, _ -> new int[3])[WIN]++;
+                scores.computeIfAbsent(awayPlayer, _ -> new int[3])[LOSS]++;
                 break;
             case 2: // Away Player wins
-                scores.computeIfAbsent(homePlayer, k -> new int[3])[LOSS]++;
-                scores.computeIfAbsent(awayPlayer, k -> new int[3])[WIN]++;
+                scores.computeIfAbsent(homePlayer, _ -> new int[3])[LOSS]++;
+                scores.computeIfAbsent(awayPlayer, _ -> new int[3])[WIN]++;
                 break;
         }
     }
 
-    public void addScore(String gameType, String homePlayer, String awayPlayer, int result) {
+    public void addScore(String homePlayer, String awayPlayer, int result) {
         updateScores(homePlayer, awayPlayer, result);
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(CSV_FILE_NAME, true))) {
@@ -90,13 +93,13 @@ public class Scoreboard {
             if (!Files.exists(path) || !Files.readAllLines(path).get(0).contains("Game Type")) {
                 writer.println("Game Type,Home Player,Away Player,Result");
             }
-            writer.println(gameType + "," + homePlayer + "," + awayPlayer + "," + result);
+            writer.println(homePlayer + "," + awayPlayer + "," + result);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void printScoreboard(String gameType) {
+    public void printScoreboard() {
         System.out.println("Spel: " + gameType);
         System.out.printf("%-15s %-5s %-7s %-8s%n",
                 "Namn", "Vinst", "Förlust", "Oavgjort");
