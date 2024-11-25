@@ -22,9 +22,6 @@ public class AgentPlayer extends Player<CodenamesBoard> {
         System.out.println(board);
 
         System.out.println(getName() + " från det" + teamColor + " " + (teamColor.equals(BLUE) ? "blå" : "röda") + RESET + " lagets tur.");
-//        System.out.println("Skriv ett nummer för att gissa ett ord (1-25):");
-//
-//        int cellId = scanner.nextInt();
 
         guessWord(board, totalGuesses); //totalGuesses ska komma från spymasterns tur
     }
