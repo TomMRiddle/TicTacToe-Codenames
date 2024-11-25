@@ -15,13 +15,13 @@ public class AgentPlayer extends Player<CodenamesBoard> {
     @Override
     public void takeTurn(CodenamesBoard board) {
         int totalGuesses = board.getNumberOfGuesses();
+        String clue = board.getClue();
+        System.out.println(CLS);
+        System.out.println("Spymaster's ledtråd: \n" +clue+" "+totalGuesses);
         board.setSpymasterView(false);
         System.out.println(board);
 
         System.out.println(getName() + " från det" + teamColor + " " + (teamColor.equals(BLUE) ? "blå" : "röda") + RESET + " lagets tur.");
-//        System.out.println("Skriv ett nummer för att gissa ett ord (1-25):");
-//
-//        int cellId = scanner.nextInt();
 
         guessWord(board, totalGuesses); //totalGuesses ska komma från spymasterns tur
     }
@@ -63,6 +63,8 @@ public class AgentPlayer extends Player<CodenamesBoard> {
 
             // Avslöja cellen
             cell.reveal();
+            System.out.println(CLS);
+            System.out.println("Spymaster's ledtråd: \n" +board.getClue()+" "+totalGuesses);
             System.out.println(getName() + " gissar på: " + cell.toString());
             System.out.println(board);
 
@@ -76,10 +78,14 @@ public class AgentPlayer extends Player<CodenamesBoard> {
                 remainingGuesses--;
             } else if (cell.getColor().equals(BRIGHT_WHITE)) {
                 System.out.println("Fel! Detta var en oskyldig åskådare.");
-                return;
+                break;
             } else {
                 String oppositeColor = teamColor.equals(BLUE) ? RED : BLUE;
                 System.out.println("Fel! Detta var en " + oppositeColor + (oppositeColor.equals(BLUE) ? "blå" : "röd") + RESET + " agent :(");
+                break;
+            }
+
+            if (board.checkWin()) {
                 return;
             }
 
@@ -92,15 +98,24 @@ public class AgentPlayer extends Player<CodenamesBoard> {
             }
 
             // Fråga om att fortsätta om gissningar
-            if (remainingGuesses > 0) {
-                System.out.println("Vill ni fortsätta gissa? (ja/nej)");
-                String userResponse = scanner.nextLine().trim().toLowerCase();
-                if (!userResponse.equals("ja")) {
-                    break;
+            while(true) {
+                if (remainingGuesses > 0) {
+                    System.out.println("Vill ni fortsätta gissa? (ja/nej)");
+                    String userResponse = scanner.nextLine().trim().toLowerCase();
+
+                    if (userResponse.equals("ja")) {
+                        break;
+                    } else if (userResponse.equals("nej")) {
+                        remainingGuesses = 0;
+                        break;
+                    } else {
+                        System.out.println("Ogiltig input. Svara med ja eller nej.");
+                    }
                 }
             }
         }
-        System.out.println("Rundan är över.");
+        System.out.println("Rundan är över. Tryck ENTER för att fortsätta.");
+        scanner.nextLine();
     }
 }
 

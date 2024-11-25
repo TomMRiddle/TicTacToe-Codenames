@@ -1,71 +1,75 @@
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
 import static utils.Ansi.*;
 
 public class CodenamesGame {
-    //only use main until we have a main class with the menu
-    public static void main(String[] args) {
-        start();
-    }
-    public static void start() {
-        System.out.println(RED +
-                "     ███▄ ▄███▓ ▒█████   ██▀███  ▄▄▄█████▓ ██▓  ██████       \n" +
-                "    ▓██▒▀█▀ ██▒▒██▒  ██▒▓██ ▒ ██▒▓  ██▒ ▓▒▓██▒▒██    ▒       \n" +
-                "    ▓██    ▓██░▒██░  ██▒▓██ ░▄█ ▒▒ ▓██░ ▒░▒██▒░ ▓██▄         \n" +
-                "    ▒██    ▒██ ▒██   ██░▒██▀▀█▄  ░ ▓██▓ ░ ░██░  ▒   ██▒      \n" +
-                "    ▒██▒   ░██▒░ ████▓▒░░██▓ ▒██▒  ▒██▒ ░ ░██░▒██████▒▒      \n" +
-                "    ░ ▒░   ░  ░░ ▒░▒░▒░ ░ ▒▓ ░▒▓░  ▒ ░░   ░▓  ▒ ▒▓▒ ▒ ░      \n" +
-                " "+BRIGHT_WHITE+"█████"+RED+" ░ "+BRIGHT_WHITE+"█████"+RED+"░  ░ ▒ ▒░   ░▒ ░ ▒░"+BRIGHT_WHITE+"█████"+RED+"     ▒ ░░ ░▒  ░ ░      \n" +
-                BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"   ░░"+BRIGHT_WHITE+"███"+RED+"  ░ ░ ░ ▒    ░░   ░ "+BRIGHT_GREEN+"░"+BRIGHT_WHITE+"███"+RED+"      ▒ ░░  ░  ░        \n" +
-                BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"    ░"+BRIGHT_WHITE+"███  ██████  ████████ ███████    ██████  █████ █████\n" +
-                BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"    ░"+BRIGHT_WHITE+"███ ███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░    "+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░░"+BRIGHT_WHITE+"███\n" +
-                BRIGHT_GREEN+" ░░"+BRIGHT_WHITE+"███   ███"+BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░░░  ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"    ░"+BRIGHT_WHITE+"███████"+BRIGHT_GREEN+"  ░░░"+BRIGHT_WHITE+"█████"+BRIGHT_GREEN+"░ \n" +
-                BRIGHT_GREEN+"  ░░░"+BRIGHT_WHITE+"█████"+BRIGHT_GREEN+"░  ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"      ░"+BRIGHT_WHITE+"███ ███"+BRIGHT_GREEN+"░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░░    "+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░░"+BRIGHT_WHITE+"███\n" +
-                BRIGHT_GREEN+"    ░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"    ░░"+BRIGHT_WHITE+"██████  █████"+BRIGHT_GREEN+"     ░░"+BRIGHT_WHITE+"█████"+BRIGHT_GREEN+" ░░"+BRIGHT_WHITE+"██████  █████ █████\n" +
-                BRIGHT_GREEN+"     ░░░      ░░░░░░  ░░░░░       ░░░░░   ░░░░░░  ░░░░░ ░░░░░\n" +
-                RESET);
-        System.out.println(CLS);
+    private static CodenamesBoard board;
+
+    public static void start(String[] playerNames, int[] spymasterIndices) {
         boolean playAgain = true;
-
         while (playAgain) {
-            CodenamesBoard board = new CodenamesBoard();
-            List<Player<CodenamesBoard>> players = new ArrayList<>();
-            if (board.getStartingTeam() == RED) {
-                players.add(new SpymasterPlayer("Spy1", RED));
-                players.add(new AgentPlayer("Agent1", RED));
-                players.add(new SpymasterPlayer("Spy2", BLUE));
-                players.add(new AgentPlayer("Agent2", BLUE));
-            } else {
-                players.add(new SpymasterPlayer("Spy2", BLUE));
-                players.add(new AgentPlayer("Agent2", BLUE));
-                players.add(new SpymasterPlayer("Spy1", RED));
-                players.add(new AgentPlayer("Agent1", RED));
-            }
-
-            boolean gameloop = true;
-            int breaker = 0;
-            while(gameloop) {
-                for (Player<CodenamesBoard> player : players) {
-                    player.takeTurn(board);
-                }
-
-                if(breaker == 4) {
-                    gameloop = false;
-                }
-                breaker++;
-            }
-
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Would you like to play again? (yes/no): ");
-            String userInput = scanner.nextLine().trim().toLowerCase();
-
-            playAgain = userInput.contains("y");
+            board = new CodenamesBoard();
+            List<Player<CodenamesBoard>> players = createTeams(playerNames, spymasterIndices, board.getStartingTeam());
+            playGame(players, board);
+            playAgain = askToPlayAgain();
         }
+        System.out.println("Tack för en god match!");
+    }
 
-        System.out.println("Thank you for playing!");
+    private static List<Player<CodenamesBoard>> createTeams(String[] playerNames, int[] spymasterIndices, String startingTeam) {
+        List<Player<CodenamesBoard>> players = new ArrayList<>();
+        int redTeamSize = (playerNames.length + 1) / 2;
+        
+        // Add starting team first, then other team
+        addTeamPlayers(players, playerNames, spymasterIndices, startingTeam, redTeamSize);
+        addTeamPlayers(players, playerNames, spymasterIndices, startingTeam.equals(RED) ? BLUE : RED, redTeamSize);
+        
+        return players;
+    }
+
+    private static void addTeamPlayers(List<Player<CodenamesBoard>> players, String[] playerNames, 
+                                     int[] spymasterIndices, String team, int redTeamSize) {
+        int spymasterIndex = team.equals(RED) ? spymasterIndices[0] : spymasterIndices[1];
+        int startIndex = team.equals(RED) ? 0 : redTeamSize;
+        int endIndex = team.equals(RED) ? redTeamSize : playerNames.length;
+
+        players.add(new SpymasterPlayer(playerNames[spymasterIndex], team));
+        for (int i = startIndex; i < endIndex; i++) {
+            if (i != spymasterIndex) {
+                players.add(new AgentPlayer(playerNames[i], team));
+            }
+        }
+    }
+
+    private static void playGame(List<Player<CodenamesBoard>> players, CodenamesBoard board) {
+        boolean gameloop = true;
+        while(gameloop) {
+            for (Player<CodenamesBoard> player : players) {
+                player.takeTurn(board);
+                if(board.checkWin()) {
+                    String winningTeam = board.getWinningTeam();
+                    if (winningTeam.equals(BRIGHT_BLACK)) {
+                        AgentPlayer agent = (AgentPlayer) player;
+                        System.out.println("Det "+(agent.getTeamColor() == RED ? BLUE+"blå" : RED+BG+"röda")+RESET+" laget har vunnit!");
+
+                    } else {
+                        System.out.println("Det "+(board.getWinningTeam() ==  RED ? RED+BG+"röda" : BLUE+BG+"blå")+RESET+" laget har vunnit!");
+                    }
+                    gameloop = false;
+                    break;
+                }
+
+            }
+        }
+    }
+
+    private static boolean askToPlayAgain() {
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("Vill du spela igen? (ja/nej): ");
+            String userInput = scanner.nextLine().trim().toLowerCase();
+            return !userInput.contains("nej");
+        }
     }
 }

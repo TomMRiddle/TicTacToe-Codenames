@@ -23,7 +23,6 @@ public class MenuLogic {
             display.displayGameDetails(gameChoice, playerCount, playerNames);
             startTicTacToe(playerCount, playerNames);
         } else {
-            display.displayCodenamesGameDetails(playerNames);
             startCodenames(playerNames);
         }
     }
@@ -32,7 +31,7 @@ public class MenuLogic {
         while (true) {
             if (type.equals("game")) {
                 display.showGameSelectionMenu();
-            } else {
+            } else if (type.equals("players")) {
                 display.showPlayerCountMenu(min == 1 ? 1 : 2);
             }
 
@@ -47,29 +46,15 @@ public class MenuLogic {
     }
 
     private void startTicTacToe(int playerCount, String[] playerNames) {
-        TicTacToeBoard board = new TicTacToeBoard();
-        List<Player<TicTacToeBoard>> players = new ArrayList<>();
-        
-        if (playerCount == 1) {
-            players.add(new HumanPlayer(playerNames[0], "X"));
-            players.add(new ComputerPlayer("Computer", "O"));
-        } else {
-            players.add(new HumanPlayer(playerNames[0], "X"));
-            players.add(new HumanPlayer(playerNames[1], "O"));
-        }
-
-        while (true) {
-            for (Player<TicTacToeBoard> player : players) {
-                player.takeTurn(board);
-                if (board.checkWin() || board.isDraw()) {
-                    display.showGameResult(board);
-                    return;
-                }
-            }
-        }
+        display.displayGameDetails(1, playerCount, playerNames);
+        TicTacToeGame.start(playerCount, playerNames);
     }
 
     private void startCodenames(String[] playerNames) {
-        CodenamesGame.main(null);
+        int[] spymasterIndices = playerManager.selectSpymasters(playerNames);
+        display.displayCodenamesGameDetails(playerNames, spymasterIndices);
+        System.out.println("\nTryck ENTER för att starta spelet...");
+        scanner.nextLine();
+        CodenamesGame.start(playerNames, spymasterIndices);
     }
 }

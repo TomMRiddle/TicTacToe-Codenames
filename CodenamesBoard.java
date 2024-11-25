@@ -6,6 +6,8 @@ public class CodenamesBoard extends Board<CodenamesCell> {
     private int numberOfGuesses;
     private boolean spymasterView;
     private String startingTeam;
+    private String winningTeam;
+    private String clue;
     public CodenamesBoard() {
         spymasterView = false;
         initialize(5,5);
@@ -63,7 +65,37 @@ public class CodenamesBoard extends Board<CodenamesCell> {
 
     @Override
     protected boolean checkWin() {
-        return false;
+        int redThreshold = (startingTeam.equals(RED) ? 9 : 8);
+        int blueThreshold = (startingTeam.equals(BLUE) ? 9 : 8);
+        long redCount = cells.stream()
+                .flatMap(List::stream)
+                .filter(cell -> RED.equals(cell.getColor()) && cell.isRevealed())
+                .count();
+
+        long blueCount = cells.stream()
+                .flatMap(List::stream)
+                .filter(cell -> BLUE.equals(cell.getColor()) && cell.isRevealed())
+                .count();
+
+        long assassin = cells.stream()
+                .flatMap(List::stream)
+                .filter(cell -> BRIGHT_BLACK.equals(cell.getColor()) && cell.isRevealed())
+                .count();
+
+
+        if (assassin == 1) {
+            winningTeam = BRIGHT_BLACK;
+            return true;
+        }
+        if (redCount >= redThreshold) {
+            winningTeam = RED;
+            return true;
+        } else if (blueCount >= blueThreshold) {
+            winningTeam = BLUE;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void setSpymasterView(boolean spymasterView) {
@@ -78,9 +110,8 @@ public class CodenamesBoard extends Board<CodenamesCell> {
         getCellById(cellId).reveal();
     }
 
-    @Override
-    public Player getWinner() {
-        return null;
+    public String getWinningTeam() {
+        return winningTeam;
     }
 
     @Override
@@ -94,6 +125,12 @@ public class CodenamesBoard extends Board<CodenamesCell> {
     }
     public int getNumberOfGuesses() {
         return numberOfGuesses;
+    }
+    public void setClue(String clue) {
+        this.clue = clue;
+    }
+    public String getClue() {
+        return clue;
     }
     public String getStartingTeam() {
         return startingTeam;

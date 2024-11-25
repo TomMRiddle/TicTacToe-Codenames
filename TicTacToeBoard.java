@@ -1,10 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
+import static utils.Ansi.*;
 
 public class TicTacToeBoard extends Board<TicTacToeCell> {
-
+    private Player<TicTacToeBoard> winner;
     public TicTacToeBoard() {
         initialize(3, 3);
+        winner = null;
     }
 
     @Override
@@ -33,6 +35,9 @@ public class TicTacToeBoard extends Board<TicTacToeCell> {
                 if(getCell(i, 0).getOwner() == getCell(i, 1).getOwner() &&
                     getCell(i, 1).getOwner() == getCell(i, 2).getOwner()) {
                     winner = getCell(i,0).getOwner();
+                    getCell(i,0).setColor(GREEN);
+                    getCell(i,1).setColor(GREEN);
+                    getCell(i,2).setColor(GREEN);
                 }
                 return true;
             }
@@ -47,6 +52,9 @@ public class TicTacToeBoard extends Board<TicTacToeCell> {
                 if(getCell(0, j).getOwner() == getCell(1, j).getOwner() &&
                 getCell(1, j).getOwner() == getCell(2, j).getOwner()) {
                     winner = getCell(0, j).getOwner();
+                    getCell(0,j).setColor(GREEN);
+                    getCell(1,j).setColor(GREEN);
+                    getCell(2,j).setColor(GREEN);
                 }
                 return true;
             }
@@ -60,6 +68,9 @@ public class TicTacToeBoard extends Board<TicTacToeCell> {
             if(getCell(0, 0).getOwner() == getCell(1, 1).getOwner() &&
             getCell(1, 1).getOwner() == getCell(2, 2).getOwner()) {
                 winner = getCell(0,0).getOwner();
+                getCell(0,0).setColor(GREEN);
+                getCell(1,1).setColor(GREEN);
+                getCell(2,2).setColor(GREEN);
             }
             return true;
         }
@@ -70,6 +81,9 @@ public class TicTacToeBoard extends Board<TicTacToeCell> {
             if(getCell(0, 2).getOwner() == getCell(1, 1).getOwner() &&
             getCell(1, 1).getOwner() == getCell(2, 0).getOwner()) {
                 winner = getCell(0, 2).getOwner();
+                getCell(0, 2).setColor(GREEN);
+                getCell(1,1).setColor(GREEN);
+                getCell(2,0).setColor(GREEN);
             }
             return true;
         }

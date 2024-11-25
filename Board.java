@@ -14,7 +14,6 @@ public abstract class Board<T extends Cell> {
 
     protected abstract void initialize(int numRows, int numCols);
     protected abstract boolean checkWin();
-    public abstract Player getWinner();
 
     public T getCell(int row, int col) {
         return cells.get(row).get(col);

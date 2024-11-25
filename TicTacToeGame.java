@@ -1,76 +1,79 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import utils.Ansi;
+
+import java.util.*;
+
 import static utils.Ansi.*;
-import java.util.Scanner;
 
 public class TicTacToeGame {
-    private static final TicTacToeBoard board = new TicTacToeBoard();
-    private static final List<Player<TicTacToeBoard>> players= new ArrayList<>();
+    private static TicTacToeBoard board;
+    private final List<Player<TicTacToeBoard>> players;
+    private final MenuDisplay display;
     
-    public static void main(String[] args) {
-        start();
+    public TicTacToeGame() {
+        this.players = new ArrayList<>();
+        this.display = new MenuDisplay();
     }
-    public static void start() {
-        Scanner scan = new Scanner(System.in);
-        System.out.println( BRIGHT_YELLOW + """
-          _____                       ____ \s
-         |_ " _|         ___       U /"___|\s
-           | |          |_"_|      \\| | u  \s
-          /| |\\          | |        | |/__ \s
-         u |_|U        U/| |\\u       \\____|\s
-         _// \\\\_    .-,_|___|_,-.   _// \\\\ \s
-        (__) (__)    \\_)-' '-(_/   (__)(__)\s
-          _____           _           ____    \s
-         |_ " _|      U  /"\\  u    U /"___|   \s
-           | |         \\/ _ \\/     \\| | u     \s
-          /| |\\        / ___ \\      | |/__    \s
-         u |_|U       /_/   \\_\\      \\____|   \s
-         _// \\\\_       \\\\    >>     _// \\\\    \s
-        (__) (__)     (__)  (__)   (__)(__)   \s
-          _____       U  ___ u     U _____ u \s
-         |_ " _|       \\/"_ \\/     \\| ___"|/ \s
-           | |         | | | |      |  _|"   \s
-          /| |\\    .-,_| |_| |      | |___   \s
-         u |_|U     \\_)-\\___/       |_____|  \s
-         _// \\\\_         \\\\         <<   >>  \s
-        (__) (__)       (__)       (__) (__)\s
-        """ + RESET);
-        players.add(new HumanPlayer("Victor", "X"));
-        players.add(new ComputerPlayer("Computer", "O"));
 
-        boolean playAgain = true;
+    private void initializePlayers(int playerCount, String[] playerNames) {
+        // Låt första spelaren välja symbol
+        display.showSymbolSelectionMenu(playerNames[0]);
+        String player1Symbol = getValidSymbolChoice() == 1 ? "X" : "O";
+        String player2Symbol = player1Symbol.equals("X") ? "O" : "X";
+        
+        // Skapa spelarna med deras symboler
+        players.add(new HumanPlayer(playerNames[0], player1Symbol));
+        players.add(playerCount == 1 ? 
+            new ComputerPlayer("Dator", player2Symbol) :
+            new HumanPlayer(playerNames[1], player2Symbol));
+            
+        // Slumpa vem som börjar
+        Collections.shuffle(players);
+    }
 
-        while (playAgain) {
-            TicTacToeBoard board = new TicTacToeBoard();
+    private int getValidSymbolChoice() {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            try {
+                int choice = Integer.parseInt(scanner.nextLine());
+                if (choice >= 1 && choice <= 2) return choice;
+                display.showInvalidChoice();
+            } catch (NumberFormatException e) {
+                display.showInvalidChoice();
+            }
+        }
+    }
 
-            Collections.shuffle(players);
-
-            boolean gameloop = true;
-            while(gameloop) {
-                for (Player<TicTacToeBoard> player : players) {
-                    player.takeTurn(board);
-                    board.checkWin();
-                    if(board.getWinner() != null || board.isDraw()) {
-                        gameloop = false;
-                        break;
+    private void playGame() {
+        boolean gameloop = true;
+        while (gameloop) {
+            for (Player<TicTacToeBoard> player : players) {
+                player.takeTurn(board);
+                if (board.checkWin() || board.isDraw()) {
+                    if(board.checkWin()) {
+                        Scoreboard.getInstance("TicTacToe").addScore(players.get(0).getName(), players.get(1).getName(), ( board.getWinner() == players.get(0) ? 1 : 2 ));
+                    } else if(board.isDraw()){
+                        Scoreboard.getInstance("TicTacToe").addScore(players.get(0).getName(), players.get(1).getName(), 0);
                     }
+                    display.showGameResult(board);
+                    gameloop = false;
+                    break;
                 }
             }
-            System.out.println(board);
-            if(!board.isDraw()) {
-                System.out.println(board.getWinner().getName() + " wins!");
-            } else {
-                System.out.println("It's a tie!");
-            }
-
-            System.out.println("Would you like to play again? (yes/no): ");
-            String userInput = scan.nextLine().trim().toLowerCase();
-
-            playAgain = userInput.contains("y");
         }
-
-        System.out.println("Thank you for playing!");
     }
 
+    public static void start(int playerCount, String[] playerNames) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        do {
+            board = new TicTacToeBoard();
+            TicTacToeGame game = new TicTacToeGame();
+            game.initializePlayers(playerCount, playerNames);
+            game.playGame();
+            System.out.println("Vill du spela igen? (j/n): ");
+        } while (scanner.nextLine().trim().toLowerCase().startsWith("j"));
+
+        System.out.println("Tack för att du spelade!");
+    }
 }
