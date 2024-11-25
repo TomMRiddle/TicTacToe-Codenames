@@ -21,7 +21,7 @@ public class MenuDisplay {
                 "┌─────────────────────────────────────────────────────────┐\n" +
                 "│                                                         │\n" +
                 "│                VÄLKOMMEN TILL VÅRA SPEL!                │\n" +
-                "│                Tre i rad & Codenames                    │\n" +
+                "│                  Tre i rad & Codenames                  │\n" +
                 "│                                                         │\n" +
                 "└─────────────────────────────────────────────────────────┘\n" +
                 RESET);
@@ -79,7 +79,25 @@ public class MenuDisplay {
             └──────────────────────────────────┘
             """);
     }
-
+    public void showSymbolSelectionMenu(String playerName) {
+        String formattedName = playerName.length() > 10 ? 
+            playerName.substring(0, 10) : 
+            String.format("%-10s", playerName);
+    
+        System.out.println("""
+            ┌──────────────────────────────────┐
+            │         VÄLJ DIN SYMBOL          │
+            │                                  │""");
+        System.out.printf("│        %s välj:          │%n", formattedName);
+        System.out.println("""
+            │                                  │
+            │         1. X                     │
+            │         2. O                     │
+            │                                  │
+            │         Välj symbol (1-2):       │
+            └──────────────────────────────────┘
+            """);
+    }
     public void displayGameDetails(int gameChoice, int playerCount, String[] playerNames) {
         System.out.println("""
             ┌──────────────────────────────────┐
@@ -89,9 +107,9 @@ public class MenuDisplay {
         System.out.printf("│        SPEL: %-20s│%n", getGameName(gameChoice));
         System.out.printf("│        ANTAL SPELARE: %-11d│%n", playerCount);
     
-        System.out.println("│         SPELARE:                 │");
+        System.out.println("│        SPELARE:                  │");
         for (String name : playerNames) {
-            System.out.printf("│         - %-22s │%n", name);
+            System.out.printf("│        - %-22s  │%n", name);
         }
         
         System.out.println("""

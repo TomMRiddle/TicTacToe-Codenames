@@ -101,13 +101,21 @@ public class AgentPlayer extends Player<CodenamesBoard> {
             }
 
             // Fråga om att fortsätta om gissningar
-            if (remainingGuesses > 0) {
-                System.out.println("Vill ni fortsätta gissa? (ja/nej)");
-                String userResponse = scanner.nextLine().trim().toLowerCase();
-                if (userResponse.equals("nej")) {
-                    break;
+            while(true) {
+                if (remainingGuesses > 0) {
+                    System.out.println("Vill ni fortsätta gissa? (ja/nej)");
+                    String userResponse = scanner.nextLine().trim().toLowerCase();
+    
+                    if (userResponse.equals("ja")) {
+                        break;
+                    } else if (userResponse.equals("nej")) {
+                        remainingGuesses = 0;
+                        break;
+                    } else {
+                        System.out.println("Ogiltig input. Svara med ja eller nej.");
+                    }
                 }
-            }
+            } 
         }
         System.out.println("Rundan är över. Tryck ENTER för att fortsätta.");
         scanner.nextLine();
