@@ -1,11 +1,9 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class MenuLogic {
-    private MenuDisplay display;
-    private MenuPlayerManager playerManager;
-    private Scanner scanner;
+    private final MenuDisplay display;
+    private final MenuPlayerManager playerManager;
+    private final Scanner scanner;
 
     public MenuLogic() {
         this.scanner = new Scanner(System.in);
