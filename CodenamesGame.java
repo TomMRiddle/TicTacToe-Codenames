@@ -1,5 +1,8 @@
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 import static utils.Ansi.*;
 
@@ -26,10 +29,43 @@ public class CodenamesGame {
                 BRIGHT_GREEN+"     ░░░      ░░░░░░  ░░░░░       ░░░░░   ░░░░░░  ░░░░░ ░░░░░\n" +
                 RESET);
         System.out.println(CLS);
-        CodenamesBoard board = new CodenamesBoard();
-        board.reveal(9);
-        System.out.println(board);
-        board.setSpymasterView(true);
-        System.out.println(board);
+        boolean playAgain = true;
+
+        while (playAgain) {
+            CodenamesBoard board = new CodenamesBoard();
+            List<Player<CodenamesBoard>> players = new ArrayList<>();
+            if (board.getStartingTeam() == RED) {
+                players.add(new SpymasterPlayer("Spy1", RED));
+                players.add(new AgentPlayer("Agent1", RED));
+                players.add(new SpymasterPlayer("Spy2", BLUE));
+                players.add(new AgentPlayer("Agent2", BLUE));
+            } else {
+                players.add(new SpymasterPlayer("Spy2", BLUE));
+                players.add(new AgentPlayer("Agent2", BLUE));
+                players.add(new SpymasterPlayer("Spy1", RED));
+                players.add(new AgentPlayer("Agent1", RED));
+            }
+
+            boolean gameloop = true;
+            int breaker = 0;
+            while(gameloop) {
+                for (Player<CodenamesBoard> player : players) {
+                    player.takeTurn(board);
+                }
+
+                if(breaker == 4) {
+                    gameloop = false;
+                }
+                breaker++;
+            }
+
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Would you like to play again? (yes/no): ");
+            String userInput = scanner.nextLine().trim().toLowerCase();
+
+            playAgain = userInput.contains("y");
+        }
+
+        System.out.println("Thank you for playing!");
     }
 }

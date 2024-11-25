@@ -3,8 +3,9 @@ import static utils.Ansi.*;
 import static utils.Words.*;
 
 public class CodenamesBoard extends Board<CodenamesCell> {
-
+    private int numberOfGuesses;
     private boolean spymasterView;
+    private String startingTeam;
     public CodenamesBoard() {
         spymasterView = false;
         initialize(5,5);
@@ -49,8 +50,10 @@ public class CodenamesBoard extends Board<CodenamesCell> {
         // Add a random extra agent from one of the teams (choose randomly between Team1 and Team2)
         if (Math.random() < 0.5) {
             secrets.add(RED);
+            startingTeam = RED;
         } else {
             secrets.add(BLUE);
+            startingTeam = BLUE;
         }
 
         // Shuffle the list to randomize the order
@@ -85,5 +88,14 @@ public class CodenamesBoard extends Board<CodenamesCell> {
         String legend = BG+BLUE+"Agent för lag blå"+RESET+" "+BG+RED+"Agent för lag röd"+RESET+" "+BG+BRIGHT_BLACK+"Lönnmördare"+RESET+" "+BG+BRIGHT_WHITE+"oskyldig åskådare"+RESET+"\n\n";
         if (spymasterView) { legend = "█avslöjat kodnamn█ "+legend; } else { legend = BG+BRIGHT_YELLOW+"Ej avslöjade kodnamn"+RESET+" "+legend; }
         return legend + super.toString();
+    }
+    public void setNumberOfGuesses(int numberOfGuesses) {
+        this.numberOfGuesses = numberOfGuesses;
+    }
+    public int getNumberOfGuesses() {
+        return numberOfGuesses;
+    }
+    public String getStartingTeam() {
+        return startingTeam;
     }
 }
