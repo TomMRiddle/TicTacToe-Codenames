@@ -15,20 +15,22 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
 
     @Override
     public void takeTurn(CodenamesBoard board) {
-            // Visa varning men rensa inte skärmen
-            System.out.println("\n=== VARNING ===");
-            System.out.println("Det är dags för Spymaster från " + teamColor + "Det " + (teamColor.equals(BLUE) ? "blåa" : "röda") + " laget" + RESET + " att spela.");
-            System.out.println("Alla agenter, titta bort från skärmen!");
-            System.out.println("Tryck ENTER för att fortsätta...");
-            System.out.println("==============\n");
-            spyscan.nextLine();
-            
+        System.out.println(CLS);
+        // Visa varning men rensa inte skärmen
+        System.out.println("\n=== VARNING ===");
+        System.out.println("Det är dags för Spymaster från " + teamColor + "Det " + (teamColor.equals(BLUE) ? "blåa" : "röda") + " laget" + RESET + " att spela.");
+        System.out.println("Alla agenter, titta bort från skärmen!");
+        System.out.println("Tryck ENTER för att fortsätta...");
+        System.out.println("==============\n");
+        spyscan.nextLine();
+        System.out.println(CLS);
         String clue;
         int cluenumber;
         boolean tryAgain=true;
         board.setSpymasterView(true);
-        System.out.println("Studera spelbrädet och fundera på en ledtråd som kan hjälpa dina agenter att gissa rätt! \nDin ledtråd ska bestå av ett ord följt av en siffra som representerar antalet agenter ditt ord passar in på. Exempel: TRÄD 5.\nOBS! Ditt ord får inte vara ett av orden på aktuell spelplan. Din siffra får inte överstiga antalet agenter ditt lag har kvar att hitta.");
+        System.out.println("Ge en ledtråd med ett ord och en siffra för antalet agenter. Exempel: TRÄD 5. Ordet får inte vara på spelplanen, och siffran får inte överstiga kvarvarande agenter");
         System.out.println(board);
+        System.out.println(getName() + ", spymaster från det" + teamColor + " " + (teamColor.equals(BLUE) ? "blå" : "röda") + RESET + " lagets tur.");
 
         do {
             System.out.println("Ange ditt ord: ");
@@ -72,8 +74,8 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
                 tryAgain=false;
             }
         } while (tryAgain);
-        System.out.println("Spymaster's ledtråd: \n" +clue+" "+cluenumber);
         board.setNumberOfGuesses(cluenumber);
+        board.setClue(clue);
     }
     public String getTeamColor() {
         return teamColor;

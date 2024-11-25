@@ -15,6 +15,9 @@ public class AgentPlayer extends Player<CodenamesBoard> {
     @Override
     public void takeTurn(CodenamesBoard board) {
         int totalGuesses = board.getNumberOfGuesses();
+        String clue = board.getClue();
+        System.out.println(CLS);
+        System.out.println("Spymaster's ledtråd: \n" +clue+" "+totalGuesses);
         board.setSpymasterView(false);
         System.out.println(board);
 
@@ -63,23 +66,29 @@ public class AgentPlayer extends Player<CodenamesBoard> {
 
             // Avslöja cellen
             cell.reveal();
+            System.out.println(CLS);
+            System.out.println("Spymaster's ledtråd: \n" +board.getClue()+" "+totalGuesses);
             System.out.println(getName() + " gissar på: " + cell.toString());
             System.out.println(board);
 
             // feedback på gissningarna
             if (cell.getColor().equals(BRIGHT_BLACK)) {
                 System.out.println("Lönnmördaren avslöjad! Spelet är över.");
-                return;
+                break;
             } else if (cell.getColor().equals(teamColor)) {
                 System.out.println("Bra gissat! Detta är en " + teamColor + (teamColor.equals(BLUE) ? "blå" : "röd") + RESET + " agent! :D");
                 correctGuesses++;
                 remainingGuesses--;
             } else if (cell.getColor().equals(BRIGHT_WHITE)) {
                 System.out.println("Fel! Detta var en oskyldig åskådare.");
-                return;
+                break;
             } else {
                 String oppositeColor = teamColor.equals(BLUE) ? RED : BLUE;
                 System.out.println("Fel! Detta var en " + oppositeColor + (oppositeColor.equals(BLUE) ? "blå" : "röd") + RESET + " agent :(");
+                break;
+            }
+
+            if (board.checkWin()) {
                 return;
             }
 
@@ -100,7 +109,8 @@ public class AgentPlayer extends Player<CodenamesBoard> {
                 }
             }
         }
-        System.out.println("Rundan är över.");
+        System.out.println("Rundan är över. Tryck ENTER för att fortsätta.");
+        scanner.nextLine();
     }
 }
 

@@ -7,6 +7,7 @@ public class CodenamesBoard extends Board<CodenamesCell> {
     private boolean spymasterView;
     private String startingTeam;
     private String winningTeam;
+    private String clue;
     public CodenamesBoard() {
         spymasterView = false;
         initialize(5,5);
@@ -124,6 +125,12 @@ public class CodenamesBoard extends Board<CodenamesCell> {
     }
     public int getNumberOfGuesses() {
         return numberOfGuesses;
+    }
+    public void setClue(String clue) {
+        this.clue = clue;
+    }
+    public String getClue() {
+        return clue;
     }
     public String getStartingTeam() {
         return startingTeam;
