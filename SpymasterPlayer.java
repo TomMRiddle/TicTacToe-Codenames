@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 import static utils.Ansi.*;
 
@@ -8,7 +9,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
 
     public SpymasterPlayer(String name, String teamColor) {
         super(name);
-        this.teamColor=teamColor;
+        this.teamColor = teamColor;
         spyscan = new Scanner(System.in);
     }
 
@@ -35,13 +36,17 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
 
             for (List<CodenamesCell> cellRow : board.cells) {
                 for (CodenamesCell cell : cellRow) {
-                    if (clue.equals(cell.content)){
+                    if (clue.equalsIgnoreCase(cell.toString())){
                         System.out.println("\nVälj ett ord som inte finns på spelplanen!");
                         tryAgain = true;
+                        break;
                     }
                     else{
                         tryAgain = false;
                     }
+                }
+                if (tryAgain){
+                    break;
                 }
             }
         } while (tryAgain);
@@ -54,7 +59,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
 
             for (List<CodenamesCell> cellRow : board.cells) {
                 for (CodenamesCell cell : cellRow) {
-                    if(!cell.isRevealed() && cell.getColor()==teamColor){
+                    if(!cell.isRevealed() && cell.getColor().equals(teamColor)){
                         missingAgentCounter++;
                     }
                 }

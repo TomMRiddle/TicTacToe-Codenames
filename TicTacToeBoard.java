@@ -2,9 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TicTacToeBoard extends Board<TicTacToeCell> {
-
+    private Player<TicTacToeBoard> winner;
     public TicTacToeBoard() {
         initialize(3, 3);
+        winner = null;
     }
 
     @Override

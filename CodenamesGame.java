@@ -5,13 +5,12 @@ import java.util.Scanner;
 import static utils.Ansi.*;
 
 public class CodenamesGame {
-    private static final String RED = "RED";
-    private static final String BLUE = "BLUE";
+    private static CodenamesBoard board;
 
     public static void start(String[] playerNames, int[] spymasterIndices) {
         boolean playAgain = true;
         while (playAgain) {
-            CodenamesBoard board = new CodenamesBoard();
+            board = new CodenamesBoard();
             List<Player<CodenamesBoard>> players = createTeams(playerNames, spymasterIndices, board.getStartingTeam());
             playGame(players, board);
             playAgain = askToPlayAgain();
@@ -45,10 +44,23 @@ public class CodenamesGame {
     }
 
     private static void playGame(List<Player<CodenamesBoard>> players, CodenamesBoard board) {
-        int maxTurns = 4;  // Can adjust this value based on game requirements
-        for (int turn = 0; turn < maxTurns; turn++) {
+        boolean gameloop = true;
+        while(gameloop) {
             for (Player<CodenamesBoard> player : players) {
                 player.takeTurn(board);
+                if(board.checkWin()) {
+                    String winningTeam = board.getWinningTeam();
+                    if (winningTeam.equals(BRIGHT_BLACK)) {
+                        AgentPlayer agent = (AgentPlayer) player;
+                        System.out.println("Det "+(agent.getTeamColor() == RED ? BLUE+"blå" : RED+BG+"röda")+RESET+" laget har vunnit!");
+
+                    } else {
+                        System.out.println("Det "+(board.getWinningTeam() ==  RED ? RED+BG+"röda" : BLUE+BG+"blå")+RESET+" laget har vunnit!");
+                    }
+                    gameloop = false;
+                    break;
+                }
+
             }
         }
     }
