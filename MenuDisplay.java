@@ -2,7 +2,7 @@ import static utils.Ansi.*;
 
 public class MenuDisplay {
     public void displayWelcomeBanner() {
-        System.out.println(RED +
+        System.out.println(CLS+RED +
                 "     ███▄ ▄███▓ ▒█████   ██▀███  ▄▄▄█████▓ ██▓  ██████       \n" +
                 "    ▓██▒▀█▀ ██▒▒██▒  ██▒▓██ ▒ ██▒▓  ██▒ ▓▒▓██▒▒██    ▒       \n" +
                 "    ▓██    ▓██░▒██░  ██▒▓██ ░▄█ ▒▒ ▓██░ ▒░▒██▒░ ▓██▄         \n" +

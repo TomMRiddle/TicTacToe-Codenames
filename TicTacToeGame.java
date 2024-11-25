@@ -1,8 +1,4 @@
-import utils.Ansi;
-
 import java.util.*;
-
-import static utils.Ansi.*;
 
 public class TicTacToeGame {
     private static TicTacToeBoard board;
