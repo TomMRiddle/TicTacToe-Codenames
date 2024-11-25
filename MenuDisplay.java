@@ -80,11 +80,15 @@ public class MenuDisplay {
             """);
     }
     public void showSymbolSelectionMenu(String playerName) {
+        String formattedName = playerName.length() > 10 ? 
+            playerName.substring(0, 10) : 
+            String.format("%-10s", playerName);
+    
         System.out.println("""
             ┌──────────────────────────────────┐
             │         VÄLJ DIN SYMBOL          │
             │                                  │""");
-        System.out.printf("│        %s välj:                   │%n", playerName);
+        System.out.printf("│        %s välj:          │%n", formattedName);
         System.out.println("""
             │                                  │
             │         1. X                     │
