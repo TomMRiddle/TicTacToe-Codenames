@@ -63,11 +63,12 @@ public class TicTacToeGame {
     }
 
     public static void start(int playerCount, String[] playerNames) {
-        TicTacToeGame game = new TicTacToeGame();
+
         Scanner scanner = new Scanner(System.in);
 
         do {
             board = new TicTacToeBoard();
+            TicTacToeGame game = new TicTacToeGame();
             game.initializePlayers(playerCount, playerNames);
             game.playGame();
             System.out.println("Vill du spela igen? (j/n): ");
