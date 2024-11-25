@@ -18,7 +18,6 @@ public class MenuLogic {
         String[] playerNames = playerManager.getPlayerNames(playerCount);
         
         if (gameChoice == 1) {
-            display.displayGameDetails(gameChoice, playerCount, playerNames);
             startTicTacToe(playerCount, playerNames);
         } else {
             startCodenames(playerNames);
