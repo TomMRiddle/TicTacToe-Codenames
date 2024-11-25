@@ -163,6 +163,7 @@ public class MenuDisplay {
         } else {
             System.out.println("Det blev oavgjort!");
         }
+        Scoreboard.getInstance().printScoreboard("TicTacToe");
     }
     private String getGameName(int gameChoice) {
         return gameChoice == 1 ? "TRE I RAD" : "CODENAMES";

@@ -27,3 +27,6 @@ replay_pid*
 /.idea/
 /out/
 *.iml
+
+# output
+scores.csv

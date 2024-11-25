@@ -1,16 +1,15 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import utils.Ansi;
+
+import java.util.*;
+
 import static utils.Ansi.*;
-import java.util.Scanner;
 
 public class TicTacToeGame {
-    private final TicTacToeBoard board;
+    private static TicTacToeBoard board;
     private final List<Player<TicTacToeBoard>> players;
     private final MenuDisplay display;
     
     public TicTacToeGame() {
-        this.board = new TicTacToeBoard();
         this.players = new ArrayList<>();
         this.display = new MenuDisplay();
     }
@@ -50,6 +49,11 @@ public class TicTacToeGame {
             for (Player<TicTacToeBoard> player : players) {
                 player.takeTurn(board);
                 if (board.checkWin() || board.isDraw()) {
+                    if(board.checkWin()) {
+                        Scoreboard.getInstance().addScore("TicTacToe", players.get(0).getName(), players.get(1).getName(), ( board.getWinner() == players.get(0) ? 1 : 2 ));
+                    } else if(board.isDraw()){
+                        Scoreboard.getInstance().addScore("TicTacToe", players.get(0).getName(), players.get(1).getName(), 0);
+                    }
                     display.showGameResult(board);
                     gameloop = false;
                     break;
@@ -63,6 +67,7 @@ public class TicTacToeGame {
         Scanner scanner = new Scanner(System.in);
 
         do {
+            board = new TicTacToeBoard();
             game.initializePlayers(playerCount, playerNames);
             game.playGame();
             System.out.println("Vill du spela igen? (j/n): ");

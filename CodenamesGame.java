@@ -15,7 +15,7 @@ public class CodenamesGame {
             playGame(players, board);
             playAgain = askToPlayAgain();
         }
-        System.out.println("Thank you for playing!");
+        System.out.println("Tack för en god match!");
     }
 
     private static List<Player<CodenamesBoard>> createTeams(String[] playerNames, int[] spymasterIndices, String startingTeam) {
@@ -67,9 +67,9 @@ public class CodenamesGame {
 
     private static boolean askToPlayAgain() {
         try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("Would you like to play again? (yes/no): ");
+            System.out.println("Vill du spela igen? (ja/nej): ");
             String userInput = scanner.nextLine().trim().toLowerCase();
-            return userInput.contains("y");
+            return !userInput.contains("nej");
         }
     }
 }
