@@ -110,8 +110,14 @@ public class AgentPlayer extends Player<CodenamesBoard> {
                     } else {
                         System.out.println("Ogiltig input. Svara med ja eller nej.");
                     }
+                    if (board.checkWin()) {
+                        return;
+                    }
+                } else {
+                    break;
                 }
             }
+
         }
         System.out.println("Rundan är över. Tryck ENTER för att fortsätta.");
         scanner.nextLine();
