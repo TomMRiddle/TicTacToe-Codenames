@@ -66,10 +66,12 @@ public class CodenamesGame {
     }
 
     private static boolean askToPlayAgain() {
-        try (Scanner scanner = ScannerSingleton.getInstance()) {
+        try {
             System.out.println("Vill du spela igen? (ja/nej): ");
-            String userInput = scanner.nextLine().trim().toLowerCase();
+            String userInput = ScannerSingleton.getNextLine().toLowerCase();
             return !userInput.contains("nej");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

@@ -9,7 +9,6 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
     public SpymasterPlayer(String name, String teamColor) {
         super(name);
         this.teamColor=teamColor;
-        this.spyscan = ScannerSingleton.getInstance();
     }
 
     @Override
@@ -45,7 +44,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
 
         do {
             System.out.println("\nAnge din siffra: ");
-            cluenumber = spyscan.nextInt();
+            cluenumber = Integer.parseInt(ScannerSingleton.getNextLine());
             tryAgain = false;
             int missingAgentCounter=0;
 

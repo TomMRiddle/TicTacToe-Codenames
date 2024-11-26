@@ -3,10 +3,8 @@ import java.util.Scanner;
 public class MenuLogic {
     private final MenuDisplay display;
     private final MenuPlayerManager playerManager;
-    private final Scanner scanner;
 
     public MenuLogic() {
-        this.scanner = ScannerSingleton.getInstance();
         this.display = new MenuDisplay();
         this.playerManager = new MenuPlayerManager();
     }
@@ -33,7 +31,7 @@ public class MenuLogic {
             }
 
             try {
-                int choice = Integer.parseInt(scanner.nextLine());
+                int choice = Integer.parseInt(ScannerSingleton.getNextLine());
                 if (choice >= min && choice <= max) return choice;
                 display.showInvalidChoice();
             } catch (NumberFormatException e) {
@@ -51,7 +49,7 @@ public class MenuLogic {
         int[] spymasterIndices = playerManager.selectSpymasters(playerNames);
         display.displayCodenamesGameDetails(playerNames, spymasterIndices);
         System.out.println("\nTryck ENTER för att starta spelet...");
-        scanner.nextLine();
+        ScannerSingleton.getNextLine();
         CodenamesGame.start(playerNames, spymasterIndices);
     }
 }

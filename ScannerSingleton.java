@@ -2,16 +2,16 @@ import java.util.Scanner;
 
 public class ScannerSingleton {
     private static ScannerSingleton instance = null;
-    private Scanner scanner;
+    private final Scanner scanner;
 
     private ScannerSingleton() {
         scanner = new Scanner(System.in);
     }
 
-    public static Scanner getInstance() {
+    public static String getNextLine() {
         if (instance == null) {
             instance = new ScannerSingleton();
         }
-        return instance.scanner;
+        return instance.scanner.nextLine();
     }
 }

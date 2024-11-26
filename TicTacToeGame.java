@@ -27,10 +27,9 @@ public class TicTacToeGame {
     }
 
     private int getValidSymbolChoice() {
-        Scanner scanner = ScannerSingleton.getInstance();
         while (true) {
             try {
-                int choice = Integer.parseInt(scanner.nextLine());
+                int choice = Integer.parseInt(ScannerSingleton.getNextLine());
                 if (choice >= 1 && choice <= 2) return choice;
                 display.showInvalidChoice();
             } catch (NumberFormatException e) {
@@ -60,7 +59,7 @@ public class TicTacToeGame {
 
     public static void start(int playerCount, String[] playerNames) {
 
-        Scanner scanner = ScannerSingleton.getInstance();
+
 
         do {
             board = new TicTacToeBoard();
@@ -68,7 +67,7 @@ public class TicTacToeGame {
             game.initializePlayers(playerCount, playerNames);
             game.playGame();
             System.out.println("Vill du spela igen? (j/n): ");
-        } while (scanner.nextLine().trim().toLowerCase().startsWith("j"));
+        } while (ScannerSingleton.getNextLine().trim().toLowerCase().startsWith("j"));
 
         System.out.println("Tack för att du spelade!");
     }

@@ -2,12 +2,10 @@ import java.util.Scanner;
 
 public class HumanPlayer extends Player<TicTacToeBoard> {
     private final String symbol;
-    private final Scanner scanner;
 
     public HumanPlayer(String name, String symbol) {
         super(name);
         this.symbol = symbol;
-        this.scanner = ScannerSingleton.getInstance();
     }
 
     @Override
@@ -17,8 +15,7 @@ public class HumanPlayer extends Player<TicTacToeBoard> {
         
         while (true) {
             try {
-                int cellId = scanner.nextInt();
-                scanner.nextLine(); 
+                int cellId = Integer.parseInt(ScannerSingleton.getNextLine());
                 
                 if (cellId < 1 || cellId > 9) {
                     System.out.println("Ogiltigt val! Välj ett nummer mellan 1-9.");
@@ -37,7 +34,6 @@ public class HumanPlayer extends Player<TicTacToeBoard> {
                 
             } catch (NumberFormatException e) {
                 System.out.println("Ange ett giltigt nummer!");
-                scanner.nextLine(); // clear invalid input
             }
         }
     }
