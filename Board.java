@@ -34,7 +34,7 @@ public abstract class Board<T extends Cell> {
         return cells;
     }
 
-    protected int getLongestCellLength() {
+    private int getLongestCellLength() {
         int maxStringLength = 0;
         for (List<T> cellRow : cells) {
             for (T cell : cellRow) {

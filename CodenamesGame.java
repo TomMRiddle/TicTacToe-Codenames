@@ -55,6 +55,8 @@ public class CodenamesGame {
                         System.out.println("Det "+(agent.getTeamColor() == RED ? BLUE+"blå" : RED+BG+"röda")+RESET+" laget har vunnit!");
 
                     } else {
+                        board.setSpymasterView(true);
+                        System.out.println(board);
                         System.out.println("Det "+(board.getWinningTeam() ==  RED ? RED+BG+"röda" : BLUE+BG+"blå")+RESET+" laget har vunnit!");
                     }
                     gameloop = false;
