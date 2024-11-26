@@ -3,7 +3,6 @@ import java.util.Scanner;
 import static utils.Ansi.*;
 
 public class SpymasterPlayer extends Player<CodenamesBoard>{
-    Scanner spyscan;
     private final String teamColor;
 
     public SpymasterPlayer(String name, String teamColor) {
@@ -19,7 +18,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
             System.out.println("Alla agenter, titta bort från skärmen!");
             System.out.println("Tryck ENTER för att fortsätta...");
             System.out.println("==============\n");
-            spyscan.nextLine();
+            ScannerSingleton.getNextLine();
 
         String clue;
         int cluenumber;
@@ -30,7 +29,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
 
         do {
             System.out.println("Ange ditt ord: ");
-            clue = spyscan.nextLine();
+            clue = ScannerSingleton.getNextLine();
             tryAgain = false;
             for (List<CodenamesCell> cellRow : board.cells) {
                 for (CodenamesCell cell : cellRow) {

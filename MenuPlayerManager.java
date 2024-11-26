@@ -56,7 +56,7 @@ public class MenuPlayerManager {
         
         while (true) {
             try {
-                int choice = Integer.parseInt(scanner.nextLine().trim());
+                int choice = Integer.parseInt(ScannerSingleton.getNextLine().trim());
                 if (choice >= 1 && choice <= redTeamSize) {
                     spymasterIndices[0] = choice - 1;
                     break;
@@ -82,7 +82,7 @@ public class MenuPlayerManager {
         
         while (true) {
             try {
-                int choice = Integer.parseInt(scanner.nextLine().trim());
+                int choice = Integer.parseInt(ScannerSingleton.getNextLine().trim());
                 if (choice >= 1 && choice <= allPlayers.length - redTeamSize) {
                     spymasterIndices[1] = redTeamSize + choice - 1;
                     break;
