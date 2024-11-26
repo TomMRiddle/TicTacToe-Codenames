@@ -39,9 +39,6 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
                         System.out.println("\nVälj ett ord som inte finns på spelplanen!");
                         tryAgain = true;
                     }
-                    else{
-                        tryAgain = false;
-                    }
                 }
             }
         } while (tryAgain);
