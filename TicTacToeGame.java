@@ -27,7 +27,7 @@ public class TicTacToeGame {
     }
 
     private int getValidSymbolChoice() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = ScannerSingleton.getInstance();
         while (true) {
             try {
                 int choice = Integer.parseInt(scanner.nextLine());
@@ -46,9 +46,9 @@ public class TicTacToeGame {
                 player.takeTurn(board);
                 if (board.checkWin() || board.isDraw()) {
                     if(board.checkWin()) {
-                        Scoreboard.getInstance("TicTacToe").addScore(players.get(0).getName(), players.get(1).getName(), ( board.getWinner() == players.get(0) ? 1 : 2 ));
+                        //Scoreboard.getInstance("TicTacToe").addScore(players.get(0).getName(), players.get(1).getName(), ( board.getWinner() == players.get(0) ? 1 : 2 ));
                     } else if(board.isDraw()){
-                        Scoreboard.getInstance("TicTacToe").addScore(players.get(0).getName(), players.get(1).getName(), 0);
+                        //Scoreboard.getInstance("TicTacToe").addScore(players.get(0).getName(), players.get(1).getName(), 0);
                     }
                     display.showGameResult(board);
                     gameloop = false;
@@ -60,7 +60,7 @@ public class TicTacToeGame {
 
     public static void start(int playerCount, String[] playerNames) {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = ScannerSingleton.getInstance();
 
         do {
             board = new TicTacToeBoard();

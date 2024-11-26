@@ -4,7 +4,7 @@ public class MenuPlayerManager {
     private Scanner scanner;
 
     public MenuPlayerManager() {
-        this.scanner = new Scanner(System.in);
+        this.scanner = ScannerSingleton.getInstance();;
     }
 
     public String[] getPlayerNames(int playerCount) {

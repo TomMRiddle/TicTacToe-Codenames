@@ -9,7 +9,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
     public SpymasterPlayer(String name, String teamColor) {
         super(name);
         this.teamColor=teamColor;
-        spyscan = new Scanner(System.in);
+        this.spyscan = ScannerSingleton.getInstance();
     }
 
     @Override

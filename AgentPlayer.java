@@ -7,7 +7,7 @@ public class AgentPlayer extends Player<CodenamesBoard> {
 
     public AgentPlayer(String name, String teamColor) {
         super(name);
-        scanner = new Scanner(System.in);
+        this.scanner = ScannerSingleton.getInstance();
         this.teamColor = teamColor;
     }
 

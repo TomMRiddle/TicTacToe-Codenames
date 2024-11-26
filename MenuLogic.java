@@ -6,7 +6,7 @@ public class MenuLogic {
     private final Scanner scanner;
 
     public MenuLogic() {
-        this.scanner = new Scanner(System.in);
+        this.scanner = ScannerSingleton.getInstance();
         this.display = new MenuDisplay();
         this.playerManager = new MenuPlayerManager();
     }

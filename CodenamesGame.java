@@ -66,7 +66,7 @@ public class CodenamesGame {
     }
 
     private static boolean askToPlayAgain() {
-        try (Scanner scanner = new Scanner(System.in)) {
+        try (Scanner scanner = ScannerSingleton.getInstance()) {
             System.out.println("Vill du spela igen? (ja/nej): ");
             String userInput = scanner.nextLine().trim().toLowerCase();
             return !userInput.contains("nej");

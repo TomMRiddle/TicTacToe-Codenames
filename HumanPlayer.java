@@ -7,7 +7,7 @@ public class HumanPlayer extends Player<TicTacToeBoard> {
     public HumanPlayer(String name, String symbol) {
         super(name);
         this.symbol = symbol;
-        this.scanner = new Scanner(System.in);
+        this.scanner = ScannerSingleton.getInstance();
     }
 
     @Override
