@@ -46,9 +46,9 @@ public class TicTacToeGame {
                 player.takeTurn(board);
                 if (board.checkWin() || board.isDraw()) {
                     if(board.checkWin()) {
-                        //Scoreboard.getInstance("TicTacToe").addScore(players.get(0).getName(), players.get(1).getName(), ( board.getWinner() == players.get(0) ? 1 : 2 ));
+                        Scoreboard.getInstance("Tre i rad").addScore(players.get(0).getName(), players.get(1).getName(), ( board.getWinner() == players.get(0) ? 1 : 2 ));
                     } else if(board.isDraw()){
-                        //Scoreboard.getInstance("TicTacToe").addScore(players.get(0).getName(), players.get(1).getName(), 0);
+                        Scoreboard.getInstance("Tre i rad").addScore(players.get(0).getName(), players.get(1).getName(), 0);
                     }
                     display.showGameResult(board);
                     gameloop = false;

@@ -12,7 +12,7 @@ import java.util.Map;
 public class Scoreboard {
     private static final String COMMA_DELIMITER = ", ";
     private static final Map<String, Scoreboard> INSTANCES = new HashMap<>();
-    private String gameType;
+    private final String gameType;
     private final Map<String, int[]> scores;
     private final String CSV_FILE_NAME;
 
@@ -31,7 +31,8 @@ public class Scoreboard {
     }
 
     private void load() {
-        if (!Files.exists(Paths.get(CSV_FILE_NAME))) {
+        Path path = Paths.get(CSV_FILE_NAME);
+        if (!Files.exists(path)) {
             try (PrintWriter writer = new PrintWriter(new FileWriter(CSV_FILE_NAME))) {
                 writer.println("Home Player,Away Player,Result");
             } catch (IOException e) {
@@ -40,7 +41,7 @@ public class Scoreboard {
             return;
         }
 
-        try (BufferedReader reader = Files.newBufferedReader(Paths.get(CSV_FILE_NAME))) {
+        try (BufferedReader reader = Files.newBufferedReader(path)) {
             String[] headers = reader.readLine().split(",");
             String line;
             while ((line = reader.readLine()) != null) {
@@ -50,8 +51,7 @@ public class Scoreboard {
                     for (int i = 0; i < headers.length; i++) {
                         gameData.put(headers[i], parts[i]);
                     }
-
-                    String gameType = gameData.get("Game Type");
+                    
                     String homePlayer = gameData.get("Home Player");
                     String awayPlayer = gameData.get("Away Player");
                     int result = Integer.parseInt(gameData.get("Result"));
@@ -90,8 +90,8 @@ public class Scoreboard {
 
         try (PrintWriter writer = new PrintWriter(new FileWriter(CSV_FILE_NAME, true))) {
             Path path = Paths.get(CSV_FILE_NAME);
-            if (!Files.exists(path) || !Files.readAllLines(path).get(0).contains("Game Type")) {
-                writer.println("Game Type,Home Player,Away Player,Result");
+            if (!Files.exists(path)) {
+                writer.println("Home Player,Away Player,Result");
             }
             writer.println(homePlayer + "," + awayPlayer + "," + result);
         } catch (IOException e) {
@@ -109,8 +109,5 @@ public class Scoreboard {
             System.out.printf("%-15s %5d %7d %8d%n",
                     player, scores[0], scores[1], scores[2]);
         }
-    }
-    private static String convertToCSV(List<String> fields) {
-        return String.join(COMMA_DELIMITER, fields);
     }
 }
