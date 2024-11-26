@@ -3,11 +3,9 @@ import static utils.Ansi.*;
 
 public class AgentPlayer extends Player<CodenamesBoard> {
     private final String teamColor;
-    private final Scanner scanner;
 
     public AgentPlayer(String name, String teamColor) {
         super(name);
-        scanner = new Scanner(System.in);
         this.teamColor = teamColor;
     }
 
@@ -41,7 +39,7 @@ public class AgentPlayer extends Player<CodenamesBoard> {
             int cellId;
             while (true) {
                 try {
-                    cellId = Integer.parseInt(scanner.nextLine().trim());
+                    cellId = Integer.parseInt(ScannerSingleton.getNextLine().trim());
                     if (cellId < 1 || cellId > 25) {
                         System.out.println("Ogiltigt nummer. Välj mellan 1 och 25: ");
                         continue;
@@ -100,7 +98,7 @@ public class AgentPlayer extends Player<CodenamesBoard> {
             while(true) {
                 if (remainingGuesses > 0) {
                     System.out.println("Vill ni fortsätta gissa? (ja/nej)");
-                    String userResponse = scanner.nextLine().trim().toLowerCase();
+                    String userResponse = ScannerSingleton.getNextLine().trim().toLowerCase();
 
                     if (userResponse.equals("ja")) {
                         break;
@@ -110,11 +108,17 @@ public class AgentPlayer extends Player<CodenamesBoard> {
                     } else {
                         System.out.println("Ogiltig input. Svara med ja eller nej.");
                     }
+                    if (board.checkWin()) {
+                        return;
+                    }
+                } else {
+                    break;
                 }
             }
+
         }
         System.out.println("Rundan är över. Tryck ENTER för att fortsätta.");
-        scanner.nextLine();
+        ScannerSingleton.getNextLine();
     }
 }
 

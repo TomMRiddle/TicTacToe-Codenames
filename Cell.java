@@ -1,5 +1,5 @@
 import static utils.Ansi.*;
-public abstract class Cell {
+public abstract class Cell<T> {
     protected String content;
     protected String color;
     protected int id;

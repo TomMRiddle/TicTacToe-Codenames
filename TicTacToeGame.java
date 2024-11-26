@@ -27,10 +27,9 @@ public class TicTacToeGame {
     }
 
     private int getValidSymbolChoice() {
-        Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-                int choice = Integer.parseInt(scanner.nextLine());
+                int choice = Integer.parseInt(ScannerSingleton.getNextLine());
                 if (choice >= 1 && choice <= 2) return choice;
                 display.showInvalidChoice();
             } catch (NumberFormatException e) {
@@ -46,9 +45,9 @@ public class TicTacToeGame {
                 player.takeTurn(board);
                 if (board.checkWin() || board.isDraw()) {
                     if(board.checkWin()) {
-                        Scoreboard.getInstance("TicTacToe").addScore(players.get(0).getName(), players.get(1).getName(), ( board.getWinner() == players.get(0) ? 1 : 2 ));
+                        Scoreboard.getInstance("Tre i rad").addScore(players.get(0).getName(), players.get(1).getName(), ( board.getWinner() == players.get(0) ? 1 : 2 ));
                     } else if(board.isDraw()){
-                        Scoreboard.getInstance("TicTacToe").addScore(players.get(0).getName(), players.get(1).getName(), 0);
+                        Scoreboard.getInstance("Tre i rad").addScore(players.get(0).getName(), players.get(1).getName(), 0);
                     }
                     display.showGameResult(board);
                     gameloop = false;
@@ -60,7 +59,7 @@ public class TicTacToeGame {
 
     public static void start(int playerCount, String[] playerNames) {
 
-        Scanner scanner = new Scanner(System.in);
+
 
         do {
             board = new TicTacToeBoard();
@@ -68,7 +67,7 @@ public class TicTacToeGame {
             game.initializePlayers(playerCount, playerNames);
             game.playGame();
             System.out.println("Vill du spela igen? (j/n): ");
-        } while (scanner.nextLine().trim().toLowerCase().startsWith("j"));
+        } while (ScannerSingleton.getNextLine().trim().toLowerCase().startsWith("j"));
 
         System.out.println("Tack för att du spelade!");
     }

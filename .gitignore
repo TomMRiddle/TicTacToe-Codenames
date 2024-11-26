@@ -30,3 +30,6 @@ replay_pid*
 
 # output
 scoreboard_*.csv
+
+# vscode
+/.vscode/
