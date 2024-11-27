@@ -58,9 +58,6 @@ public class TicTacToeGame {
     }
 
     public static void start(int playerCount, String[] playerNames) {
-
-
-
         do {
             board = new TicTacToeBoard();
             TicTacToeGame game = new TicTacToeGame();

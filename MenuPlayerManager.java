@@ -11,16 +11,17 @@ public class MenuPlayerManager {
             │    VÄLJ SPELARNAMN FÖR SPELET    │
             │                                  │
             │  Skriv in namn för varje spelare │
-            └──────────────────────────────────┘
-            """);
+            └──────────────────────────────────┘"""
+        );
 
         for (int i = 0; i < playerCount; i++) {
             while (true) {
-                System.out.println("""
-                    ┌──────────────────────────────────┐
-                    │       Skriv in Spelare %d:        │
-                    └──────────────────────────────────┘
-                    """.formatted(i + 1));
+                System.out.printf("""
+                        ┌──────────────────────────────────┐
+                        │       Skriv in Spelare %d:        │
+                        └──────────────────────────────────┘
+                        """
+                        , i + 1);
                 
                 String name = ScannerSingleton.getNextLine().trim();
                 if (!name.isEmpty()) {
@@ -30,8 +31,8 @@ public class MenuPlayerManager {
                 System.out.println("""
                     ┌──────────────────────────────────┐
                     │   Namn får inte vara tomt!       │
-                    └──────────────────────────────────┘
-                    """);
+                    └──────────────────────────────────┘"""
+                );
             }
         }
         return playerNames;
@@ -47,8 +48,8 @@ public class MenuPlayerManager {
             │  VÄLJ SPYMASTER FÖR DET RÖDA LAGET  │
             │                                     │
             │     Välj nummer för spymaster:      │
-            └─────────────────────────────────────┘
-            """);
+            └─────────────────────────────────────┘"""
+        );
             
         for (int i = 0; i < redTeamSize; i++) {
             System.out.printf("%d. %s%n", i + 1, allPlayers[i]);
@@ -73,8 +74,8 @@ public class MenuPlayerManager {
             │  VÄLJ SPYMASTER FÖR DET BLÅ LAGET   │
             │                                     │
             │     Välj nummer för spymaster:      │
-            └─────────────────────────────────────┘
-            """);
+            └─────────────────────────────────────┘"""
+        );
             
         for (int i = redTeamSize; i < allPlayers.length; i++) {
             System.out.printf("%d. %s%n", i - redTeamSize + 1, allPlayers[i]);

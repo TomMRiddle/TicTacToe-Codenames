@@ -36,8 +36,8 @@ public class MenuDisplay {
             │        2. CODENAMES              │
             │                                  │
             │        Välj mellan (1-2):        │
-            └──────────────────────────────────┘
-            """);
+            └──────────────────────────────────┘"""
+        );
     }
 
     public void showPlayerCountMenu(int gameChoice) {
@@ -51,8 +51,8 @@ public class MenuDisplay {
                 │      2. TVÅ SPELARE              │
                 │                                  │
                 │      Välj antal (1-2):           │
-                └──────────────────────────────────┘
-                """);
+                └──────────────────────────────────┘"""
+            );
         } else {
             System.out.println("""
                 ┌──────────────────────────────────────┐
@@ -68,8 +68,8 @@ public class MenuDisplay {
                 │                                      │
                 │      Välj antal (4-8):               │ 
                 │                                      │
-                └──────────────────────────────────────┘
-                """);
+                └──────────────────────────────────────┘"""
+            );
         }
     }
 
@@ -77,8 +77,8 @@ public class MenuDisplay {
         System.out.println("""
             ┌──────────────────────────────────┐
             │    Felaktigt val! Försök igen    │
-            └──────────────────────────────────┘
-            """);
+            └──────────────────────────────────┘"""
+        );
     }
     public void showSymbolSelectionMenu(String playerName) {
         String formattedName = playerName.length() > 10 ? 
@@ -96,8 +96,8 @@ public class MenuDisplay {
             │         2. O                     │
             │                                  │
             │         Välj symbol (1-2):       │
-            └──────────────────────────────────┘
-            """);
+            └──────────────────────────────────┘"""
+        );
     }
     public void displayGameDetails(int gameChoice, int playerCount, String[] playerNames) {
         System.out.println(CLS+"""
