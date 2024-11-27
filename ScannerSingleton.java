@@ -6,7 +6,7 @@ public class ScannerSingleton {
     private final Scanner scanner;
 
     private ScannerSingleton() {
-        scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in, StandardCharsets.UTF_8);
     }
 
     public static String getNextLine() {
