@@ -158,7 +158,7 @@ public class MenuDisplay {
     }
 
     public void showGameResult(TicTacToeBoard board) {
-        System.out.println(board);
+        System.out.println(CLS+board);
         if(!board.isDraw()) {
             System.out.println(board.getWinner().getName() + " Vann!");
         } else {

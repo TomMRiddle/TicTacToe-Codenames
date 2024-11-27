@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import static utils.Ansi.*;
 
 public class HumanPlayer extends Player<TicTacToeBoard> {
     private final String symbol;
@@ -10,7 +10,8 @@ public class HumanPlayer extends Player<TicTacToeBoard> {
 
     @Override
     public void takeTurn(TicTacToeBoard board) {
-        System.out.println(board);
+
+        System.out.println(CLS+board);
         System.out.println(getName() + ", ange cellnummer (1-9): ");
         
         while (true) {

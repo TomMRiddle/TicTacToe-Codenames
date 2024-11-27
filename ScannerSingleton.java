@@ -14,4 +14,7 @@ public class ScannerSingleton {
         }
         return instance.scanner.nextLine();
     }
+    public static void close() {
+        instance.scanner.close();
+    }
 }
