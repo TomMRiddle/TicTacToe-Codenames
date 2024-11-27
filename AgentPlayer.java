@@ -14,7 +14,7 @@ public class AgentPlayer extends Player<CodenamesBoard> {
         int totalGuesses = board.getNumberOfGuesses();
         String clue = board.getClue();
         System.out.println(CLS);
-        System.out.println("Spymaster's ledtråd: \n" +clue+" "+totalGuesses);
+        System.out.println("Spymaster's ledtråd: \n" +clue+" "+totalGuesses+"\n");
         board.setSpymasterView(false);
         System.out.println(board);
 
@@ -117,8 +117,10 @@ public class AgentPlayer extends Player<CodenamesBoard> {
             }
 
         }
-        System.out.println("Rundan är över. Tryck ENTER för att fortsätta.");
-        ScannerSingleton.getNextLine();
+        if (!board.checkWin()) {
+            System.out.println("Rundan är över. Tryck ENTER för att fortsätta.");
+            ScannerSingleton.getNextLine();
+        }
     }
 }
 

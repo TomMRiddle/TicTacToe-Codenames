@@ -1,12 +1,12 @@
 import java.util.Scanner;
-
+import static utils.Ansi.*;
 public class MenuPlayerManager {
-    private Scanner scanner;
+
 
     public String[] getPlayerNames(int playerCount) {
         String[] playerNames = new String[playerCount];
 
-        System.out.println("""
+        System.out.println(CLS+"""
             ┌──────────────────────────────────┐
             │    VÄLJ SPELARNAMN FÖR SPELET    │
             │                                  │
@@ -42,7 +42,7 @@ public class MenuPlayerManager {
         int[] spymasterIndices = new int[2]; 
         
         // Det röda laget väljer Spymaster
-        System.out.println("""
+        System.out.println(CLS+"""
             ┌─────────────────────────────────────┐
             │  VÄLJ SPYMASTER FÖR DET RÖDA LAGET  │
             │                                     │
@@ -68,9 +68,9 @@ public class MenuPlayerManager {
         }
 
         // Det blåa laget väljer Spymaster
-        System.out.println("""
+        System.out.println(CLS+"""
             ┌─────────────────────────────────────┐
-            │  VÄLJ SPYMASTER FÖR DET BLÅA LAGET  │
+            │  VÄLJ SPYMASTER FÖR DET BLÅ LAGET   │
             │                                     │
             │     Välj nummer för spymaster:      │
             └─────────────────────────────────────┘
