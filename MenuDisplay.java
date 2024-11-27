@@ -41,6 +41,7 @@ public class MenuDisplay {
     }
 
     public void showPlayerCountMenu(int gameChoice) {
+        displayWelcomeBanner();
         if (gameChoice == 1) {
             System.out.println("""
                 ┌──────────────────────────────────┐
@@ -84,7 +85,7 @@ public class MenuDisplay {
             playerName.substring(0, 10) : 
             String.format("%-10s", playerName);
     
-        System.out.println("""
+        System.out.println(CLS+"""
             ┌──────────────────────────────────┐
             │         VÄLJ DIN SYMBOL          │
             │                                  │""");
@@ -99,7 +100,7 @@ public class MenuDisplay {
             """);
     }
     public void displayGameDetails(int gameChoice, int playerCount, String[] playerNames) {
-        System.out.println("""
+        System.out.println(CLS+"""
             ┌──────────────────────────────────┐
             │         SPELÖVERSIKT             │
             │                                  │""");
@@ -125,7 +126,7 @@ public class MenuDisplay {
         System.arraycopy(allPlayers, 0, redTeam, 0, redTeamSize);
         System.arraycopy(allPlayers, redTeamSize, blueTeam, 0, allPlayers.length - redTeamSize);
         
-        System.out.println("""
+        System.out.println(CLS+"""
             ┌──────────────────────────────────┐
             │         SPELÖVERSIKT             │
             │                                  │

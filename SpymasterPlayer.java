@@ -1,5 +1,4 @@
 import java.util.List;
-import java.util.Scanner;
 import static utils.Ansi.*;
 
 public class SpymasterPlayer extends Player<CodenamesBoard>{
@@ -13,7 +12,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
     @Override
     public void takeTurn(CodenamesBoard board) {
             // Visa varning men rensa inte skärmen
-            System.out.println("\n=== VARNING ===");
+            System.out.println(CLS+"\n=== VARNING ===");
             System.out.println("Det är dags för Spymaster från " + teamColor + "Det " + (teamColor.equals(BLUE) ? "blåa" : "röda") + " laget" + RESET + " att spela.");
             System.out.println("Alla agenter, titta bort från skärmen!");
             System.out.println("Tryck ENTER för att fortsätta...");
@@ -24,7 +23,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
         int cluenumber;
         boolean tryAgain;
         board.setSpymasterView(true);
-        System.out.println("Ge en ledtråd med ett ord och en siffra som visar hur många agenter ordet passar för. Exempel: TRÄD 5. Ordet får inte vara på spelplanen och siffran får inte överstiga antalet kvarvarande agenter.");
+        System.out.println(CLS+"Ge en ledtråd med ett ord och en siffra som visar hur många agenter ordet passar för. Exempel: TRÄD 5. Ordet får inte vara på spelplanen och siffran får inte överstiga antalet kvarvarande agenter.");
         System.out.println(board);
 
         do {

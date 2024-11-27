@@ -49,14 +49,14 @@ public class CodenamesGame {
             for (Player<CodenamesBoard> player : players) {
                 player.takeTurn(board);
                 if(board.checkWin()) {
+                    board.setSpymasterView(true);
+                    System.out.println(board);
                     String winningTeam = board.getWinningTeam();
                     if (winningTeam.equals(BRIGHT_BLACK)) {
                         AgentPlayer agent = (AgentPlayer) player;
                         System.out.println("Det "+(agent.getTeamColor() == RED ? BLUE+"blå" : RED+BG+"röda")+RESET+" laget har vunnit!");
 
                     } else {
-                        board.setSpymasterView(true);
-                        System.out.println(board);
                         System.out.println("Det "+(board.getWinningTeam() ==  RED ? RED+BG+"röda" : BLUE+BG+"blå")+RESET+" laget har vunnit!");
                     }
                     gameloop = false;
