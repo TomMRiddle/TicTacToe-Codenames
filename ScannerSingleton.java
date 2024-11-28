@@ -1,5 +1,4 @@
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,7 +8,7 @@ public class ScannerSingleton {
 
     private ScannerSingleton() {
         scanner = new Scanner(System.in, StandardCharsets.UTF_8);
-    } //Cp850 gör att ÅÄÖ fungerar i terminalen
+    }
 
     public static ScannerSingleton getInstance() {
         if (instance == null) {
