@@ -24,7 +24,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
         int cluenumber;
         boolean tryAgain;
         board.setSpymasterView(true);
-        System.out.println("Studera spelbrädet och fundera på en ledtråd som kan hjälpa dina agenter att gissa rätt! \nDin ledtråd ska bestå av ett ord följt av en siffra som representerar antalet agenter ditt ord passar in på. Exempel: TRÄD 5.\nOBS! Ditt ord får inte vara ett av orden på aktuell spelplan. Din siffra får inte överstiga antalet agenter ditt lag har kvar att hitta.");
+        System.out.println("Ge en ledtråd med ett ord och en siffra som visar hur många agenter ordet passar för. Exempel: TRÄD 5. Ordet får inte vara på spelplanen och siffran får inte överstiga antalet kvarvarande agenter.");
         System.out.println(board);
 
         do {
