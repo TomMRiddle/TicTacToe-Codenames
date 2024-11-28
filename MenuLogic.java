@@ -14,10 +14,13 @@ public class MenuLogic {
         int gameChoice =  display.getGameSelection();
         int playerCount = display.getPlayerCount(gameChoice);
         String[] playerNames = playerManager.getPlayerNames(playerCount);
+
+        ReadRules rules = new ReadRuels();
         
         if (gameChoice == 1) {
             startTicTacToe(playerCount, playerNames);
         } else {
+            rules.gameRules();
             startCodenames(playerNames);
         }
     }

@@ -2,6 +2,7 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Scanner;
 
 public class ReadRules {
     public void gameRules() {
@@ -25,7 +26,7 @@ public class ReadRules {
     }
 
     public static void showGameRules() {
-        // Ange URL:n till länken
+        // Ange URL:n till regelboken
         String url = "https://raw.githubusercontent.com/TomMRiddle/TicTacToe-Codenames/6c7f22282299bb95cb6c3fa203aa71d9c5707c3b/CN_rules_ENG_web.pdf";
 
         try {
