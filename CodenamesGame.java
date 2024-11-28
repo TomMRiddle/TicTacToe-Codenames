@@ -8,14 +8,9 @@ public class CodenamesGame {
     private static CodenamesBoard board;
 
     public static void start(String[] playerNames, int[] spymasterIndices) {
-        boolean playAgain = true;
-        while (playAgain) {
-            board = new CodenamesBoard();
-            List<Player<CodenamesBoard>> players = createTeams(playerNames, spymasterIndices, board.getStartingTeam());
-            playGame(players, board);
-            playAgain = askToPlayAgain();
-        }
-        System.out.println("Tack för en god match!");
+        board = new CodenamesBoard();
+        List<Player<CodenamesBoard>> players = createTeams(playerNames, spymasterIndices, board.getStartingTeam());
+        playGame(players, board);
     }
 
     private static List<Player<CodenamesBoard>> createTeams(String[] playerNames, int[] spymasterIndices, String startingTeam) {

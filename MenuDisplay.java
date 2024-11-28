@@ -12,11 +12,11 @@ public class MenuDisplay {
                 " "+BRIGHT_WHITE+"█████"+RED+" ░ "+BRIGHT_WHITE+"█████"+RED+"░  ░ ▒ ▒░   ░▒ ░ ▒░"+BRIGHT_WHITE+"█████"+RED+"     ▒ ░░ ░▒  ░ ░      \n" +
                 BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"   ░░"+BRIGHT_WHITE+"███"+RED+"  ░ ░ ░ ▒    ░░   ░ "+BRIGHT_GREEN+"░"+BRIGHT_WHITE+"███"+RED+"      ▒ ░░  ░  ░        \n" +
                 BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"    ░"+BRIGHT_WHITE+"███  ██████  ████████ ███████    ██████  █████ █████\n" +
-                BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"    ░"+BRIGHT_WHITE+"███ ███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░    "+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░░"+BRIGHT_WHITE+"███\n" +
+                BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"    ░"+BRIGHT_WHITE+"███ ███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░    "+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░░"+BRIGHT_WHITE+"███\n" +
                 BRIGHT_GREEN+" ░░"+BRIGHT_WHITE+"███   ███"+BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░░░  ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"    ░"+BRIGHT_WHITE+"███████"+BRIGHT_GREEN+"  ░░░"+BRIGHT_WHITE+"█████"+BRIGHT_GREEN+"░ \n" +
                 BRIGHT_GREEN+"  ░░░"+BRIGHT_WHITE+"█████"+BRIGHT_GREEN+"░  ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+" ░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"      ░"+BRIGHT_WHITE+"███ ███"+BRIGHT_GREEN+"░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░░    "+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"░░░"+BRIGHT_WHITE+"███\n" +
                 BRIGHT_GREEN+"    ░░"+BRIGHT_WHITE+"███"+BRIGHT_GREEN+"    ░░"+BRIGHT_WHITE+"██████  █████"+BRIGHT_GREEN+"     ░░"+BRIGHT_WHITE+"█████"+BRIGHT_GREEN+" ░░"+BRIGHT_WHITE+"██████  █████ █████\n" +
-                BRIGHT_GREEN+"     ░░░      ░░░░░░  ░░░░░       ░░░░░   ░░░░░░  ░░░░░ ░░░░░\n" + 
+                BRIGHT_GREEN+"     ░░░      ░░░░░  ░░░░░       ░░░░░   ░░░░░░  ░░░░░ ░░░░░\n" + 
                 "\n" +
                 "┌─────────────────────────────────────────────────────────┐\n" +
                 "│                                                         │\n" +
@@ -86,7 +86,7 @@ public class MenuDisplay {
             │         VÄLJ DIN SYMBOL          │
             │                                  │""");
         System.out.printf("│        %s välj:          │%n", formattedName);
-        System.out.println("""
+        System.out.println(""" 
             │                                  │
             │         1. X                     │
             │         2. O                     │
@@ -109,7 +109,7 @@ public class MenuDisplay {
             System.out.printf("│        - %-22s  │%n", name);
         }
         
-        System.out.println("""
+        System.out.println(""" 
             │                                  │
             └──────────────────────────────────┘""");
     }
@@ -136,7 +136,7 @@ public class MenuDisplay {
             }
         }
         
-        System.out.println("""
+        System.out.println(""" 
             │                                  │
             │         BLÅA LAGET               │""");
         
@@ -148,7 +148,7 @@ public class MenuDisplay {
             }
         }
         
-        System.out.println("""
+        System.out.println(""" 
             │                                  │
             └──────────────────────────────────┘""");
     }
@@ -164,5 +164,13 @@ public class MenuDisplay {
     }
     private String getGameName(int gameChoice) {
         return gameChoice == 1 ? "TRE I RAD" : "CODENAMES";
+    }
+
+    public int getSpymasterChoice() {
+        System.out.println(CLS + "VÄLJ SPYMASTER ALTERNATIV\n");
+        System.out.println("1. Välj nya spymasters");
+        System.out.println("2. Behåll samma spymasters\n");
+        
+        return ScannerSingleton.getInstance().getNextLineInt(1, 2);
     }
 }

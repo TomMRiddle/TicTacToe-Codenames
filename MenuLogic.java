@@ -31,10 +31,28 @@ public class MenuLogic {
     }
 
     private void startCodenames(String[] playerNames) {
+        boolean playAgain = true;
         int[] spymasterIndices = playerManager.selectSpymasters(playerNames);
-        display.displayCodenamesGameDetails(playerNames, spymasterIndices);
-        System.out.println("\nTryck ENTER för att starta spelet...");
-        ScannerSingleton.getInstance().pressEnterToContinue();
-        CodenamesGame.start(playerNames, spymasterIndices);
+        
+        while (playAgain) {
+            display.displayCodenamesGameDetails(playerNames, spymasterIndices);
+            System.out.println("\nTryck ENTER för att starta spelet...");
+            ScannerSingleton.getInstance().pressEnterToContinue();
+            
+            CodenamesGame.start(playerNames, spymasterIndices);
+            System.out.println("Vill du spela igen? (ja/nej): ");
+            String playAgainInput = ScannerSingleton.getInstance().getNextLine().toLowerCase();
+            
+            if (!playAgainInput.contains("nej")) {
+                int choice = display.getSpymasterChoice();
+                if (choice == 1) {
+                    spymasterIndices = playerManager.selectSpymasters(playerNames);
+                }
+                playAgain = true;
+            } else {
+                playAgain = false;
+                System.out.println("Tack för en god match!");
+            }
+        }
     }
 }
