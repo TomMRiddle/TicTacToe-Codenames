@@ -2,7 +2,7 @@ import static utils.Ansi.*;
 
 public class MenuDisplay {
     public void displayWelcomeBanner() {
-        System.out.println((CLS+RED +
+        System.out.println(CLS+RED +
                 "     ███▄ ▄███▓ ▒█████   ██▀███  ▄▄▄█████▓ ██▓  ██████       \n" +
                 "    ▓██▒▀█▀ ██▒▒██▒  ██▒▓██ ▒ ██▒▓  ██▒ ▓▒▓██▒▒██    ▒       \n" +
                 "    ▓██    ▓██░▒██░  ██▒▓██ ░▄█ ▒▒ ▓██░ ▒░▒██▒░ ▓██▄         \n" +
@@ -24,7 +24,7 @@ public class MenuDisplay {
                 "│                  Tre i rad & Codenames                  │\n" +
                 "│                                                         │\n" +
                 "└─────────────────────────────────────────────────────────┘\n" +
-                RESET).replace(" ", "\u00A0"));
+                RESET);
     }
 
     public int getGameSelection() {

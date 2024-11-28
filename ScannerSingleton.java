@@ -7,8 +7,8 @@ public class ScannerSingleton {
     private final Scanner scanner;
 
     private ScannerSingleton() {
-        scanner = new Scanner(System.in, StandardCharsets.UTF_8);
-    }
+        scanner = new Scanner(System.in, "Cp850");
+    } //Makes åäö work in the terminal,
 
     public static ScannerSingleton getInstance() {
         if (instance == null) {
