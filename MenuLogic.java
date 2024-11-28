@@ -11,32 +11,17 @@ public class MenuLogic {
 
     public void start() {
         display.displayWelcomeBanner();
-        int gameChoice = getValidInput("game", 1, 2);
-        int playerCount = getValidInput("players", gameChoice == 1 ? 1 : 4, gameChoice == 1 ? 2 : 8);
+        int gameChoice =  display.getGameSelection();
+        int playerCount = display.getPlayerCount(gameChoice);
         String[] playerNames = playerManager.getPlayerNames(playerCount);
+
+        ReadRules rules = new ReadRuels();
         
         if (gameChoice == 1) {
             startTicTacToe(playerCount, playerNames);
         } else {
+            rules.gameRules();
             startCodenames(playerNames);
-        }
-    }
-
-    private int getValidInput(String type, int min, int max) {
-        while (true) {
-            if (type.equals("game")) {
-                display.showGameSelectionMenu();
-            } else if (type.equals("players")) {
-                display.showPlayerCountMenu(min == 1 ? 1 : 2);
-            }
-
-            try {
-                int choice = Integer.parseInt(ScannerSingleton.getNextLine());
-                if (choice >= min && choice <= max) return choice;
-                display.showInvalidChoice();
-            } catch (NumberFormatException e) {
-                display.showInvalidChoice();
-            }
         }
     }
 
@@ -49,7 +34,7 @@ public class MenuLogic {
         int[] spymasterIndices = playerManager.selectSpymasters(playerNames);
         display.displayCodenamesGameDetails(playerNames, spymasterIndices);
         System.out.println("\nTryck ENTER för att starta spelet...");
-        ScannerSingleton.getNextLine();
+        ScannerSingleton.getInstance().pressEnterToContinue();
         CodenamesGame.start(playerNames, spymasterIndices);
     }
 }

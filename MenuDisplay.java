@@ -27,7 +27,7 @@ public class MenuDisplay {
                 RESET);
     }
 
-    public void showGameSelectionMenu() {
+    public int getGameSelection() {
         System.out.println("""
             ┌──────────────────────────────────┐
             │         VÄLJ SPEL ATT SPELA:     │
@@ -36,11 +36,13 @@ public class MenuDisplay {
             │        2. CODENAMES              │
             │                                  │
             │        Välj mellan (1-2):        │
-            └──────────────────────────────────┘
-            """);
+            └──────────────────────────────────┘"""
+        );
+        return ScannerSingleton.getInstance().getNextLineInt(1,2);
     }
 
-    public void showPlayerCountMenu(int gameChoice) {
+    public int getPlayerCount(int gameChoice) {
+        displayWelcomeBanner();
         if (gameChoice == 1) {
             System.out.println("""
                 ┌──────────────────────────────────┐
@@ -50,12 +52,13 @@ public class MenuDisplay {
                 │      2. TVÅ SPELARE              │
                 │                                  │
                 │      Välj antal (1-2):           │
-                └──────────────────────────────────┘
-                """);
+                └──────────────────────────────────┘"""
+            );
+            return ScannerSingleton.getInstance().getNextLineInt(1,2);
         } else {
             System.out.println("""
                 ┌──────────────────────────────────────┐
-                │      VÄLJ ANTAL SPELARE:             │ 
+                │      VÄLJ ANTAL SPELARE:             │
                 │                                      │
                 │      Lagen kommer automatiskt        │
                 │      delas upp baserat på vilken     │
@@ -65,26 +68,20 @@ public class MenuDisplay {
                 │      resterande spelarna går         │
                 │      till lag blå.                   │
                 │                                      │
-                │      Välj antal (4-8):               │ 
+                │      Välj antal (4-8):               │
                 │                                      │
-                └──────────────────────────────────────┘
-                """);
+                └──────────────────────────────────────┘"""
+            );
+            return ScannerSingleton.getInstance().getNextLineInt(4,8);
         }
     }
 
-    public void showInvalidChoice() {
-        System.out.println("""
-            ┌──────────────────────────────────┐
-            │    Felaktigt val! Försök igen    │
-            └──────────────────────────────────┘
-            """);
-    }
     public void showSymbolSelectionMenu(String playerName) {
         String formattedName = playerName.length() > 10 ? 
             playerName.substring(0, 10) : 
             String.format("%-10s", playerName);
     
-        System.out.println("""
+        System.out.println(CLS+"""
             ┌──────────────────────────────────┐
             │         VÄLJ DIN SYMBOL          │
             │                                  │""");
@@ -95,11 +92,11 @@ public class MenuDisplay {
             │         2. O                     │
             │                                  │
             │         Välj symbol (1-2):       │
-            └──────────────────────────────────┘
-            """);
+            └──────────────────────────────────┘"""
+        );
     }
     public void displayGameDetails(int gameChoice, int playerCount, String[] playerNames) {
-        System.out.println("""
+        System.out.println(CLS+"""
             ┌──────────────────────────────────┐
             │         SPELÖVERSIKT             │
             │                                  │""");
@@ -125,7 +122,7 @@ public class MenuDisplay {
         System.arraycopy(allPlayers, 0, redTeam, 0, redTeamSize);
         System.arraycopy(allPlayers, redTeamSize, blueTeam, 0, allPlayers.length - redTeamSize);
         
-        System.out.println("""
+        System.out.println(CLS+"""
             ┌──────────────────────────────────┐
             │         SPELÖVERSIKT             │
             │                                  │
@@ -157,7 +154,7 @@ public class MenuDisplay {
     }
 
     public void showGameResult(TicTacToeBoard board) {
-        System.out.println(board);
+        System.out.println(CLS+board);
         if(!board.isDraw()) {
             System.out.println(board.getWinner().getName() + " Vann!");
         } else {
