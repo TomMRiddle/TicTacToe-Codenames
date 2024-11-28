@@ -1,16 +1,15 @@
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Scanner;
 
-public class ScannerSingleton {
-    private static ScannerSingleton instance = null;
+public final class ScannerSingleton {
+    private static ScannerSingleton instance;
     private final Scanner scanner;
 
     private ScannerSingleton() {
         scanner = new Scanner(System.in, "Cp850");
     } //Makes åäö work in the terminal,
 
-    public static ScannerSingleton getInstance() {
+    public static synchronized ScannerSingleton getInstance() {
         if (instance == null) {
             instance = new ScannerSingleton();
         }

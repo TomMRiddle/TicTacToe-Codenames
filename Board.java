@@ -4,15 +4,7 @@ import static utils.Ansi.*;
 public abstract class Board<T extends Cell> {
     protected List<List<T>> cells;
     protected int padding = 2;
-    protected Player winner;
-    protected boolean draw;
 
-    public Board() {
-        winner = null;
-        draw = false;
-    }
-
-    protected abstract void initialize(int numRows, int numCols);
     protected abstract boolean checkWin();
 
     public T getCell(int row, int col) {
@@ -56,23 +48,23 @@ public abstract class Board<T extends Cell> {
                     String colorCode = cells.get(i / 3).get(j).getColor();
                     out.append(BG).append(colorCode);
                     if (i % 3 == 0) { //first row in cell
-                        String cellId = cells.get(i / 3).get(j).getId()+"";
-                        out.append(cellId);
-                        out.append(spacer.repeat(longestCellLength-cellId.length()));
+                        String cellId = Integer.toString(cells.get(i / 3).get(j).getId());
+                        out.append(cellId)
+                        .append(spacer.repeat(longestCellLength-cellId.length()));
                     } else if (i % 3 == 1) { // Place original cell row in the middle of each block of three rows
                         int cellPaddingLeft = (longestCellLength - cells.get(i / 3).get(j).toString().length()) / 2;
                         int cellPaddingRight = (longestCellLength - cells.get(i / 3).get(j).toString().length()) - cellPaddingLeft;
-                        out.append(spacer.repeat(cellPaddingRight));
-                        out.append(cells.get(i / 3).get(j));
-                        out.append(spacer.repeat(cellPaddingLeft));
+                        out.append(spacer.repeat(cellPaddingRight))
+                        .append(cells.get(i / 3).get(j))
+                        .append(spacer.repeat(cellPaddingLeft));
                     } else { //third row in cell
                         out.append(spacer.repeat(longestCellLength)); //output the number of spacers equal to the length of the cell content
                     }
                     out.append(RESET).append("  ");
                 }
-            out.append("\n");
+            out.append('\n');
             if (i % 3 == 2) {
-                out.append("\n"); //add an empty line between cell rows
+                out.append('\n'); //add an empty line between cell rows
             }
         }
         return out.toString();

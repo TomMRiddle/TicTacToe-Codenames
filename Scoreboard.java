@@ -7,17 +7,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class Scoreboard {
-    private static final String COMMA_DELIMITER = ", ";
+public final class Scoreboard {
     private static final Map<String, Scoreboard> INSTANCES = new HashMap<>();
     private final String gameType;
     private final Map<String, int[]> scores;
-    private final String CSV_FILE_NAME;
+    private final String csvFileName;
 
     private Scoreboard(String gameType) {
         this.scores = new HashMap<>();
         this.gameType = gameType;
-        this.CSV_FILE_NAME = "scoreboard_" + gameType + ".csv";
+        this.csvFileName = "scoreboard_" + gameType + ".csv";
         load();
     }
     //singleton
@@ -29,9 +28,9 @@ public class Scoreboard {
     }
 
     private void load() {
-        Path path = Paths.get(CSV_FILE_NAME);
+        Path path = Paths.get(csvFileName);
         if (!Files.exists(path)) {
-            try (PrintWriter writer = new PrintWriter(new FileWriter(CSV_FILE_NAME))) {
+            try (PrintWriter writer = new PrintWriter(new FileWriter(csvFileName))) {
                 writer.println("Home Player,Away Player,Result");
             } catch (IOException e) {
                 e.printStackTrace();
@@ -63,9 +62,9 @@ public class Scoreboard {
     }
 
     private void updateScores(String homePlayer, String awayPlayer, int result) {
-        final int DRAW = 2;
         final int WIN = 0;
         final int LOSS = 1;
+        final int DRAW = 2;
         switch (result) {
 
             case 0: // Draw
@@ -86,8 +85,8 @@ public class Scoreboard {
     public void addScore(String homePlayer, String awayPlayer, int result) {
         updateScores(homePlayer, awayPlayer, result);
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter(CSV_FILE_NAME, true))) {
-            Path path = Paths.get(CSV_FILE_NAME);
+        try (PrintWriter writer = new PrintWriter(new FileWriter(csvFileName, true))) {
+            Path path = Paths.get(csvFileName);
             if (!Files.exists(path)) {
                 writer.println("Home Player,Away Player,Result");
             }
@@ -102,18 +101,7 @@ public class Scoreboard {
         System.out.printf("%-15s %-5s %-7s %-8s %-11s%n",
                 "Namn", "Vinst", "Förlust", "Oavgjort", "Vinstfaktor");
         // Create a list from the entries of the map
-        List<Map.Entry<String, int[]>> entryList = new ArrayList<>(scores.entrySet());
-
-        // Sort the list by win ratio
-        entryList.sort(new Comparator<Map.Entry<String, int[]>>() {
-            @Override
-            public int compare(Map.Entry<String, int[]> e1, Map.Entry<String, int[]> e2) {
-                double winRatio1 = calculateWinRatio(e1.getValue());
-                double winRatio2 = calculateWinRatio(e2.getValue());
-
-                return Double.compare(winRatio2, winRatio1); // Sort in descending order
-            }
-        });
+        List<Map.Entry<String, int[]>> entryList = getEntries();
 
         // Print the sorted entries
         for (Map.Entry<String, int[]> entry : entryList) {
@@ -130,13 +118,27 @@ public class Scoreboard {
                     player, wins, losses, draws, winRatio);
         }
     }
+
+    private List<Map.Entry<String, int[]>> getEntries() {
+        List<Map.Entry<String, int[]>> entryList = new ArrayList<>(scores.entrySet());
+
+        // Sort the list by win ratio
+        entryList.sort((e1, e2) -> {
+            double winRatio1 = calculateWinRatio(e1.getValue());
+            double winRatio2 = calculateWinRatio(e2.getValue());
+
+            return Double.compare(winRatio2, winRatio1); // Sort in descending order
+        });
+        return entryList;
+    }
+
     private double calculateWinRatio(int[] scores) {
         int wins = scores[0];
         int losses = scores[1];
         int draws = scores[2];
 
         if (losses + draws == 0) {
-            return (double) wins;
+            return wins;
         } else {
             return (double) wins / (losses + draws);
         }

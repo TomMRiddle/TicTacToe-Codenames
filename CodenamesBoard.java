@@ -10,19 +10,15 @@ public class CodenamesBoard extends Board<CodenamesCell> {
     private String clue;
     public CodenamesBoard() {
         spymasterView = false;
-        initialize(5,5);
-    }
-    @Override
-    protected void initialize(int numRows, int numCols) {
-        Collections.shuffle(words);
-        Queue<String> content = new LinkedList<>(words.subList(0,25));
+        Collections.shuffle(WORD_LIST);
+        Queue<String> content = new LinkedList<>(WORD_LIST.subList(0,25));
         Queue<String> secret = createSecrets();
         cells = new ArrayList<>();
         int cellId = 1;
-        for (int i = 0; i < numRows; i++) {
+        for (int i = 0; i < 5; i++) {
             List<CodenamesCell> row = new ArrayList<>();
 
-            for (int j = 0; j < numCols; j++) {
+            for (int j = 0; j < 5; j++) {
 
                 row.add(new CodenamesCell(cellId, content.poll(), secret.poll()));
                 cellId++;
@@ -49,7 +45,7 @@ public class CodenamesBoard extends Board<CodenamesCell> {
             secrets.add(BLUE);
         }
 
-        // Add a random extra agent from one of the teams (choose randomly between Team1 and Team2)
+        // Add a random extra agent randomly chosen between Team1 and Team2
         if (Math.random() < 0.5) {
             secrets.add(RED);
             startingTeam = RED;

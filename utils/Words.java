@@ -1,16 +1,13 @@
 package utils;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
-import static utils.Ansi.*;
-
-public class Words {
+public final class Words {
     private Words(){
         throw new AssertionError();
     }
-    public static List<String> words = new ArrayList<>(Arrays.asList(
+    public static final List<String> WORD_LIST = new ArrayList<>(Arrays.asList(
             "Linjal",
             "Nyckel",
             "Stadium",

@@ -1,11 +1,7 @@
 package utils;
 
-public class Ansi {
+public final class Ansi {
     //prevent instantiation
-    private Ansi(){
-        throw new AssertionError();
-    }
-
     public static final String RESET = "\033[0m";
     public static final String FG = "\033[27m";
     public static final String BG = "\033[7m";
@@ -48,4 +44,8 @@ public class Ansi {
     public static final String CLEAR_SCREEN = CUR_HOME+"\033[J";
     public static final String CLEAR_LINE = "\033[K";
     public static final String CLS = "If you can read this message it means the screen was not cleared, most likely because you are running the code from inside an IDE\033\143";
+
+    private Ansi(){
+        throw new AssertionError();
+    }
 }

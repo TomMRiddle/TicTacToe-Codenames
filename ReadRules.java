@@ -1,27 +1,19 @@
-import java.awt.Desktop;
+import java.awt.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Scanner;
 
 public class ReadRules {
     public void gameRules() {
-        boolean validInput = false;
-
-        while (!validInput) {
-            System.out.println("Vill du/ni se spelreglerna?");
-            System.out.println("1. Ja");
-            System.out.println("2. Nej");
-            System.out.print("Skriv in ett nummer (1 eller 2): ");
-
-                int choice = ScannerSingleton.getInstance().getNextLineInt(1,2);
-                if (choice == 1) {
-                    showGameRules();
-                    validInput = true;
-                } else if (choice == 2) {
-                    System.out.println("Lycka till!");
-                    validInput = true;
-                }
+        System.out.println("Vill du/ni se spelreglerna?");
+        System.out.println("1. Ja");
+        System.out.println("2. Nej");
+        System.out.print("Skriv in ett nummer (1 eller 2): ");
+        int choice = ScannerSingleton.getInstance().getNextLineInt(1,2);
+        if (choice == 1) {
+            showGameRules();
+        } else if (choice == 2) {
+            System.out.println("Lycka till!");
         }
     }
 

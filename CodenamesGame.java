@@ -1,14 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import static utils.Ansi.*;
 
 public class CodenamesGame {
-    private static CodenamesBoard board;
 
     public static void start(String[] playerNames, int[] spymasterIndices) {
-        board = new CodenamesBoard();
+        CodenamesBoard board = new CodenamesBoard();
         List<Player<CodenamesBoard>> players = createTeams(playerNames, spymasterIndices, board.getStartingTeam());
         playGame(players, board);
     }
@@ -49,10 +47,10 @@ public class CodenamesGame {
                     String winningTeam = board.getWinningTeam();
                     if (winningTeam.equals(BRIGHT_BLACK)) {
                         AgentPlayer agent = (AgentPlayer) player;
-                        System.out.println("Det "+(agent.getTeamColor() == RED ? BLUE+"blå" : RED+BG+"röda")+RESET+" laget har vunnit!");
+                        System.out.println("Det "+(agent.getTeamColor().equals(RED) ? BLUE+"blå" : RED+BG+"röda")+RESET+" laget har vunnit!");
 
                     } else {
-                        System.out.println("Det "+(board.getWinningTeam() ==  RED ? RED+BG+"röda" : BLUE+BG+"blå")+RESET+" laget har vunnit!");
+                        System.out.println("Det "+(board.getWinningTeam().equals(RED) ? RED+BG+"röda" : BLUE+BG+"blå")+RESET+" laget har vunnit!");
                     }
                     gameloop = false;
                     break;
