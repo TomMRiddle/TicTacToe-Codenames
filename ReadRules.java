@@ -2,7 +2,6 @@ import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Scanner;
 
 public class ReadRules {
     public void gameRules() {
@@ -14,27 +13,20 @@ public class ReadRules {
             System.out.println("2. Nej");
             System.out.print("Skriv in ett nummer (1 eller 2): ");
 
-            try {
-                int choice = Integer.parseInt(ScannerSingleton.getNextLine());
-
+                int choice = ScannerSingleton.getInstance().getNextLineInt(1,2);
                 if (choice == 1) {
                     showGameRules();
                     validInput = true;
                 } else if (choice == 2) {
                     System.out.println("Lycka till!");
                     validInput = true;
-                } else {
-                    System.out.println("Ogiltigt val. Välj 1 eller 2.");
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Ogiltig inmatning. Ange en siffra.");
-            }
         }
     }
 
     public static void showGameRules() {
         // Ange URL:n till länken
-        String url = "https://github.com/TomMRiddle/TicTacToe-Codenames/blob/berggren00-patch-1/CN_rules_ENG_web.pdf";
+        String url = "https://raw.githubusercontent.com/TomMRiddle/TicTacToe-Codenames/6c7f22282299bb95cb6c3fa203aa71d9c5707c3b/CN_rules_ENG_web.pdf";
 
         try {
             // Kontrollera om Desktop är tillgängligt
