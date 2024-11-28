@@ -65,7 +65,6 @@ public class SpymasterPlayer extends Player<CodenamesBoard>{
 
         System.out.println("\nAnge din siffra: ");
         cluenumber = (ScannerSingleton.getInstance().getNextLineInt(1,missingAgentCounter));
-        System.out.println("Spymaster's ledtråd: \n" +clue+" "+cluenumber);
         board.setNumberOfGuesses(cluenumber);
         board.setClue(clue);
     }

@@ -5,9 +5,7 @@ import java.io.BufferedReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Scoreboard {
     private static final String COMMA_DELIMITER = ", ";
@@ -103,7 +101,17 @@ public class Scoreboard {
         System.out.println("Spel: " + gameType);
         System.out.printf("%-15s %-5s %-7s %-8s%n",
                 "Namn", "Vinst", "Förlust", "Oavgjort");
-        for (Map.Entry<String, int[]> entry : scores.entrySet()) {
+        // Create a list from the entries of the map
+        List<Map.Entry<String, int[]>> entryList = new ArrayList<>(scores.entrySet());
+
+        // Sort the list by the number of wins (first element in the array)
+        entryList.sort(new Comparator<Map.Entry<String, int[]>>() {
+            @Override
+            public int compare(Map.Entry<String, int[]> e1, Map.Entry<String, int[]> e2) {
+                return Integer.compare(e2.getValue()[0], e1.getValue()[0]);
+            }
+        });
+        for (Map.Entry<String, int[]> entry : entryList) {
             String player = entry.getKey().length() > 20 ? entry.getKey().substring(0, 17) + "..." : entry.getKey();
             int[] scores = entry.getValue();
             System.out.printf("%-15s %5d %7d %8d%n",
