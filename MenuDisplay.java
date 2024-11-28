@@ -27,7 +27,7 @@ public class MenuDisplay {
                 RESET);
     }
 
-    public void showGameSelectionMenu() {
+    public int getGameSelection() {
         System.out.println("""
             ┌──────────────────────────────────┐
             │         VÄLJ SPEL ATT SPELA:     │
@@ -38,9 +38,10 @@ public class MenuDisplay {
             │        Välj mellan (1-2):        │
             └──────────────────────────────────┘"""
         );
+        return ScannerSingleton.getInstance().getNextLineInt(1,2);
     }
 
-    public void showPlayerCountMenu(int gameChoice) {
+    public int getPlayerCount(int gameChoice) {
         displayWelcomeBanner();
         if (gameChoice == 1) {
             System.out.println("""
@@ -53,10 +54,11 @@ public class MenuDisplay {
                 │      Välj antal (1-2):           │
                 └──────────────────────────────────┘"""
             );
+            return ScannerSingleton.getInstance().getNextLineInt(1,2);
         } else {
             System.out.println("""
                 ┌──────────────────────────────────────┐
-                │      VÄLJ ANTAL SPELARE:             │ 
+                │      VÄLJ ANTAL SPELARE:             │
                 │                                      │
                 │      Lagen kommer automatiskt        │
                 │      delas upp baserat på vilken     │
@@ -66,20 +68,14 @@ public class MenuDisplay {
                 │      resterande spelarna går         │
                 │      till lag blå.                   │
                 │                                      │
-                │      Välj antal (4-8):               │ 
+                │      Välj antal (4-8):               │
                 │                                      │
                 └──────────────────────────────────────┘"""
             );
+            return ScannerSingleton.getInstance().getNextLineInt(4,8);
         }
     }
 
-    public void showInvalidChoice() {
-        System.out.println("""
-            ┌──────────────────────────────────┐
-            │    Felaktigt val! Försök igen    │
-            └──────────────────────────────────┘"""
-        );
-    }
     public void showSymbolSelectionMenu(String playerName) {
         String formattedName = playerName.length() > 10 ? 
             playerName.substring(0, 10) : 

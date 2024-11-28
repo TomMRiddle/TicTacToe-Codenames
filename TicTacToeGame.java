@@ -27,15 +27,7 @@ public class TicTacToeGame {
     }
 
     private int getValidSymbolChoice() {
-        while (true) {
-            try {
-                int choice = Integer.parseInt(ScannerSingleton.getNextLine());
-                if (choice >= 1 && choice <= 2) return choice;
-                display.showInvalidChoice();
-            } catch (NumberFormatException e) {
-                display.showInvalidChoice();
-            }
-        }
+        return ScannerSingleton.getInstance().getNextLineInt(1,2);
     }
 
     private void playGame() {
@@ -64,7 +56,7 @@ public class TicTacToeGame {
             game.initializePlayers(playerCount, playerNames);
             game.playGame();
             System.out.println("Vill du spela igen? (j/n): ");
-        } while (ScannerSingleton.getNextLine().trim().toLowerCase().startsWith("j"));
+        } while (ScannerSingleton.getInstance().getNextLine().trim().toLowerCase().startsWith("j"));
 
         System.out.println("Tack för att du spelade!");
     }

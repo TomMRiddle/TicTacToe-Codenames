@@ -68,12 +68,8 @@ public class CodenamesGame {
     }
 
     private static boolean askToPlayAgain() {
-        try {
-            System.out.println("Vill du spela igen? (ja/nej): ");
-            String userInput = ScannerSingleton.getNextLine().toLowerCase();
-            return !userInput.contains("nej");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        System.out.println("Vill du spela igen? (ja/nej): ");
+        String userInput = ScannerSingleton.getInstance().getNextLine().toLowerCase();
+        return !userInput.contains("nej");
     }
 }

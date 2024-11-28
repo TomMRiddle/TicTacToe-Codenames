@@ -36,20 +36,7 @@ public class AgentPlayer extends Player<CodenamesBoard> {
             System.out.println("Skriv ett nummer för att gissa ett ord (1-25): ");
 
             // Hantera & felhantera inmatning av cellId
-            int cellId;
-            while (true) {
-                try {
-                    cellId = Integer.parseInt(ScannerSingleton.getNextLine().trim());
-                    if (cellId < 1 || cellId > 25) {
-                        System.out.println("Ogiltigt nummer. Välj mellan 1 och 25: ");
-                        continue;
-                    }
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println("Ogiltig input. Ange ett nummer: ");
-                }
-            }
-
+            int cellId = ScannerSingleton.getInstance().getNextLineInt(1,25);
             CodenamesCell cell = board.getCellById(cellId);
 
             // Kontrollera om cellen redan är avslöjad
@@ -98,7 +85,7 @@ public class AgentPlayer extends Player<CodenamesBoard> {
             while(true) {
                 if (remainingGuesses > 0) {
                     System.out.println("Vill ni fortsätta gissa? (ja/nej)");
-                    String userResponse = ScannerSingleton.getNextLine().trim().toLowerCase();
+                    String userResponse = ScannerSingleton.getInstance().getNextLine().trim().toLowerCase();
 
                     if (userResponse.equals("ja")) {
                         break;
@@ -119,7 +106,7 @@ public class AgentPlayer extends Player<CodenamesBoard> {
         }
         if (!board.checkWin()) {
             System.out.println("Rundan är över. Tryck ENTER för att fortsätta.");
-            ScannerSingleton.getNextLine();
+            ScannerSingleton.getInstance().pressEnterToContinue();
         }
     }
 }
