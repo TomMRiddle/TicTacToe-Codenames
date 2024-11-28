@@ -15,7 +15,7 @@ public class MenuLogic {
         int playerCount = display.getPlayerCount(gameChoice);
         String[] playerNames = playerManager.getPlayerNames(playerCount);
 
-        ReadRules rules = new ReadRuels();
+        ReadRules rules = new ReadRules();
         
         if (gameChoice == 1) {
             startTicTacToe(playerCount, playerNames);
