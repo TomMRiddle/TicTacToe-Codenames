@@ -99,23 +99,46 @@ public class Scoreboard {
 
     public void printScoreboard() {
         System.out.println("Spel: " + gameType);
-        System.out.printf("%-15s %-5s %-7s %-8s%n",
-                "Namn", "Vinst", "Förlust", "Oavgjort");
+        System.out.printf("%-15s %-5s %-7s %-8s %-11s%n",
+                "Namn", "Vinst", "Förlust", "Oavgjort", "Vinstfaktor");
         // Create a list from the entries of the map
         List<Map.Entry<String, int[]>> entryList = new ArrayList<>(scores.entrySet());
 
-        // Sort the list by the number of wins (first element in the array)
+        // Sort the list by win ratio
         entryList.sort(new Comparator<Map.Entry<String, int[]>>() {
             @Override
             public int compare(Map.Entry<String, int[]> e1, Map.Entry<String, int[]> e2) {
-                return Integer.compare(e2.getValue()[0], e1.getValue()[0]);
+                double winRatio1 = calculateWinRatio(e1.getValue());
+                double winRatio2 = calculateWinRatio(e2.getValue());
+
+                return Double.compare(winRatio2, winRatio1); // Sort in descending order
             }
         });
+
+        // Print the sorted entries
         for (Map.Entry<String, int[]> entry : entryList) {
             String player = entry.getKey().length() > 20 ? entry.getKey().substring(0, 17) + "..." : entry.getKey();
-            int[] scores = entry.getValue();
-            System.out.printf("%-15s %5d %7d %8d%n",
-                    player, scores[0], scores[1], scores[2]);
+            int[] scoresArray = entry.getValue();
+            int wins = scoresArray[0];
+            int losses = scoresArray[1];
+            int draws = scoresArray[2];
+
+            // Calculate win ratio
+            double winRatio = calculateWinRatio(scoresArray);
+
+            System.out.printf("%-15s %5d %7d %8d %11.2f%n",
+                    player, wins, losses, draws, winRatio);
+        }
+    }
+    private double calculateWinRatio(int[] scores) {
+        int wins = scores[0];
+        int losses = scores[1];
+        int draws = scores[2];
+
+        if (losses + draws == 0) {
+            return (double) wins;
+        } else {
+            return (double) wins / (losses + draws);
         }
     }
 }
