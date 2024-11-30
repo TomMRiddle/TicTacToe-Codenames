@@ -1,11 +1,12 @@
-import java.io.PrintWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.BufferedReader;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public final class Scoreboard {
     private static final Map<String, Scoreboard> INSTANCES = new HashMap<>();
@@ -85,13 +86,19 @@ public final class Scoreboard {
 
     public void addScore(String homePlayer, String awayPlayer, int result) {
         updateScores(homePlayer, awayPlayer, result);
-
-        try (PrintWriter writer = new PrintWriter(new FileWriter(csvFileName, true))) {
-            Path path = Paths.get(csvFileName);
-            if (!Files.exists(path)) {
+        Path path = Paths.get(csvFileName);
+        if (!Files.exists(path)) {
+            try (PrintWriter writer = new PrintWriter(new FileWriter(csvFileName))) {
                 writer.println("Home Player,Away Player,Result");
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            writer.println(homePlayer + "," + awayPlayer + "," + result);
+        }
+
+        try (BufferedWriter writer = Files.newBufferedWriter(path, StandardOpenOption.APPEND)) {
+            String line = homePlayer + "," + awayPlayer + "," + result;
+            writer.write(line);
+            writer.newLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
