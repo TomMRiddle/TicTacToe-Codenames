@@ -5,9 +5,11 @@ public abstract class Player<T extends Board> {
         this.name = name;
 
     }
+
     public String getName() {
         return name;
     }
+
     public abstract void takeTurn(T board);
 
 }

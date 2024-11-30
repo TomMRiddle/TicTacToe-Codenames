@@ -15,9 +15,11 @@ public final class ScannerSingleton {
         }
         return instance;
     }
+
     public void pressEnterToContinue() {
         instance.scanner.nextLine();
     }
+
     public String getNextLine() {
         boolean invalid = true;
         String value = null;

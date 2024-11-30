@@ -19,6 +19,7 @@ public final class Scoreboard {
         this.csvFileName = "scoreboard_" + gameType + ".csv";
         load();
     }
+
     //singleton
     public static synchronized Scoreboard getInstance(String gameType) {
         if (!INSTANCES.containsKey(gameType)) {
@@ -48,7 +49,7 @@ public final class Scoreboard {
                     for (int i = 0; i < headers.length; i++) {
                         gameData.put(headers[i], parts[i]);
                     }
-                    
+
                     String homePlayer = gameData.get("Home Player");
                     String awayPlayer = gameData.get("Away Player");
                     int result = Integer.parseInt(gameData.get("Result"));

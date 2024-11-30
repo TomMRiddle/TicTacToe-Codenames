@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import static utils.Ansi.*;
 
 public class AgentPlayer extends Player<CodenamesBoard> {
@@ -14,7 +13,7 @@ public class AgentPlayer extends Player<CodenamesBoard> {
         int totalGuesses = board.getNumberOfGuesses();
         String clue = board.getClue();
         System.out.println(CLS);
-        System.out.println("Spymaster's ledtråd: \n" +clue+" "+totalGuesses+"\n");
+        System.out.println("Spymaster's ledtråd: \n" + clue + " " + totalGuesses + "\n");
         board.setSpymasterView(false);
         System.out.println(board);
 
@@ -36,7 +35,7 @@ public class AgentPlayer extends Player<CodenamesBoard> {
             System.out.println("Skriv ett nummer för att gissa ett ord (1-25): ");
 
             // Hantera & felhantera inmatning av cellId
-            int cellId = ScannerSingleton.getInstance().getNextLineInt(1,25);
+            int cellId = ScannerSingleton.getInstance().getNextLineInt(1, 25);
             CodenamesCell cell = board.getCellById(cellId);
 
             // Kontrollera om cellen redan är avslöjad
@@ -48,7 +47,7 @@ public class AgentPlayer extends Player<CodenamesBoard> {
             // Avslöja cellen
             cell.reveal();
             System.out.println(CLS);
-            System.out.println("Spymaster's ledtråd: \n" +board.getClue()+" "+totalGuesses);
+            System.out.println("Spymaster's ledtråd: \n" + board.getClue() + " " + totalGuesses);
             System.out.println(getName() + " gissar på: " + cell.toString());
             System.out.println(board);
 
@@ -82,7 +81,7 @@ public class AgentPlayer extends Player<CodenamesBoard> {
             }
 
             // Fråga om att fortsätta om gissningar
-            while(true) {
+            while (true) {
                 if (remainingGuesses > 0) {
                     System.out.println("Vill ni fortsätta gissa? (ja/nej)");
                     String userResponse = ScannerSingleton.getInstance().getNextLine().trim().toLowerCase();

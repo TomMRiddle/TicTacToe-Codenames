@@ -1,4 +1,5 @@
 import static utils.Ansi.*;
+
 public abstract class Cell<T> {
     protected String content;
     protected String color;
@@ -13,6 +14,7 @@ public abstract class Cell<T> {
     public int getId() {
         return id;
     }
+
     public String getColor() {
         return color;
     }

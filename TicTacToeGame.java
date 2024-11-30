@@ -4,7 +4,7 @@ public class TicTacToeGame {
     private static TicTacToeBoard board;
     private final List<Player<TicTacToeBoard>> players;
     private final MenuDisplay display;
-    
+
     public TicTacToeGame() {
         this.players = new ArrayList<>();
         this.display = new MenuDisplay();
@@ -15,19 +15,19 @@ public class TicTacToeGame {
         display.showSymbolSelectionMenu(playerNames[0]);
         String player1Symbol = getValidSymbolChoice() == 1 ? "X" : "O";
         String player2Symbol = player1Symbol.equals("X") ? "O" : "X";
-        
+
         // Skapa spelarna med deras symboler
         players.add(new HumanPlayer(playerNames[0], player1Symbol));
-        players.add(playerCount == 1 ? 
-            new ComputerPlayer("Dator", player2Symbol) :
-            new HumanPlayer(playerNames[1], player2Symbol));
-            
+        players.add(playerCount == 1 ?
+                new ComputerPlayer("Dator", player2Symbol) :
+                new HumanPlayer(playerNames[1], player2Symbol));
+
         // Slumpa vem som börjar
         Collections.shuffle(players);
     }
 
     private int getValidSymbolChoice() {
-        return ScannerSingleton.getInstance().getNextLineInt(1,2);
+        return ScannerSingleton.getInstance().getNextLineInt(1, 2);
     }
 
     private void playGame() {
@@ -36,9 +36,9 @@ public class TicTacToeGame {
             for (Player<TicTacToeBoard> player : players) {
                 player.takeTurn(board);
                 if (board.checkWin() || board.isDraw()) {
-                    if(board.checkWin()) {
-                        Scoreboard.getInstance("Tre i rad").addScore(players.get(0).getName(), players.get(1).getName(), ( board.getWinner() == players.get(0) ? 1 : 2 ));
-                    } else if(board.isDraw()){
+                    if (board.checkWin()) {
+                        Scoreboard.getInstance("Tre i rad").addScore(players.get(0).getName(), players.get(1).getName(), (board.getWinner() == players.get(0) ? 1 : 2));
+                    } else if (board.isDraw()) {
                         Scoreboard.getInstance("Tre i rad").addScore(players.get(0).getName(), players.get(1).getName(), 0);
                     }
                     display.showGameResult(board);

@@ -1,4 +1,5 @@
 import java.util.*;
+
 import static utils.Ansi.*;
 import static utils.Words.*;
 
@@ -8,10 +9,11 @@ public class CodenamesBoard extends Board<CodenamesCell> {
     private String startingTeam;
     private String winningTeam;
     private String clue;
+
     public CodenamesBoard() {
         spymasterView = false;
         Collections.shuffle(WORD_LIST);
-        Queue<String> content = new LinkedList<>(WORD_LIST.subList(0,25));
+        Queue<String> content = new LinkedList<>(WORD_LIST.subList(0, 25));
         Queue<String> secret = createSecrets();
         cells = new ArrayList<>();
         int cellId = 1;
@@ -102,6 +104,7 @@ public class CodenamesBoard extends Board<CodenamesCell> {
         }
         this.spymasterView = spymasterView;
     }
+
     public void reveal(int cellId) {
         getCellById(cellId).reveal();
     }
@@ -112,22 +115,31 @@ public class CodenamesBoard extends Board<CodenamesCell> {
 
     @Override
     public String toString() {
-        String legend = BG+BLUE+"Agent för lag blå"+RESET+" "+BG+RED+"Agent för lag röd"+RESET+" "+BG+BRIGHT_BLACK+"Lönnmördare"+RESET+" "+BG+BRIGHT_WHITE+"oskyldig åskådare"+RESET+"\n\n";
-        if (spymasterView) { legend = "\n█avslöjat kodnamn█ "+legend; } else { legend = "\n"+BG+BRIGHT_YELLOW+"Ej avslöjade kodnamn"+RESET+" "+legend; }
+        String legend = BG + BLUE + "Agent för lag blå" + RESET + " " + BG + RED + "Agent för lag röd" + RESET + " " + BG + BRIGHT_BLACK + "Lönnmördare" + RESET + " " + BG + BRIGHT_WHITE + "oskyldig åskådare" + RESET + "\n\n";
+        if (spymasterView) {
+            legend = "\n█avslöjat kodnamn█ " + legend;
+        } else {
+            legend = "\n" + BG + BRIGHT_YELLOW + "Ej avslöjade kodnamn" + RESET + " " + legend;
+        }
         return legend + super.toString();
     }
+
     public void setNumberOfGuesses(int numberOfGuesses) {
         this.numberOfGuesses = numberOfGuesses;
     }
+
     public int getNumberOfGuesses() {
         return numberOfGuesses;
     }
+
     public void setClue(String clue) {
         this.clue = clue;
     }
+
     public String getClue() {
         return clue;
     }
+
     public String getStartingTeam() {
         return startingTeam;
     }

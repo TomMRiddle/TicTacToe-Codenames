@@ -41,11 +41,11 @@ public final class Ansi {
     public static final String CUR_HOME = "\033[H";
     public static final String CUR_SAVE = "\0337";
     public static final String CUR_RESTORE = "\0338";
-    public static final String CLEAR_SCREEN = CUR_HOME+"\033[J";
+    public static final String CLEAR_SCREEN = CUR_HOME + "\033[J";
     public static final String CLEAR_LINE = "\033[K";
     public static final String CLS = "If you can read this message it means the screen was not cleared, most likely because you are running the code from inside an IDE\033\143";
 
-    private Ansi(){
+    private Ansi() {
         throw new AssertionError();
     }
 }

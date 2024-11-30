@@ -9,7 +9,7 @@ public class ReadRules {
         System.out.println("1. Ja");
         System.out.println("2. Nej");
         System.out.print("Skriv in ett nummer (1 eller 2): ");
-        int choice = ScannerSingleton.getInstance().getNextLineInt(1,2);
+        int choice = ScannerSingleton.getInstance().getNextLineInt(1, 2);
         if (choice == 1) {
             showGameRules();
         } else if (choice == 2) {

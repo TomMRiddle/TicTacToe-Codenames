@@ -1,12 +1,14 @@
 package utils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public final class Words {
-    private Words(){
+    private Words() {
         throw new AssertionError();
     }
+
     public static final List<String> WORD_LIST = new ArrayList<>(Arrays.asList(
             "Linjal",
             "Nyckel",

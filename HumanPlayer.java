@@ -11,11 +11,11 @@ public class HumanPlayer extends Player<TicTacToeBoard> {
     @Override
     public void takeTurn(TicTacToeBoard board) {
 
-        System.out.println(CLS+board);
+        System.out.println(CLS + board);
         System.out.println(getName() + ", ange cellnummer (1-9): ");
-        
+
         while (true) {
-            int cellId = ScannerSingleton.getInstance().getNextLineInt(1,9);
+            int cellId = ScannerSingleton.getInstance().getNextLineInt(1, 9);
 
             TicTacToeCell cell = board.getCellById(cellId);
             if (cell.getOwner() != null) {

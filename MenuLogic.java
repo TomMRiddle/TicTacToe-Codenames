@@ -11,12 +11,12 @@ public class MenuLogic {
 
     public void start() {
         display.displayWelcomeBanner();
-        int gameChoice =  display.getGameSelection();
+        int gameChoice = display.getGameSelection();
         int playerCount = display.getPlayerCount(gameChoice);
         String[] playerNames = playerManager.getPlayerNames(playerCount);
 
         ReadRules rules = new ReadRules();
-        
+
         if (gameChoice == 1) {
             startTicTacToe(playerCount, playerNames);
         } else {
@@ -33,16 +33,16 @@ public class MenuLogic {
     private void startCodenames(String[] playerNames) {
         boolean playAgain = true;
         int[] spymasterIndices = playerManager.selectSpymasters(playerNames);
-        
+
         while (playAgain) {
             display.displayCodenamesGameDetails(playerNames, spymasterIndices);
             System.out.println("\nTryck ENTER för att starta spelet...");
             ScannerSingleton.getInstance().pressEnterToContinue();
-            
+
             CodenamesGame.start(playerNames, spymasterIndices);
             System.out.println("Vill du spela igen? (ja/nej): ");
             String playAgainInput = ScannerSingleton.getInstance().getNextLine().toLowerCase();
-            
+
             if (!playAgainInput.contains("nej")) {
                 int choice = display.getSpymasterChoice();
                 if (choice == 1) {

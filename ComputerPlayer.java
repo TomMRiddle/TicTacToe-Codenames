@@ -3,6 +3,7 @@ import java.util.*;
 public class ComputerPlayer extends Player<TicTacToeBoard> {
     private final String symbol;
     private final int[][] winnableLines;
+
     public ComputerPlayer(String name, String symbol) {
         super(name);
         this.symbol = symbol;
@@ -21,7 +22,7 @@ public class ComputerPlayer extends Player<TicTacToeBoard> {
 
         // Vinnande drag
         int winningMove = findWinningMove(board, symbol);
-        if(winningMove != -1) {
+        if (winningMove != -1) {
             board.getCellById(winningMove).setContent(symbol);
             takeTurn(board, winningMove);
             return;
@@ -29,14 +30,14 @@ public class ComputerPlayer extends Player<TicTacToeBoard> {
 
         // Blockerande drag
         int blockingMove = findWinningMove(board, opponentSymbol(symbol));
-        if(blockingMove != -1) {
+        if (blockingMove != -1) {
             takeTurn(board, blockingMove);
             return;
         }
 
         //drag som kan leda till vinst
         int winnableMove = findWinnable(board, symbol);
-        if(winnableMove != -1) {
+        if (winnableMove != -1) {
             takeTurn(board, winnableMove);
             return;
         }
@@ -46,7 +47,7 @@ public class ComputerPlayer extends Player<TicTacToeBoard> {
         int cellId;
 
         do {
-            cellId = random.nextInt(9)+1;
+            cellId = random.nextInt(9) + 1;
         } while (!board.getCellById(cellId).toString().equals(" "));
         board.getCellById(cellId).setContent(symbol);
         board.getCellById(cellId).setOwner(this);
