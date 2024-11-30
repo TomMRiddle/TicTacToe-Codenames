@@ -48,7 +48,7 @@ public class AgentPlayer extends Player<CodenamesBoard> {
             cell.reveal();
             System.out.println(CLS);
             System.out.println("Spymaster's ledtråd: \n" + board.getClue() + " " + totalGuesses);
-            System.out.println(getName() + " gissar på: " + cell.toString());
+            System.out.println(getName() + " gissar på: " + cell);
             System.out.println(board);
 
             // feedback på gissningarna
