@@ -1,7 +1,6 @@
 package codenames;
 
 import base.Player;
-import utils.ScannerSingleton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,10 +62,5 @@ public class CodenamesGame {
 
             }
         }
-    }
-    private static boolean askToPlayAgain() {
-        System.out.println("Vill du spela igen? (ja/nej): ");
-        String userInput = ScannerSingleton.getInstance().getNextLine().toLowerCase();
-        return !userInput.contains("nej");
     }
 }

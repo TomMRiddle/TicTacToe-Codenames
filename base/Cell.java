@@ -2,7 +2,7 @@ package base;
 
 import static utils.Ansi.*;
 
-public abstract class Cell<T> {
+public abstract class Cell {
     protected String content;
     protected String color;
     protected int id;
