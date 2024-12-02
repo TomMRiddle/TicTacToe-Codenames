@@ -192,16 +192,17 @@ public class MenuDisplay {
         );
     }
 
-    public void displayPlayerNamePrompt(int playerNumber) {
+    public String displayPlayerNamePrompt(int playerNumber) {
         System.out.printf("""
                 ┌──────────────────────────────────┐
                 │       Skriv in Spelare %d:        │
                 └──────────────────────────────────┘
                 """
                 , playerNumber);
+        return ScannerSingleton.getInstance().getNextLine().trim();
     }
 
-    public void displaySpymasterSelection(String[] players, int start, int count, String team) {
+    public int displaySpymasterSelection(String[] players, int start, int count, String team) {
         System.out.println(CLS + """
             ┌─────────────────────────────────────┐
             │  VÄLJ SPYMASTER FÖR DET %-4s LAGET    │
@@ -213,5 +214,6 @@ public class MenuDisplay {
         for (int i = 0; i < count; i++) {
             System.out.printf("%d. %s%n", i + 1, players[start + i]);
         }
+        return ScannerSingleton.getInstance().getNextLineInt(1, count) - 1;
     }
 }
