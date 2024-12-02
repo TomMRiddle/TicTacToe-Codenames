@@ -175,4 +175,37 @@ public class MenuDisplay {
 
         return ScannerSingleton.getInstance().getNextLineInt(1, 2);
     }
+
+    public void displayPlayerNameHeader() {
+        System.out.println(CLS + """
+                ┌──────────────────────────────────┐
+                │    VÄLJ SPELARNAMN FÖR SPELET    │
+                │                                  │
+                │  Skriv in namn för varje spelare │
+                └──────────────────────────────────┘"""
+        );
+    }
+
+    public void displayPlayerNamePrompt(int playerNumber) {
+        System.out.printf("""
+                ┌──────────────────────────────────┐
+                │       Skriv in Spelare %d:        │
+                └──────────────────────────────────┘
+                """
+                , playerNumber);
+    }
+
+    public void displaySpymasterSelection(String[] players, int start, int count, String team) {
+        System.out.println(CLS + """
+                ┌─────────────────────────────────────┐
+                │  VÄLJ SPYMASTER FÖR DET %s LAGET  │
+                │                                     │
+                │     Välj nummer för spymaster:      │
+                └─────────────────────────────────────┘"""
+                .formatted(team));
+        
+        for (int i = 0; i < count; i++) {
+            System.out.printf("%d. %s%n", i + 1, players[start + i]);
+        }
+    }
 }
