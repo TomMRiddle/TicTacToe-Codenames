@@ -5,20 +5,19 @@ import codenames.ReadRules;
 import tictactoe.TicTacToeGame;
 import utils.ScannerSingleton;
 
+
 public class MenuLogic {
     private final MenuDisplay display;
-    private final MenuPlayerManager playerManager;
 
     public MenuLogic() {
         this.display = new MenuDisplay();
-        this.playerManager = new MenuPlayerManager();
     }
 
     public void start() {
         display.displayWelcomeBanner();
         int gameChoice = display.getGameSelection();
         int playerCount = display.getPlayerCount(gameChoice);
-        String[] playerNames = playerManager.getPlayerNames(playerCount);
+        String[] playerNames = getPlayerNames(playerCount);
 
         ReadRules rules = new ReadRules();
 
@@ -30,6 +29,28 @@ public class MenuLogic {
         }
     }
 
+    private String[] getPlayerNames(int playerCount) {
+        String[] playerNames = new String[playerCount];
+        display.displayPlayerNameHeader();
+
+        for (int i = 0; i < playerCount; i++) {
+            playerNames[i] = display.displayPlayerNamePrompt(i + 1);
+        }
+        return playerNames;
+    }
+
+    private int[] selectSpymasters(String[] allPlayers) {
+        int redTeamSize = (allPlayers.length + 1) / 2;
+        int[] spymasterIndices = new int[2];
+
+        // Red team spymaster selection
+        spymasterIndices[0] = display.displaySpymasterSelection(allPlayers, 0, redTeamSize, "RÖDA");
+
+        // Blue team spymaster selection
+        spymasterIndices[1] = display.displaySpymasterSelection(allPlayers, redTeamSize, allPlayers.length - redTeamSize, "BLÅ")+redTeamSize;
+        return spymasterIndices;
+    }
+
     private void startTicTacToe(int playerCount, String[] playerNames) {
         display.displayGameDetails(1, playerCount, playerNames);
         TicTacToeGame.start(playerCount, playerNames);
@@ -37,7 +58,7 @@ public class MenuLogic {
 
     private void startCodenames(String[] playerNames) {
         boolean playAgain = true;
-        int[] spymasterIndices = playerManager.selectSpymasters(playerNames);
+        int[] spymasterIndices = selectSpymasters(playerNames);
 
         while (playAgain) {
             display.displayCodenamesGameDetails(playerNames, spymasterIndices);
@@ -51,9 +72,8 @@ public class MenuLogic {
             if (!playAgainInput.contains("nej")) {
                 int choice = display.getSpymasterChoice();
                 if (choice == 1) {
-                    spymasterIndices = playerManager.selectSpymasters(playerNames);
+                    spymasterIndices = selectSpymasters(playerNames);
                 }
-                playAgain = true;
             } else {
                 playAgain = false;
                 System.out.println("Tack för en god match!");
