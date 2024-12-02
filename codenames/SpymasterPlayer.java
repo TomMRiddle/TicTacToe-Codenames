@@ -1,3 +1,8 @@
+package codenames;
+
+import base.Player;
+import utils.ScannerSingleton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +45,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard> {
         );
 
         int missingAgentCounter = 0;
-        for (List<CodenamesCell> cellRow : board.cells) {
+        for (List<CodenamesCell> cellRow : board.getAllCells()) {
             for (CodenamesCell cell : cellRow) {
                 if (!cell.isRevealed() && cell.getColor().equals(teamColor)) {
                     missingAgentCounter++;

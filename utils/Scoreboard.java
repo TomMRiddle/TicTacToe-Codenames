@@ -1,3 +1,5 @@
+package utils;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,7 +35,7 @@ public final class Scoreboard {
         Path path = Paths.get(csvFileName);
         if (!Files.exists(path)) {
             try (PrintWriter writer = new PrintWriter(new FileWriter(csvFileName))) {
-                writer.println("Home Player,Away Player,Result");
+                writer.println("Home base.Player,Away base.Player,Result");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -51,8 +53,8 @@ public final class Scoreboard {
                         gameData.put(headers[i], parts[i]);
                     }
 
-                    String homePlayer = gameData.get("Home Player");
-                    String awayPlayer = gameData.get("Away Player");
+                    String homePlayer = gameData.get("Home base.Player");
+                    String awayPlayer = gameData.get("Away base.Player");
                     int result = Integer.parseInt(gameData.get("Result"));
 
                     updateScores(homePlayer, awayPlayer, result);
@@ -73,11 +75,11 @@ public final class Scoreboard {
                 scores.computeIfAbsent(homePlayer, _ -> new int[3])[DRAW]++;
                 scores.computeIfAbsent(awayPlayer, _ -> new int[3])[DRAW]++;
                 break;
-            case 1: // Home Player wins
+            case 1: // Home base.Player wins
                 scores.computeIfAbsent(homePlayer, _ -> new int[3])[WIN]++;
                 scores.computeIfAbsent(awayPlayer, _ -> new int[3])[LOSS]++;
                 break;
-            case 2: // Away Player wins
+            case 2: // Away base.Player wins
                 scores.computeIfAbsent(homePlayer, _ -> new int[3])[LOSS]++;
                 scores.computeIfAbsent(awayPlayer, _ -> new int[3])[WIN]++;
                 break;
@@ -89,7 +91,7 @@ public final class Scoreboard {
         Path path = Paths.get(csvFileName);
         if (!Files.exists(path)) {
             try (PrintWriter writer = new PrintWriter(new FileWriter(csvFileName))) {
-                writer.println("Home Player,Away Player,Result");
+                writer.println("Home base.Player,Away base.Player,Result");
             } catch (IOException e) {
                 e.printStackTrace();
             }

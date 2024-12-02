@@ -1,4 +1,8 @@
-import static utils.Ansi.*;
+package codenames;
+
+import base.Cell;
+
+import static utils.Ansi.BRIGHT_YELLOW;
 
 public class CodenamesCell extends Cell {
     private final String secret;

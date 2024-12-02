@@ -1,7 +1,8 @@
+package codenames;
+import base.Board;
 import java.util.*;
-
 import static utils.Ansi.*;
-import static utils.Words.*;
+import static utils.Words.WORD_LIST;
 
 public class CodenamesBoard extends Board<CodenamesCell> {
     private int numberOfGuesses;

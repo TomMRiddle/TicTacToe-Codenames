@@ -1,4 +1,9 @@
-import java.util.Scanner;
+package menu;
+
+import codenames.CodenamesGame;
+import codenames.ReadRules;
+import tictactoe.TicTacToeGame;
+import utils.ScannerSingleton;
 
 public class MenuLogic {
     private final MenuDisplay display;

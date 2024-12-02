@@ -1,3 +1,7 @@
+package tictactoe;
+
+import base.Player;
+
 import java.util.*;
 
 public class ComputerPlayer extends Player<TicTacToeBoard> {

@@ -1,3 +1,7 @@
+package codenames;
+
+import utils.ScannerSingleton;
+
 import java.awt.*;
 import java.io.IOException;
 import java.net.URI;

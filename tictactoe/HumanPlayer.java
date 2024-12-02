@@ -1,4 +1,9 @@
-import static utils.Ansi.*;
+package tictactoe;
+
+import base.Player;
+import utils.ScannerSingleton;
+
+import static utils.Ansi.CLS;
 
 public class HumanPlayer extends Player<TicTacToeBoard> {
     private final String symbol;

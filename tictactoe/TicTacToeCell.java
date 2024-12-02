@@ -1,3 +1,8 @@
+package tictactoe;
+
+import base.Cell;
+import base.Player;
+
 public class TicTacToeCell extends Cell {
     private Player<TicTacToeBoard> owner;
 

@@ -1,3 +1,8 @@
+package codenames;
+
+import base.Player;
+import utils.ScannerSingleton;
+
 import static utils.Ansi.*;
 
 public class AgentPlayer extends Player<CodenamesBoard> {

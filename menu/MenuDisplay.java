@@ -1,3 +1,9 @@
+package menu;
+
+import tictactoe.TicTacToeBoard;
+import utils.ScannerSingleton;
+import utils.Scoreboard;
+
 import static utils.Ansi.*;
 
 public class MenuDisplay {

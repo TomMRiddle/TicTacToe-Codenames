@@ -1,3 +1,5 @@
+package base;
+
 import static utils.Ansi.*;
 
 public abstract class Cell<T> {

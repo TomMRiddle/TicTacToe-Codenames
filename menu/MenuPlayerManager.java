@@ -1,4 +1,6 @@
-import java.util.Scanner;
+package menu;
+
+import utils.ScannerSingleton;
 
 import static utils.Ansi.*;
 

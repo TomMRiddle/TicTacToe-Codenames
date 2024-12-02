@@ -1,7 +1,12 @@
+package tictactoe;
+
+import base.Board;
+import base.Player;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static utils.Ansi.*;
+import static utils.Ansi.GREEN;
 
 public class TicTacToeBoard extends Board<TicTacToeCell> {
     private Player<TicTacToeBoard> winner;

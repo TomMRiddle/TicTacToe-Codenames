@@ -1,3 +1,5 @@
+package base;
+
 public abstract class Player<T extends Board> {
     protected String name;
 
