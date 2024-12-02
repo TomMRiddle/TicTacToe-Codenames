@@ -34,8 +34,7 @@ public class MenuLogic {
         display.displayPlayerNameHeader();
 
         for (int i = 0; i < playerCount; i++) {
-            display.displayPlayerNamePrompt(i + 1);
-            playerNames[i] = ScannerSingleton.getInstance().getNextLine().trim();
+            playerNames[i] = display.displayPlayerNamePrompt(i + 1);
         }
         return playerNames;
     }
@@ -45,13 +44,10 @@ public class MenuLogic {
         int[] spymasterIndices = new int[2];
 
         // Red team spymaster selection
-        display.displaySpymasterSelection(allPlayers, 0, redTeamSize, "RÖDA");
-        spymasterIndices[0] = ScannerSingleton.getInstance().getNextLineInt(1, redTeamSize) - 1;
+        spymasterIndices[0] = display.displaySpymasterSelection(allPlayers, 0, redTeamSize, "RÖDA");
 
         // Blue team spymaster selection
-        display.displaySpymasterSelection(allPlayers, redTeamSize, allPlayers.length - redTeamSize, "BLÅ");
-        spymasterIndices[1] = redTeamSize + ScannerSingleton.getInstance().getNextLineInt(1, allPlayers.length - redTeamSize) - 1;
-
+        spymasterIndices[1] = display.displaySpymasterSelection(allPlayers, redTeamSize, allPlayers.length - redTeamSize, "BLÅ")+redTeamSize;
         return spymasterIndices;
     }
 
@@ -78,7 +74,6 @@ public class MenuLogic {
                 if (choice == 1) {
                     spymasterIndices = selectSpymasters(playerNames);
                 }
-                playAgain = true;
             } else {
                 playAgain = false;
                 System.out.println("Tack för en god match!");
