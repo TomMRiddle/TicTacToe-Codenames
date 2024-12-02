@@ -22,7 +22,7 @@ public class SpymasterPlayer extends Player<CodenamesBoard> {
         ScannerSingleton.getInstance().pressEnterToContinue();
 
         board.setSpymasterView(true);
-        System.out.println(CLS + teamColor + "Det " + (teamColor.equals(BLUE) ? "blåa" : "röda") + " lagets Spymaster: " + RESET + "Ge en ledtråd med ett ord och en siffra som visar hur många agenter ordet passar för. Exempel: TRÄD 5. Ordet får inte vara på spelplanen och siffran får inte överstiga antalet kvarvarande agenter.");
+        System.out.println(CLS + teamColor + "Det " + (teamColor.equals(BLUE) ? "blåa" : "röda") + " lagets Spymaster: " + RESET + "Ange en ledtråd med ett ord och en siffra som visar hur många agenter ordet passar för. \nExempel: TRÄD 5. \nOBS! Ordet får inte finnas på spelplanen och siffran får inte överstiga antalet kvarvarande agenter på det egna laget.");
         System.out.println(board);
 
         List<String> forbiddenWords = new ArrayList<>();
